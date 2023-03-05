@@ -1,9 +1,9 @@
-# ToDoListNameHere
+# The Fridge
 *COP4331 - Processes of Object-Oriented Software Development*
 <br> Link to Website: [The Fridge](ToDoListLinkHere)
 
 ## Description
-ToDoListProjectDescriptionHere
+The Fridge is a to-do list website and mobile application that helps you organize your tasks into three separate lists: personal, school, and work.
 
 ToDoListProjectDescriptionLongExplainationHere
 
