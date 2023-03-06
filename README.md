@@ -12,6 +12,7 @@ Install Node
 - sudo apt-get update
 - sudo apt install nodejs
 - sudo apt install rpm
+
 <br> Update Node
 - sudo npm cache clean -f
 - sudo npm install -g n
@@ -21,10 +22,10 @@ Install Node
 - sudo npm install -g create-react-app
 - sudo npm install -g nodemon
 
-<br> Download The Frige
+<br> Download "The Frige" Project
 <br> - *Recommended to save on desktop*
 
-<br> Run The Fridge
+<br> Run "The Fridge" Project
 <br> - *Open Ubuntu (Linux) / Terminal (MacOS)*
 <br> - cd [YourFileDirectory]
 <br> - sudo npm start
