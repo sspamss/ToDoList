@@ -1,9 +1,9 @@
-# The Fridge
+# The Fridge List
 *COP4331 - Processes of Object-Oriented Software Development*
-<br> Link to Website: [The Fridge](https://thefridgelist.herokuapp.com/)
+<br> Link to Website: [The Fridge List](https://thefridgelist.herokuapp.com/)
 
 ## Description
-The Fridge is a to-do list website and mobile application that helps you organize your tasks into three separate lists: personal, school, and work.
+The Fridge List is a to-do list website and mobile application that helps you organize your tasks into three separate lists: personal, school, and work.
 
 ToDoListProjectDescriptionLongExplainationHere
 
@@ -28,7 +28,7 @@ Update Node
 Download "The Frige" Project
 - *Recommended to save on desktop*
 
-Run "The Fridge" Project
+Run "The Fridge List" Project
 - *Open Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]
 - sudo npm start
