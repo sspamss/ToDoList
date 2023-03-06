@@ -7,6 +7,22 @@ The Fridge is a to-do list website and mobile application that helps you organiz
 
 ToDoListProjectDescriptionLongExplainationHere
 
+## Installation
+Install Node
+- sudo apt-get update
+- sudo apt install nodejs
+- sudo apt install rpm
+<br> Update Node
+- sudo npm cache clean -f
+- sudo npm install -g n
+- sudo n stable
+<br> Install Nodemon
+- sudo npm install -g create-react-app
+- sudo npm install -g nodemon
+<br> Download The Frige
+<br> *recommended to save on desktop*
+
+
 ## Contributors
 Project Manager - [Kyle Franklin](https://github.com/KyleFranklin)
 <br> Database - [James Ko](https://github.com/JamesKo51)
