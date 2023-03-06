@@ -10,19 +10,18 @@ function LoggedInName()
 
     const doLogout = event => 
     {
-	    event.preventDefault();
+      event.preventDefault();
       localStorage.removeItem("user_data")
       window.location.href = '/';
     };    
 
   return(
-   <div id="loggedInDiv">
-   <span id="userName">Logged In As {firstName} {lastName}</span><br />
-   <button type="button" id="logoutButton" class="buttons" 
-     onClick={doLogout}> Log Out </button>
-   </div>
+    <div id="loggedInDiv">
+    <span id="userName">Logged In As {firstName} {lastName}</span><br/>
+    <button type="button" id="logoutButton" class="buttons"
+      onClick={doLogout}> Log Out </button>
+    </div>
   );
-
 };
 
 export default LoggedInName;

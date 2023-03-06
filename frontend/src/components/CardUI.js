@@ -23,7 +23,7 @@ function CardUI()
 
         try
         {
-            const response = await fetch('http://localhost:5000/api/addcard',
+            const response = await fetch('http://localhost:5050/api/addcard',
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             let txt = await response.text();
@@ -54,7 +54,7 @@ function CardUI()
 
         try
         {
-            const response = await fetch('http://localhost:5000/api/searchcards',
+            const response = await fetch('http://localhost:5050/api/searchcards',
             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
             let txt = await response.text();
@@ -78,6 +78,23 @@ function CardUI()
             setResults(e.toString());
         }
     };
+
+    return(
+        <div id="cardUIDiv">
+        <br/>
+        <input type="text" id="searchText" placeholder="Card To Search For" 
+            ref={(c) => search = c}/>
+        <button type="button" id="searchCardButton" class="buttons" 
+            onClick={searchCard}> Search Card</button><br/>
+        <span id="cardSearchResult">{searchResults}</span>
+        <p id="cardList">{cardList}</p><br/><br/>
+        <input type="text" id="cardText" placeholder="Card To Add" 
+            ref={(c) => card = c}/>
+        <button type="button" id="addCardButton" class="buttons" 
+            onClick={addCard}> Add Card </button><br/>
+        <span id="cardAddResult">{message}</span>
+        </div>
+    );
 }
 
 export default CardUI;
