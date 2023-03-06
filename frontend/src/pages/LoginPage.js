@@ -1,5 +1,6 @@
 import React from 'react';
 import PageTitle from '../components/PageTitle';
+import PageMotto from '../components/PageMotto';
 import Login from '../components/Login';
 
 const LoginPage = () =>
@@ -8,7 +9,8 @@ const LoginPage = () =>
     return(
       <div>
         <PageTitle/>
-        <Login />
+        <PageMotto/>
+        <Login/>
       </div>
     );
 };

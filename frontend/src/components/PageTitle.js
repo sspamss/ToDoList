@@ -2,9 +2,7 @@ import React from 'react';
 
 function PageTitle()
 {
-   return(
-     <h1 id="title">COP 4331 MERN Stack Demo</h1>
-   );
+   return(<h1 id="title">The Fridge List</h1>);
 };
 
 export default PageTitle;
