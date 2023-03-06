@@ -12,7 +12,6 @@ Install Node
 - sudo apt-get update
 - sudo apt install nodejs
 - sudo apt install rpm
-
 <br> Update Node
 - sudo npm cache clean -f
 - sudo npm install -g n
