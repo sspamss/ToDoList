@@ -1,6 +1,6 @@
 # The Fridge
 *COP4331 - Processes of Object-Oriented Software Development*
-<br> Link to Website: [The Fridge](ToDoListLinkHere)
+<br> Link to Website: [The Fridge](https://thefridgelist.herokuapp.com/)
 
 ## Description
 The Fridge is a to-do list website and mobile application that helps you organize your tasks into three separate lists: personal, school, and work.
@@ -8,19 +8,22 @@ The Fridge is a to-do list website and mobile application that helps you organiz
 ToDoListProjectDescriptionLongExplainationHere
 
 ## Installation
+Install Google Chrome
+- Link to Website: [Google Chrome](https://www.google.com/chrome/dr/download/)
+
 Install Node
 - sudo apt-get update
 - sudo apt install nodejs
 - sudo apt install rpm
 
+Install Nodemon
+- sudo npm install -g create-react-app
+- sudo npm install -g nodemon
+
 Update Node
 - sudo npm cache clean -f
 - sudo npm install -g n
 - sudo n stable
-
-Install Nodemon
-- sudo npm install -g create-react-app
-- sudo npm install -g nodemon
 
 Download "The Frige" Project
 - *Recommended to save on desktop*
@@ -32,6 +35,7 @@ Run "The Fridge" Project
 - *Open another Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]/frontend or cd [YourFileDirectory]\frontend
 - sudo npm start
+- Go to "http://localhost:3000/" on Google Chrome
 
 ## Contributors
 Project Manager - [Kyle Franklin](https://github.com/KyleFranklin)
