@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 
 function Login()
 {
-  var loginName;
+  var loginUsername;
   var loginPassword;
 
   const [message,setMessage] = useState('');
+
   const doLogin = async event => 
   {
     event.preventDefault();
-    var obj = {login:loginName.value,password:loginPassword.value};
+    var obj = {login:loginUsername.value,password:loginPassword.value};
     var js = JSON.stringify(obj);
 
     try
@@ -37,16 +38,22 @@ function Login()
     }    
   };
 
+  const doForgot = async event =>
+  {
+    event.preventDefault();
+  }
+
   return(
     <div id="loginDiv">
       <form onSubmit={doLogin}><br/>
-      <span id="inner-title">PLEASE LOG IN</span><br/>
-      <input type="text" id="loginName" placeholder="Username" 
-        ref={(c) => loginName = c}/><br/>
-      <input type="password" id="loginPassword" placeholder="Password" 
+      <input type="username" id="loginUsername" placeholder="USERNAME" 
+        ref={(c) => loginUsername = c}/><br/>
+      <input type="password" id="loginPassword" placeholder="PASSWORD" 
         ref={(c) => loginPassword = c}/><br/>
-      <input type="submit" id="loginButton" class="buttons" value = "Do It"
-        onClick={doLogin}/>
+      <input type="forgot" id="loginForgot" class="text" value="Forgot your password?"
+        onClick={doLogin}/><br/><br/>
+      <input type="submit" id="loginButton" class="buttons" value="SIGN IN"
+        onClick={doForgot}/>
       </form>
       <span id="loginResult">{message}</span>
     </div>

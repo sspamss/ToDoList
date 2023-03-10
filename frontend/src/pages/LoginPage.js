@@ -7,11 +7,11 @@ const LoginPage = () =>
 {
 
     return(
-      <div>
-        <PageTitle/>
-        <PageMotto/>
-        <Login/>
-      </div>
+        <div>
+          <PageTitle/>
+          <PageMotto/>
+          <Login/>
+        </div>
     );
 };
 
