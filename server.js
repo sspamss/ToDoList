@@ -41,15 +41,26 @@ app.post('/api/addUser', async (req, res, next) =>
   const newUser = {firstName:fname,lastName:lname,user:uid,password:pass,email:email};
   var error = '';
 
-  try
-  {
-    const db = client.db("Fridge");
-    const result = db.collection('Users').insertOne(newUser);
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find({user:uid,password:pass}).toArray();
+
+  if (results.length != 1){
+    try
+    {
+      const db = client.db("Fridge");
+      const result = db.collection('Users').insertOne(newUser);
+    }
+    catch(e)
+    {
+      error = e.toString();
+    }
   }
-  catch(e)
-  {
-    error = e.toString();
+
+  else{
+    error="This username is taken"
   }
+
+  
 
   //cardList.push( card );
 
