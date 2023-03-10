@@ -32,12 +32,13 @@ app.post('/api/addUser', async (req, res, next) =>
   // incoming: userId, color
   // outgoing: error
 	
-  const fname = req.body["firstName"]
-  const lname = req.body["lastName"]
-  const uid = req.body["user"]
-  const pass = req.body["password"]
+  const fname = req.body["firstName"];
+  const lname = req.body["lastName"];
+  const uid = req.body["user"];
+  const pass = req.body["password"];
+  const email = req.body["email"];
 
-  const newUser = {firstName:fname,lastName:lname,user:uid,password:pass};
+  const newUser = {firstName:fname,lastName:lname,user:uid,password:pass,email:email};
   var error = '';
 
   try
@@ -79,9 +80,10 @@ app.post('/api/login', async (req, res, next) =>
     id = results[0].user;
     fn = results[0].firstName;
     ln = results[0].lastName;
+    em = results[0].email;
   }
 
-  var ret = { id:id, firstName:fn, lastName:ln, error:''};
+  var ret = { id:id, firstName:fn, lastName:ln, email:em, error:''};
   res.status(200).json(ret);
 });
 
