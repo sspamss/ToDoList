@@ -43,19 +43,19 @@ function Login()
 
   return(
     <div id = "loginDiv">
+      <h1 id="title">The Fridge List</h1>
+      <i id="motto">organize tasks with ease</i>
       <form onSubmit = {doLogin}><br/>
-      <input type = "username" id = "loginUsername" placeholder = "USERNAME" 
-        ref = {(c) => loginUsername = c}/><br/>
-      <input type="password" id = "loginPassword" placeholder = "PASSWORD" 
-        ref = {(c) => loginPassword = c}/><br/>
-      <input type="forgot" id = "loginForgot" class = "text" value = "Forgot your password?"
-        onClick = {doLogin}/><br/><br/>
-      <input type = "submit" id = "loginButton" class="buttons" value = "SIGN IN"
-        onClick = {doForgot}/>
+        <input type="username" id = "loginUsername" placeholder = "USERNAME" 
+          ref = {(c) => loginUsername = c}/><br/>
+        <input type="password" id = "loginPassword" placeholder = "PASSWORD" 
+          ref = {(c) => loginPassword = c}/><br/>
+        <a href = "/forgot-password">Forgot your password?</a><br/><br/>
+        <input type="submit" id = "loginButton" class = "buttons" value = "SIGN IN" onClick = {doForgot}/>
       </form>
       <span id = "loginResult">{message}</span>
     </div>
-  );
+  );  
 };
 
 export default Login;
