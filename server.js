@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const url = 'thefridgelist.herokuapp.com';
+const url = 'mongodb+srv://User:Pass@fridge.gdztlsl.mongodb.net/?retryWrites=true&w=majority';
 const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient(url);
 
