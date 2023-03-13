@@ -5,7 +5,8 @@ import CardPage from './pages/CardPage';
 import LoginPage from './pages/LoginPage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+function App()
+{
   return (
     <BrowserRouter>
     <Routes>
