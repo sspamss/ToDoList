@@ -81,7 +81,7 @@ const ForgotPasswordPage = () =>
       <input type="username" id = "loginUsername" placeholder = "USERNAME" 
         ref = {(c) => loginUsername = c}/><br/>
       <input type="password" id = "loginPassword" placeholder = "PASSWORD" 
-        ref = {(c) => loginPassword = c}/><br/><br/>
+        ref = {(c) => loginPassword = c}/><br/>
       <input type="password" id = "loginPassword" placeholder = "CONFIRM PASSWORD" 
         ref = {(c) => loginPassword = c}/><br/><br/>
       <input type = "submit" id = "loginButton" class = "buttons" value = " RESET PASSWORD " onClick = {ForgotPasswordPage}/>

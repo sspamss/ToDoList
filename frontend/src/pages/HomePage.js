@@ -80,7 +80,6 @@ const addCard = async event =>
 
   return(
     <div id = "cardUIDiv"><br/>
-      <LoggedInName/>
       <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
         ref = {(c) => search = c}/> 
       <button type = "button" id = "searchCardButton" class = "buttons" 
