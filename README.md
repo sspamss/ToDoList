@@ -29,6 +29,7 @@ Download "The Frige" Project
 - *Recommended to save on desktop*
 
 Run "The Fridge List" Project
+- Unzip "node_modules" folder inside the "frontend" folder
 - *Open Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]
 - sudo npm start
