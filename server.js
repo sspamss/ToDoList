@@ -2,10 +2,32 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+const path = require('path');           
+const PORT = process.env.PORT || 5050; 
+
 const app = express();
-const url = 'mongodb+srv://User:Pass@fridge.gdztlsl.mongodb.net/?retryWrites=true&w=majority';
-const MongoClient = require("mongodb").MongoClient;
+
+app.set('port', (process.env.PORT || 5050));
+
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') 
+{
+  // Set static folder
+  app.use(express.static('frontend/build'));
+
+  app.get('*', (req, res) => 
+ {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+}
+
+require('dotenv').config();
+const url = process.env.MONGODB_URI;
+const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(url);
+client.connect();
+
 
 // Connect to the Mongo DB
 client.connect(console.log("mongodb connected"));
@@ -117,5 +139,9 @@ app.post('/api/searchcards', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
-// Start the server, use port 5050
-app.listen(5050); // start Node + Express server on port 5000
+
+app.listen(PORT, () => 
+{
+  console.log('Server listening on port ' + PORT);
+});
+
