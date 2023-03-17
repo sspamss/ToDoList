@@ -14,7 +14,7 @@ Install Google Chrome
 Install Node
 - sudo apt-get update
 - sudo apt install nodejs
-- sudo apt install rpm
+- sudo apt install npm
 
 Install Nodemon
 - sudo npm install -g create-react-app
@@ -29,12 +29,12 @@ Download "The Frige" Project
 - *Recommended to save on desktop*
 
 Run "The Fridge List" Project
-- Unzip "node_modules" folder inside the "frontend" folder
 - *Open Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]
 - sudo npm start
 - *Open another Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]/frontend or cd [YourFileDirectory]\frontend
+- sudo npm install
 - sudo npm start
 - Go to "http://localhost:3000/" on Google Chrome
 
