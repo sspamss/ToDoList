@@ -8,6 +8,7 @@ const LoginPageStyling = () => {
         <!-- Login Form -->
         <style>
 
+          /* Setting the website's background image */
           body {
             background-image: url(${ToDoList_bg_2});
 
