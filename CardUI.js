@@ -1,5 +1,5 @@
 // import React, { useState } from 'react';
-// import LoginPagePath from './LoginPagePath';
+// import LoginPagePath from './LoginPagePath/src/pages/LoginPagePath.js';
 
 // function CardUI()
 // {
@@ -15,20 +15,20 @@
 //     var search = '';
 
 //     // PAM: I already made this from another file, so I'm just going to import it
-//     //
-//     // const app_name = 'thefridgelist'
-//     // function buildPath(route)
-//     // {
-//     //     if (process.env.NODE_ENV === 'production') 
-//     //     {
-//     //         return 'https://' + app_name +  '.herokuapp.com/' + route;
-//     //     }
-//     //     else
-//     //     {        
-//     //         return 'http://localhost:5000/' + route;
-//     //     }
-//     // }
-
+//     // If you move this file someone else, it might change the import path, you'll have to change it
+//     const app_name = 'thefridgelist'
+//     function buildPath(route)
+//     {
+//         if (process.env.NODE_ENV === 'production') 
+//         {
+//             return 'https://' + app_name +  '.herokuapp.com/' + route;
+//         }
+//         else
+//         {        
+//             return 'http://localhost:5000/' + route;
+//         }
+//     }
+	
 //     const addCard = async event => 
 //     {
 // 	    event.preventDefault();
@@ -39,7 +39,7 @@
 //         try
 //         {
 //             const response = await fetch('api.?'),
-//             {method:'POST', body:js, headers:{'Content-Type': 'application/json'}};
+//             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
 //             let txt = await response.text();
 //             let res = JSON.parse(txt);
@@ -70,7 +70,7 @@
 //         try
 //         {
 //             response = await fetch('api.?'),
-//             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}};
+//             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
 
 //             let txt = await response.text();
 //             let res = JSON.parse(txt);
