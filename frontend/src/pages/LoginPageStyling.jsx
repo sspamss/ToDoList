@@ -1,4 +1,5 @@
 import React from 'react';
+import SigninSignupBackground from '../graphics/SigninSignupBackground.png';
 
 const LoginPageStyling = () => {
   return (
@@ -6,6 +7,15 @@ const LoginPageStyling = () => {
       __html: `
         <!-- Login Form -->
         <style>
+
+          body {
+            background-image: url(${SigninSignupBackground});
+
+            backdrop-filter: blur(10px);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
 
           /* Setting dimensions and styling the login background */
           #signinBackground {
@@ -16,7 +26,7 @@ const LoginPageStyling = () => {
 
             height: 472px;
             width: 354px;
-            
+
             left: 50%;
             top: 50%;
           }
@@ -30,7 +40,7 @@ const LoginPageStyling = () => {
           #title {
             color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
-            font-size: 2.0em;
+            font-size: 25pt;
             margin-bottom: 0em;
           }
     
@@ -38,22 +48,27 @@ const LoginPageStyling = () => {
           #motto {
             color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
-            font-size: 1.3em;
+            font-size: 14pt;
             font-style: italic;
           }
     
           /* Setting and styling the username field */
-          #username{
+          #username {
             color: #6C6C6C;
             border: none;
             border-radius: 10px;
             box-sizing: border-box;
             font-size: 12pt;
+            font-family: 'Inter', sans-serif;
             text-align: center;
             margin-bottom: 1em;
 
             height: 30px;
             width: 299px;
+          }
+          /* Removing the "focus ring" when the username field is clicked */
+          #username:focus {
+            outline: none;
           }
 
           /* Setting and styling the password field */
@@ -63,12 +78,18 @@ const LoginPageStyling = () => {
             border-radius: 10px;
             box-sizing: border-box;
             font-size: 12pt;
+            font-family: 'Inter', sans-serif;
             text-align: center;
             margin-bottom: 0.5em;
+            position: relative;
 
             height: 30px;
             width: 299px;
           }
+          /* Removing the "focus ring" when the password field is clicked */
+          #password:focus {
+            outline: none;
+          }            
     
           /* Styling the "Forgot your password?" */
           #forgotPassword {
