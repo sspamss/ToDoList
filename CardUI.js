@@ -1,4 +1,5 @@
 // import React, { useState } from 'react';
+// import LoginPagePath from './LoginPagePath';
 
 // function CardUI()
 // {
@@ -13,22 +14,21 @@
 //     var card = '';
 //     var search = '';
 
-/*
-const app_name = 'thefridgelist'
-function buildPath(route)
-{
-    if (process.env.NODE_ENV === 'production') 
-    {
-        return 'https://' + app_name +  '.herokuapp.com/' + route;
-    }
-    else
-    {        
-        return 'http://localhost:5000/' + route;
-    }
-}
+//     // PAM: I already made this from another file, so I'm just going to import it
+//     //
+//     // const app_name = 'thefridgelist'
+//     // function buildPath(route)
+//     // {
+//     //     if (process.env.NODE_ENV === 'production') 
+//     //     {
+//     //         return 'https://' + app_name +  '.herokuapp.com/' + route;
+//     //     }
+//     //     else
+//     //     {        
+//     //         return 'http://localhost:5000/' + route;
+//     //     }
+//     // }
 
-*/
-	
 //     const addCard = async event => 
 //     {
 // 	    event.preventDefault();
@@ -39,7 +39,7 @@ function buildPath(route)
 //         try
 //         {
 //             const response = await fetch('api.?'),
-//             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+//             {method:'POST', body:js, headers:{'Content-Type': 'application/json'}};
 
 //             let txt = await response.text();
 //             let res = JSON.parse(txt);
@@ -70,7 +70,7 @@ function buildPath(route)
 //         try
 //         {
 //             response = await fetch('api.?'),
-//             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+//             {method:'POST',body:js,headers:{'Content-Type': 'application/json'}};
 
 //             let txt = await response.text();
 //             let res = JSON.parse(txt);

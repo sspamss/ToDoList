@@ -28,19 +28,22 @@ const LoginPage = () =>
 
     // Send the login information to the backend and check if the login is valid
     try
-    {    
+    {
+      // Check if the username is valid
       const response = await fetch(bp.buildPath("api.login"),{
         method:'POST',
         body:js,
         headers:{'Content-Type':'application/json'}
       });
 
-      var res = JSON.parse(await response.text());
 
+      var res = JSON.parse(await response.text());
+      // If the login is invalid, display an error message
       if (res.id <= 0)
       {
         setMessage(res.error);
       }
+      // If the login is valid, store the user's information in local storage and redirect to the home page
       else
       {
         var user = {firstName:res.firstName, lastName:res.lastName, id:res.id}

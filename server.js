@@ -1,12 +1,10 @@
 // "const" used to declare variables that WILL NOT be changed 
-const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const path = require('path');           
-const PORT = process.env.PORT || 5050; 
-
-const app = express();
+const express = require('express');
+const path = require('path');
+const PORT = process.env.PORT || 5050;
 
 app.set('port', (process.env.PORT || 5050));
 
