@@ -5,7 +5,7 @@
 ## Description
 The Fridge List is a to-do list website and mobile application that helps you organize your tasks into three separate lists: personal, school, and work.
 
-ToDoListProjectDescriptionLongExplainationHere
+Our website is one of a kind. We chose purple as the sign in / sign up colors not to only to represent our brand being creative yet prestigious but to also help motivate you to finish your tasks.
 
 ## Installation
 Install Google Chrome
