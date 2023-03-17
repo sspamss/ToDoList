@@ -90,18 +90,7 @@ const LoginPageStyling = () => {
             outline: none;
           }            
     
-          /* Styling the "Forgot your password?" */
-          // #forgotPassword {
-          //   color: #FFFFFF;
-          //   display: inline-block;
-          //   font-size: 10pt;
-          //   margin-left: 3.0em;
-          //   text-align: left;
-
-          //   height: 30px;
-          //   width: 299px;
-          // }          
-
+          /* Styling the "Forgot your password?" */        
           #forgotPassword {
             color: #FFFFFF;
             text-decoration: none;
