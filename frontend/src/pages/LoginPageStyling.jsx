@@ -11,7 +11,6 @@ const LoginPageStyling = () => {
           body {
             background-image: url(${ToDoList_bg_2});
 
-            backdrop-filter: blur(10px);
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -92,18 +91,32 @@ const LoginPageStyling = () => {
           }            
     
           /* Styling the "Forgot your password?" */
+          // #forgotPassword {
+          //   color: #FFFFFF;
+          //   display: inline-block;
+          //   font-size: 10pt;
+          //   margin-left: 3.0em;
+          //   text-align: left;
+
+          //   height: 30px;
+          //   width: 299px;
+          // }          
+
           #forgotPassword {
             color: #FFFFFF;
-            display: block;
+            text-decoration: none;
+            font-family: 'Nunito', sans-serif;
             font-size: 10pt;
-            margin-left: 3.0em;
+            display: inline-block;
+            //margin-top: 0.5em;
+            margin-bottom: 0.5em;
             text-align: left;
+            float: left;
+            margin-left: 35px;
+          }
 
-            height: 30px;
-            width: 299px;
-          }          
           #forgotPassword:hover {
-            color: #EFEFEF;
+            color: #7c4182;
           }
     
           /* Setting the To Do List image */
