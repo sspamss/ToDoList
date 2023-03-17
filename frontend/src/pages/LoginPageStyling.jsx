@@ -1,5 +1,5 @@
 import React from 'react';
-import SigninSignupBackground from '../graphics/SigninSignupBackground.png';
+import ToDoList_bg_2 from '../graphics/ToDoList_bg_2.png';
 
 const LoginPageStyling = () => {
   return (
@@ -9,7 +9,7 @@ const LoginPageStyling = () => {
         <style>
 
           body {
-            background-image: url(${SigninSignupBackground});
+            background-image: url(${ToDoList_bg_2});
 
             backdrop-filter: blur(10px);
             background-position: center;
