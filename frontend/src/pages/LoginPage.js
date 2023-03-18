@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import LoginPageStyling from './LoginPageStyling';
+import SlidingAnimationStyling from './SlidingAnimationStyling';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
 import {BiEye, BiEyeSlash} from 'react-icons/bi';
 
@@ -63,11 +64,10 @@ const LoginPage = () =>
   return (
     <div>
       <LoginPageStyling/>
+      <SlidingAnimationStyling doSignin={doSignin}/>
       <div id="signinBackground">
         <div id="signinText" class="SigninText">
           <form onSubmit={doSignin}>
-            <h1 id="title">The Fridge List</h1>
-            <i id = "motto">organize tasks with ease</i><br/><br/>
             <div class="form-group">
               <input type="text" class="form-control col-md-12" id="username" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
             </div>
@@ -81,7 +81,7 @@ const LoginPage = () =>
             <div class="form-group">
               <img id="todolistpurple" src={ToDoListPurple} alt="To-Do List Purple"/>
             </div>
-              <span id="loginResult" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span><br/>
+              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span><br/>
               <input type="submit" id="signinButton" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
           </form>
         </div>

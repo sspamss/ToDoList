@@ -17,7 +17,7 @@ const LoginPageStyling = () => {
             background-size: cover;
           }
 
-          /* Setting dimensions and styling the login background */
+          /* Setting dimensions and styling the signin background */
           #signinBackground {
             background-color: #A5B2DF;
             border-radius: 10px;
@@ -31,25 +31,9 @@ const LoginPageStyling = () => {
             top: 50%;
           }
     
-          /* Centering the contents inside the sigin box */
+          /* Centering the contents inside the sigin box (except "Forgot your password") */
           #signinText {
             text-align: center;
-          }
-    
-          /* Styling the title*/
-          #title {
-            color: #FFFFFF;
-            font-family: 'Nunito', sans-serif;
-            font-size: 25pt;
-            margin-bottom: 0em;
-          }
-    
-          /* Styling the motto */
-          #motto {
-            color: #FFFFFF;
-            font-family: 'Nunito', sans-serif;
-            font-size: 14pt;
-            font-style: italic;
           }
     
           /* Setting and styling the username field */
@@ -62,7 +46,7 @@ const LoginPageStyling = () => {
             font-family: 'Inter', sans-serif;
             text-align: center;
             margin-bottom: 1em;
-
+            margin-top: 1em;
             height: 30px;
             width: 299px;
           }
@@ -94,17 +78,16 @@ const LoginPageStyling = () => {
           /* Styling the "Forgot your password?" */        
           #forgotPassword {
             color: #FFFFFF;
-            text-decoration: none;
+            display: inline-block;
             font-family: 'Nunito', sans-serif;
             font-size: 10pt;
-            display: inline-block;
-            //margin-top: 0.5em;
-            margin-bottom: 0.5em;
-            text-align: left;
             float: left;
+            margin-bottom: 0.5em;
             margin-left: 35px;
+            text-align: left;
+            text-decoration: underline;
           }
-
+          /* Changing the "Forgot your password?" color when hovered over */
           #forgotPassword:hover {
             color: #7c4182;
           }
@@ -115,7 +98,8 @@ const LoginPageStyling = () => {
             width: 60%;
           }
 
-          #loginResult {
+          /* Styling the error message (if there is one) */
+          #errorMessage {
             font-size: 10pt;
           }
 
@@ -134,6 +118,7 @@ const LoginPageStyling = () => {
             height: 37px;
             width: 299px;
           }
+          /* Changing the "Sign in" button color when hovered over */
           #signinButton:hover {
             background-color: #AB6DC9;
           }
