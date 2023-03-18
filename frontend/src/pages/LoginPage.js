@@ -30,7 +30,7 @@ const LoginPage = () =>
     try
     {
       // Check if the username is valid
-      const response = await fetch(bp.buildPath("api.login"),{
+      const response = await fetch(bp.buildPath("api/login"),{
         method:'POST',
         body:js,
         headers:{'Content-Type':'application/json'}
