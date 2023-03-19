@@ -134,6 +134,11 @@ const LoginPageStyling = () => {
 
             height: 37px;
             width: 299px;
+
+            position: absolute;
+            top: 390px;
+            left: 50%;
+            transform: translateX(-50%);
           }
           /* Changing the "SIGN IN" button color when hovered over */
           #signinButton:hover {

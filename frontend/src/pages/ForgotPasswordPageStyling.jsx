@@ -141,7 +141,6 @@ const LoginPageStyling = () => {
             font-size: 10pt;
           }
 
-          /* Setting and styling the "RESET PASSWORD" button */
           #resetPasswordButton {
             background-color: #9736C5;
             border: none;
@@ -152,9 +151,14 @@ const LoginPageStyling = () => {
 
             font-family: 'Fredoka One', sans-serif;
             font-size: 18pt;
-
+            
             height: 37px;
             width: 299px;
+
+            position: absolute;
+            top: 390px;
+            left: 50%;
+            transform: translateX(-50%);
           }
           /* Changing the "RESET PASSWORD" button color when hovered over */
           #resetPasswordButton:hover {
