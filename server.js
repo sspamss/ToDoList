@@ -95,7 +95,7 @@ app.post('/api/login', async (req, res, next) =>
   const user = req.body["Login"];
   const password = req.body["Password"];
   const db = client.db("Fridge");
-  const results = await db.collection('Users').find({username:user, password:password}).toArray();
+  const results = await db.collection('Users').find({Username:user, Password:password}).toArray();
   var id = -1;
   var fn = '';
   var ln = '';
@@ -104,7 +104,7 @@ app.post('/api/login', async (req, res, next) =>
   // The user must input at least one character in length for each field
   if (results.length > 0)
   {
-    id = results[0].username;
+    id = results[0].id;
     fn = results[0].firstName;
     ln = results[0].lastName;
     em = results[0].email;
