@@ -35,7 +35,7 @@ const LoginPageStyling = () => {
             text-align: center;
           }
     
-          /* Styling the title*/
+          /* Styling the "PASSWORD RESET" title*/
           #passwordReset {
             background-color: #FFFFFF;
             border: none;
@@ -43,10 +43,10 @@ const LoginPageStyling = () => {
             color: #000000;
             font-family: 'Fredoka One', sans-serif;
             font-size: 18pt;
-            margin-bottom: 0em;
+            line-height: 50px;
+            margin-bottom: 0.2em;
             margin-left: auto;
             margin-right: auto;
-
             height: 50px;
             width: 299px;
           }
@@ -133,7 +133,7 @@ const LoginPageStyling = () => {
           /* Setting the Winged Email image */
           #wingedEmail {
             margin-bottom: 0.2em;
-            width: 55%;
+            width: 52%;
           }
 
           /* Styling the error message (if there is one) */

@@ -35,6 +35,22 @@ const LoginPageStyling = () => {
           #signinText {
             text-align: center;
           }
+
+          /* Styling the "SIGNIN" title*/
+          #signin {
+            background-color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            color: #000000;
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 18pt;
+            line-height: 50px;
+            margin-bottom: 0.2em;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50px;
+            width: 299px;
+          }
     
           /* Setting and styling the username field */
           #usernameField {
@@ -95,6 +111,7 @@ const LoginPageStyling = () => {
           /* Setting the To Do List image */
           #todolistpurple {
             margin-bottom: 0.2em;
+            margin-top: 1.06em;
             width: 60%;
           }
 
