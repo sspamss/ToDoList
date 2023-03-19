@@ -1,90 +1,61 @@
 import React, {useState} from 'react';
-import {useLocation} from "react-router-dom";
+import ForgotPasswordPageStyling from './ForgotPasswordPageStyling';
+import WingedEmail from '../graphics/WingedEmail.png';
 
+// Function to handle the login page
 const ForgotPasswordPage = () =>
 {
-  var loginUsername;
-  var loginPassword;
+  var newSigninUsername; const minUsernameLength = 2, maxUsernameLength = 20;
+  var emailAddress, emailAddressConfirmation;
+
   const [message, setMessage] = useState('');
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = () => {setPasswordShown(!passwordShown);};
 
-  const [values, setValues] = useState({
-      password:'',
-      showPassword: false,
-      confirm: '',
-      showConfirm: false
-  });
-
-  const [errorMessage, errorMessageSet] = useState(false);
-
-  // Show password for the password field
-  const handleClickShowPassword = () => {setValues({...values, showPassword: !values.showPassword,});};
-
-  // Show password for the confirm password field
-  const handleClickShowConfirm = () => {setValues({...values, showConfirm: !values.showConfirm,});};
-
-  const [agree, setAgree] = useState(false);
-  const checkboxHandler = () => {setAgree(!agree);}
-  const handleMouseDown = (event) => {event.preventDefault();};
-  const handleMouseDownConfirm = (event) => {event.preventDefault();};
-
-  // Stores the password in the password variable
-  const tryNewPassword = (prop) => (event) => {setValues({ ...values, [prop]: event.target.value });};
-  function valid()
-  {
-    if(values.password !== values.confirm) return false;
-    else if(values.password === values.confirm) return true;
-  }
-
-  //error messages
-  const [pwdError, setPwdError] = useState({state: false, text: ""});
-  const [confirmError, setconfirmError] = useState({state: false, text: ""});
-  const [confirmName, setConfirmName] = useState({state: false, text: ""});
-  const [complexity, setComplexity] = useState({state: false, text: ""});
-
-  //submit handeler
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {setOpen(true);};
-  const handleClose = () => {setOpen(false); window.location.href='/Login';};
-
-  function handleSubmitButton(event)
+  const doForgotPassword = async event => 
   {
     event.preventDefault();
-    errorMessageSet(false);
-    setPwdError({state: false, text: ""});
-    setconfirmError({state: false, text: ""});
-    setConfirmName({state: false, text: ""});
-    setComplexity({state: false, text: ""});
+    var obj = {username:newSigninUsername.value, email:emailAddress.value, emailConfirm:emailAddressConfirmation.value};
 
-    const re = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-    const isOk = re.test(values.password);
+    // Check for any empty fields
+    if (obj.username == "" && obj.email == "" && obj.emailConfirm == "") {setMessage("* Please enter your username and email *"); return;}
+    if (obj.username == "" && obj.email == "") {setMessage("* Please enter your username and email *"); return;}
+    if (obj.username == "" && obj.emailConfirm == "") {setMessage("* Please enter your username and confirm your email *"); return;}
+    if (obj.email == "" && obj.emailConfirm == "") {setMessage("* Please enter your email *"); return;}
+    if (obj.username == "") {setMessage("* Please enter your username *"); return;}
+    if (obj.email == ""){setMessage("* Please enter your email *"); return;}
+    if (obj.emailConfirm == ""){setMessage("* Please confirm your email *"); return;}
 
+    var js = JSON.stringify(obj);
+  };
 
-    if (valid() && isOk)
-    {
-    }
-    else if (valid() !== true){setconfirmError(
-    {
-      state: true,
-      text: "Passwords do not match."
-    });}
-    else if (!isOk) {setComplexity({
-      state: true,
-      text: "Password strength is not strong enough."
-    });}
-  }
-
-  return(
-    <div id = "loginDiv">
-      <h1 id = "title"> The Fridge List </h1>
-      <i id = "motto"> organize tasks with ease </i>
-      <h4 id = "reset"> Password Reset </h4>
-      <input type="username" id = "loginUsername" placeholder = "USERNAME" 
-        ref = {(c) => loginUsername = c}/><br/>
-      <input type="password" id = "loginPassword" placeholder = "PASSWORD" 
-        ref = {(c) => loginPassword = c}/><br/>
-      <input type="password" id = "loginPassword" placeholder = "CONFIRM PASSWORD" 
-        ref = {(c) => loginPassword = c}/><br/><br/>
-      <input type = "submit" id = "loginButton" class = "buttons" value = " RESET PASSWORD " onClick = {ForgotPasswordPage}/>
+  // Returns the content of the login page
+  return (
+    <div>
+      <ForgotPasswordPageStyling/>
+      <div id="signinBackground">
+        <div id="signinText" class="SigninText">
+          <form onSubmit={doForgotPassword}>
+            <h1 id="passwordReset">PASSWORD RESET</h1>
+            <p id = "resetInstructionsP1">Password reset instructions will</p>
+            <p id = "resetInstructionsP2">be emailed directly to you.</p><br/>
+            <div class="form-group">
+              <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (newSigninUsername = c)}/>
+            </div>
+            <div class="form-group">
+              <input id="emailField" type="text" class="form-control col-md-12" placeholder="EMAIL ADDRESS" ref={(c) => (emailAddress = c)}/>
+            </div>
+            <div class="form-group">
+              <input id="emailFieldConfirmation" type="text" class="form-control col-md-12" placeholder="CONFIRM EMAIL ADDRESS" ref={(c) => (emailAddressConfirmation = c)}/>
+            </div>
+            <div class="form-group">
+              <img id="wingedEmail" src={WingedEmail} alt="To-Do List Purple"/>
+            </div>
+              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span><br/>
+              <input id="resetPasswordButton" type="submit" class="form-controlL btn-danger submit col-md-12" value="RESET PASSWORD" onClick={doForgotPassword}/>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

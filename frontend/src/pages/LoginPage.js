@@ -18,12 +18,12 @@ const LoginPage = () =>
   const doSignin = async event => 
   {
     event.preventDefault();
-    var obj = {login:signinUsername.value, password:signinPassword.value};
+    var obj = {username:signinUsername.value, password:signinPassword.value};
 
     // Check for any empty fields
-    if (obj.login == "" && obj.password == "") {setMessage("* Please enter your username and password. *"); return;}
-    if (obj.login == "") {setMessage("* Please enter your username. *"); return;}
-    if (obj.password == ""){setMessage("* Please enter your password. *"); return;}
+    if (obj.username == "" && obj.password == "") {setMessage("* Please enter your username and password *"); return;}
+    if (obj.username == "") {setMessage("* Please enter your username *"); return;}
+    if (obj.password == ""){setMessage("* Please enter your password *"); return;}
 
     var js = JSON.stringify(obj);
 
@@ -69,10 +69,10 @@ const LoginPage = () =>
         <div id="signinText" class="SigninText">
           <form onSubmit={doSignin}>
             <div class="form-group">
-              <input type="text" class="form-control col-md-12" id="username" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
+              <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
             </div>
             <div id="passwordContainer" className="password-container">
-              <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="password" placeholder="PASSWORD" ref={(c) => (signinPassword = c)}/>
+              <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signinPassword = c)}/>
               <i className={`password-icon ${passwordShown ? "fas fa-eye-slash" : "fas fa-eye"}`} onClick={togglePassword}/>
             </div>
             <div class="form-group">
@@ -82,7 +82,7 @@ const LoginPage = () =>
               <img id="todolistpurple" src={ToDoListPurple} alt="To-Do List Purple"/>
             </div>
               <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span><br/>
-              <input type="submit" id="signinButton" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
+              <input id="signinButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
           </form>
         </div>
       </div>

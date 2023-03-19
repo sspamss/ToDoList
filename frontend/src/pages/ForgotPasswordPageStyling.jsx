@@ -21,19 +21,53 @@ const LoginPageStyling = () => {
           #signinBackground {
             background-color: #A5B2DF;
             border-radius: 10px;
+            left: 50%;
+            top: 50%;
             transform: translate(-50%, -50%);
             position: absolute;
 
             height: 472px;
             width: 354px;
-
-            left: 50%;
-            top: 50%;
           }
     
           /* Centering the contents inside the sigin box (except "Forgot your password") */
           #signinText {
             text-align: center;
+          }
+    
+          /* Styling the title*/
+          #passwordReset {
+            background-color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            color: #000000;
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 18pt;
+            margin-bottom: 0em;
+            margin-left: auto;
+            margin-right: auto;
+
+            height: 50px;
+            width: 299px;
+          }
+
+          /* Styling the first line of password reset instructions */
+          #resetInstructionsP1 {
+            color: #FFFFFF;
+            margin-bottom: 0em;
+            margin-top: 0em;
+
+            font-family: 'Nunito', sans-serif;
+            font-size: 12pt;
+          }
+          /* Styling the second line of password reset instructions */
+          #resetInstructionsP2 {
+            color: #FFFFFF;
+            margin-bottom: 0em;
+            margin-top: 0em;
+
+            font-family: 'Nunito', sans-serif;
+            font-size: 12pt;
           }
     
           /* Setting and styling the username field */
@@ -42,60 +76,64 @@ const LoginPageStyling = () => {
             border: none;
             border-radius: 10px;
             box-sizing: border-box;
-            font-size: 12pt;
-            font-family: 'Inter', sans-serif;
             text-align: center;
             margin-bottom: 1em;
-            margin-top: 1em;
+
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+
             height: 30px;
             width: 299px;
           }
           /* Removing the "focus ring" when the username field is clicked */
-          #usernameField:focus {
+          #username:focus {
             outline: none;
           }
 
-          /* Setting and styling the password field */
-          #passwordField {
+          /* Setting and styling the email address field */
+          #emailField {
             color: #6C6C6C;
             border: none;
             border-radius: 10px;
             box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 1em;
+
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
-            text-align: center;
-            margin-bottom: 0.5em;
-            position: relative;
 
             height: 30px;
             width: 299px;
           }
-          /* Removing the "focus ring" when the password field is clicked */
-          #passwordField:focus {
+          /* Removing the "focus ring" when the username field is clicked */
+          #emailField:focus {
+            outline: none;
+          }
+
+          /* Setting and styling the email address confirmation field */
+          #emailFieldConfirmation {
+            color: #6C6C6C;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 0.8em;
+
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+
+            height: 30px;
+            width: 299px;
+          }
+          /* Removing the "focus ring" when the username field is clicked */
+          #emailFieldConfirmation:focus {
             outline: none;
           }
     
-          /* Styling the "Forgot your password?" */        
-          #forgotPassword {
-            color: #FFFFFF;
-            display: inline-block;
-            font-family: 'Nunito', sans-serif;
-            font-size: 10pt;
-            float: left;
-            margin-bottom: 0.5em;
-            margin-left: 35px;
-            text-align: left;
-            text-decoration: underline;
-          }
-          /* Changing the "Forgot your password?" color when hovered over */
-          #forgotPassword:hover {
-            color: #7c4182;
-          }
-    
-          /* Setting the To Do List image */
-          #todolistpurple {
+          /* Setting the Winged Email image */
+          #wingedEmail {
             margin-bottom: 0.2em;
-            width: 60%;
+            width: 55%;
           }
 
           /* Styling the error message (if there is one) */
@@ -103,8 +141,8 @@ const LoginPageStyling = () => {
             font-size: 10pt;
           }
 
-          /* Setting and styling the "SIGN IN" button */
-          #signinButton {
+          /* Setting and styling the "RESET PASSWORD" button */
+          #resetPasswordButton {
             background-color: #9736C5;
             border: none;
             border-radius: 12px;
@@ -118,8 +156,8 @@ const LoginPageStyling = () => {
             height: 37px;
             width: 299px;
           }
-          /* Changing the "SIGN IN" button color when hovered over */
-          #signinButton:hover {
+          /* Changing the "RESET PASSWORD" button color when hovered over */
+          #resetPasswordButton:hover {
             background-color: #AB6DC9;
           }
 
