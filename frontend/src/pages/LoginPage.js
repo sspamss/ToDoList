@@ -68,7 +68,7 @@ const LoginPage = () =>
       <div id="signinBackground">
         <div id="signinText" class="SigninText">
           <form onSubmit={doSignin}>
-            <h1 id="signin">PASSWORD RESET</h1>
+            <h1 id="signin">SIGN IN</h1>
             <div class="form-group">
               <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
             </div>
