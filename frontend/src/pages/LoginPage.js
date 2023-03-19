@@ -18,12 +18,12 @@ const LoginPage = () =>
   const doSignin = async event => 
   {
     event.preventDefault();
-    var obj = {username:signinUsername.value, password:signinPassword.value};
+    var obj = {user:signinUsername.value, password:signinPassword.value};
 
     // Check for any empty fields
-    if (obj.username == "" && obj.password == "") {setMessage("* Please enter your username and password *"); return;}
-    if (obj.username == "") {setMessage("* Please enter your username *"); return;}
-    if (obj.password == ""){setMessage("* Please enter your password *"); return;}
+    if (obj.user == "" && obj.password == "") {setMessage("* Please enter your username and password *"); return;}
+    if (obj.user == "") {setMessage("* Please enter your username *"); return;}
+    if (obj.user == ""){setMessage("* Please enter your password *"); return;}
 
     var js = JSON.stringify(obj);
 
@@ -40,14 +40,14 @@ const LoginPage = () =>
 
       var res = JSON.parse(await response.text());
       // If the login is invalid, display an error message
-      if (res.id <= 0)
+      if (res._id <= 0)
       {
         setMessage(res.error);
       }
       // If the login is valid, store the user's information in local storage and redirect to the home page
       else
       {
-        var user = {firstName:res.firstName, lastName:res.lastName, id:res.id}
+        var user = {firstName:res.firstName, lastName:res.lastName, id:res._id}
         localStorage.setItem('user_data', JSON.stringify(user));
         setMessage('');
         window.location.href = '/home';
