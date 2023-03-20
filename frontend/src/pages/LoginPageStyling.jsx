@@ -23,33 +23,13 @@ const LoginPageStyling = () => {
             border-radius: 10px;
             transform: translate(-50%, -50%);
             position: absolute;
+            text-align: center;
 
             height: 472px;
             width: 354px;
 
             left: 50%;
             top: 50%;
-          }
-    
-          /* Centering the contents inside the sigin box (except "Forgot your password") */
-          #signinText {
-            text-align: center;
-          }
-
-          /* Styling the "SIGNIN" title*/
-          #signin {
-            background-color: #FFFFFF;
-            border: none;
-            border-radius: 12px;
-            color: #000000;
-            font-family: 'Fredoka One', sans-serif;
-            font-size: 18pt;
-            line-height: 50px;
-            margin-bottom: 0.2em;
-            margin-left: auto;
-            margin-right: auto;
-            height: 50px;
-            width: 299px;
           }
     
           /* Setting and styling the username field */
@@ -98,7 +78,6 @@ const LoginPageStyling = () => {
             font-family: 'Nunito', sans-serif;
             font-size: 10pt;
             float: left;
-            margin-bottom: 0.5em;
             margin-left: 35px;
             text-align: left;
             text-decoration: underline;
@@ -111,13 +90,18 @@ const LoginPageStyling = () => {
           /* Setting the To Do List image */
           #todolistpurple {
             margin-bottom: 0.2em;
-            margin-top: 1.06em;
+            margin-top: 1em;
             width: 60%;
           }
 
           /* Styling the error message (if there is one) */
           #errorMessage {
             font-size: 10pt;
+            position: absolute;
+            margin-top: 0.5em;
+            top: 370px;
+            transform: translateX(-50%);
+            white-space: nowrap;
           }
 
           /* Setting and styling the "SIGN IN" button */

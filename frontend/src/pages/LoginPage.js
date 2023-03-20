@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import LoginPageStyling from './LoginPageStyling';
+import SlidingAnimation from './SlidingAnimation';
 import SlidingAnimationStyling from './SlidingAnimationStyling';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
 import {BiEye, BiEyeSlash} from 'react-icons/bi';
@@ -7,12 +8,16 @@ import {BiEye, BiEyeSlash} from 'react-icons/bi';
 // Function to handle the login page
 const LoginPage = () =>
 {
+  let bp = require("./LoginPagePath.js");
+
   var signinUsername; const minUsernameLength = 2, maxUsernameLength = 20;
   var signinPassword; const minPasswordLength = 6, maxPasswordLength = 20;
 
-  let bp = require("./LoginPagePath.js");
+  const [isSignInActive, setIsSignInActive] = useState(true);
   const [message, setMessage] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+
+  const toggleCurrent = () => {setIsSignInActive(!isSignInActive);};
   const togglePassword = () => {setPasswordShown(!passwordShown);};
 
   const doSignin = async event => 
@@ -61,31 +66,49 @@ const LoginPage = () =>
   };
 
   // Returns the content of the login page
+  // Returns the content of the login page
   return (
     <div>
       <LoginPageStyling/>
-      <SlidingAnimationStyling doSignin={doSignin}/>
+      <SlidingAnimationStyling/>
       <div id="signinBackground">
-        <div id="signinText" class="SigninText">
-          <form onSubmit={doSignin}>
-            <h1 id="signin">SIGN IN</h1>
-            <div class="form-group">
-              <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
-            </div>
-            <div id="passwordContainer" className="password-container">
-              <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signinPassword = c)}/>
-              <i className={`password-icon ${passwordShown ? "fas fa-eye-slash" : "fas fa-eye"}`} onClick={togglePassword}/>
-            </div>
-            <div class="form-group">
-            <a href='/forgot-password' id="forgotPassword">Forgot your password?</a>
-            </div>
-            <div class="form-group">
-              <img id="todolistpurple" src={ToDoListPurple} alt="To-Do List Purple"/>
-            </div>
-              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span><br/>
-              <input id="signinButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
-          </form>
+        <div id="toggleSlider">
+          <button
+            id="toggleSignin"
+            onClick={() => setIsSignInActive(true)}
+            style={{ backgroundColor: isSignInActive ? '#9736C5' : 'transparent', color: isSignInActive ? '#FFFFFF' : '#000000' }}
+          >
+            SIGN IN
+          </button>
+          <button
+            id="toggleSignup"
+            onClick={() => setIsSignInActive(false)}
+            style={{ backgroundColor: !isSignInActive ? '#9736C5' : 'transparent', color: !isSignInActive ? '#FFFFFF' : '#000000' }}
+          >
+            SIGN UP
+          </button>
+          <button id="toggleCurrent" style={{ left: isSignInActive ? 0 : 'auto', right: isSignInActive ? 'auto' : 0 }} onClick={toggleCurrent}>
+            {isSignInActive ? 'SIGN IN' : 'SIGN UP'}
+          </button>
         </div>
+        <form onSubmit={doSignin}>
+          {/* <h1 id="signin">SIGN IN</h1> */}
+          <div class="form-group">
+            <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
+          </div>
+          <div id="passwordContainer" className="password-container">
+            <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signinPassword = c)}/>
+            {/* <i className={`password-icon ${passwordShown ? "fas fa-eye-slash" : "fas fa-eye"}`} onClick={togglePassword}/> */}
+          </div>
+          <div class="form-group">
+            <a href='/forgot-password' id="forgotPassword">Forgot your password?</a>
+          </div>
+          <div class="form-group">
+            <img id="todolistpurple" src={ToDoListPurple} alt="To Do List Image"/>
+          </div>
+          <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span>
+          <input id="signinButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
+        </form>
       </div>
     </div>
   );
