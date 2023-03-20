@@ -33,12 +33,11 @@ const ForgotPasswordPage = () =>
   return (
     <div>
       <ForgotPasswordPageStyling/>
-      <div id="signinBackground">
-        <div id="signinText" class="SigninText">
+      <div id="forgotpasswordBackground">
+        <div class="forgotpasswordContents">
           <form onSubmit={doForgotPassword}>
-            <h1 id="passwordReset">PASSWORD RESET</h1>
-            <p id = "resetInstructionsP1">Password reset instructions will</p>
-            <p id = "resetInstructionsP2">be emailed directly to you.</p><br/>
+            <p id="passwordReset">PASSWORD RESET</p>
+            <p id = "resetInstructionsP2">Reset instructions will be emailed to you.</p><br/>
             <div class="form-group">
               <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (newSigninUsername = c)}/>
             </div>
@@ -49,9 +48,9 @@ const ForgotPasswordPage = () =>
               <input id="emailFieldConfirmation" type="text" class="form-control col-md-12" placeholder="CONFIRM EMAIL ADDRESS" ref={(c) => (emailAddressConfirmation = c)}/>
             </div>
             <div class="form-group">
-              <img id="wingedEmail" src={WingedEmail} alt="To-Do List Purple"/>
+              <img id="wingedEmail" src={WingedEmail} alt="Winged Email Image"/>
             </div>
-              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span><br/>
+              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span>
               <input id="resetPasswordButton" type="submit" class="form-controlL btn-danger submit col-md-12" value="RESET PASSWORD" onClick={doForgotPassword}/>
           </form>
         </div>

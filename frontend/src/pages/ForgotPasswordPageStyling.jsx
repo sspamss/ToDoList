@@ -18,24 +18,20 @@ const LoginPageStyling = () => {
           }
 
           /* Setting dimensions and styling the signin background */
-          #signinBackground {
+          #forgotpasswordBackground {
             background-color: #A5B2DF;
             border-radius: 10px;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             position: absolute;
+            text-align: center;
 
             height: 472px;
             width: 354px;
           }
     
-          /* Centering the contents inside the sigin box (except "Forgot your password") */
-          #signinText {
-            text-align: center;
-          }
-    
-          /* Styling the "PASSWORD RESET" title*/
+          /* Setting and Styling the "PASSWORD RESET" title*/
           #passwordReset {
             background-color: #FFFFFF;
             border: none;
@@ -45,10 +41,15 @@ const LoginPageStyling = () => {
             font-size: 18pt;
             line-height: 50px;
             margin-bottom: 0.2em;
-            margin-left: auto;
-            margin-right: auto;
+            margin-top: 1.33em;
+            position: relative;
+            transform: translateX(-50%);
+
             height: 50px;
             width: 299px;
+            
+            left: 50%;
+            top: 0px;
           }
 
           /* Styling the first line of password reset instructions */
@@ -86,7 +87,7 @@ const LoginPageStyling = () => {
             width: 299px;
           }
           /* Removing the "focus ring" when the username field is clicked */
-          #username:focus {
+          #usernameField:focus {
             outline: none;
           }
 
@@ -116,11 +117,10 @@ const LoginPageStyling = () => {
             border: none;
             border-radius: 10px;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            font-size: 12pt;
             text-align: center;
             margin-bottom: 0.8em;
-
-            font-size: 12pt;
-            font-family: 'Inter', sans-serif;
 
             height: 30px;
             width: 299px;
@@ -132,15 +132,20 @@ const LoginPageStyling = () => {
     
           /* Setting the Winged Email image */
           #wingedEmail {
-            margin-bottom: 0.2em;
-            width: 52%;
+            width: 55%;
           }
 
           /* Styling the error message (if there is one) */
           #errorMessage {
             font-size: 10pt;
+            position: absolute;
+            margin-top: 0.5em;
+            top: 370px;
+            transform: translateX(-50%);
+            white-space: nowrap;
           }
 
+          /* Setting and styling the "Forgot yout password?" clickable text */
           #resetPasswordButton {
             background-color: #9736C5;
             border: none;
