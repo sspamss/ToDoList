@@ -55,14 +55,15 @@ app.post('/api/addUser', async (req, res, next) =>
 	
   const fname = req.body["firstName"];
   const lname = req.body["lastName"];
-  const uid = req.body["username"];
+  const uid = req.body["user"];
   const pass = req.body["password"];
   const email = req.body["email"];
-  const newUser = {firstName:fname, lastName:lname, username:uid, password:pass, email:email};
+  const newUser = {firstName:fname, lastName:lname, user:uid, password:pass, email:email};
   var error = '';
   const db = client.db("Fridge");
-  const results = await db.collection('Users').find({username:uid, password:pass}).toArray();
-
+  const results = await db.collection('Users').find({user:uid, password:pass}).toArray();
+  console.log(results)
+  console.log(results.length)
   if (results.length != 1)
   {
     try
