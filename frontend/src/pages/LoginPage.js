@@ -28,7 +28,7 @@ const LoginPage = () =>
     // Check for any empty fields
     if (obj.user == "" && obj.password == "") {setMessage("* Please enter your username and password *"); return;}
     if (obj.user == "") {setMessage("* Please enter your username *"); return;}
-    if (obj.user == ""){setMessage("* Please enter your password *"); return;}
+    if (obj.password == "") {setMessage("* Please enter your password *"); return;}
 
     var js = JSON.stringify(obj);
 
@@ -65,7 +65,6 @@ const LoginPage = () =>
     }    
   };
 
-  // Returns the content of the login page
   // Returns the content of the login page
   return (
     <div>
