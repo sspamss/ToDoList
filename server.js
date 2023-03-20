@@ -92,10 +92,10 @@ app.post('/api/login', async (req, res, next) =>
   // outgoing: id, firstName, lastName, error
   
   var error = '';
-  const user = req.body["Login"];
-  const password = req.body["Password"];
+  const user = req.body["user"];
+  const password = req.body["password"];
   const db = client.db("Fridge");
-  const results = await db.collection('Users').find({Username:user, Password:password}).toArray();
+  const results = await db.collection('Users').find({user:user, password:password}).toArray();
   var id = -1;
   var fn = '';
   var ln = '';
@@ -104,13 +104,13 @@ app.post('/api/login', async (req, res, next) =>
   // The user must input at least one character in length for each field
   if (results.length > 0)
   {
-    id = results[0].id;
+    id = results[0]._id;
     fn = results[0].firstName;
     ln = results[0].lastName;
     em = results[0].email;
   }
 
-  var ret = { id:id, firstName:fn, lastName:ln, email:em, error:''};
+  var ret = { _id:id, firstName:fn, lastName:ln, email:em, error:''};
   res.status(200).json(ret);
 });
 
