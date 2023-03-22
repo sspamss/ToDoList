@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import SignupPage from './SignupPage';
 import LoginPageStyling from './LoginPageStyling';
 import SlidingAnimationStyling from './SlidingAnimationStyling';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
@@ -10,8 +11,8 @@ const LoginPage = () =>
   // Import the path to the backend
   let bp = require("./LoginPagePath.js");
 
-  var signinUsername, signupUsername; const minUsernameLength = 2, maxUsernameLength = 20;
-  var signinPassword, signupPassword, signupPasswordConfirm; const minPasswordLength = 6, maxPasswordLength = 20;
+  var signinUsername;
+  var signinPassword;
 
   const [isSignInActive, setIsSignInActive] = useState(true);
   const [message, setMessage] = useState('');
@@ -65,18 +66,6 @@ const LoginPage = () =>
     }    
   };
 
-  // Function to handle the sign up form
-  const doSignup = async event => 
-  {
-    event.preventDefault();
-    var obj = {user:signupUsername.value, password:signupPassword.value, passwordConfirm:signupPasswordConfirm.value};
-
-    // Check for any empty fields
-    if (obj.user == "" && obj.password == "") {setMessage("* Please enter your username and password *"); return;}
-    if (obj.user == "") {setMessage("* Please enter your username *"); return;}
-    if (obj.password == "") {setMessage("* Please enter your password *"); return;}   
-  };
-
   // Returns the content of the login page
   return (
     <div>
@@ -99,7 +88,6 @@ const LoginPage = () =>
             {isSignInActive ? 'SIGN IN' : 'SIGN UP'}
           </button>
         </div>
-
           {isSignInActive ? (
             <form id="doSignin" onSubmit={doSignin}>
               <div class="form-group">
@@ -117,21 +105,7 @@ const LoginPage = () =>
               <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span>
               <input id="signinButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
             </form>
-          ) : (
-            <form id="doSignup" onSubmit={doSignup}>
-              <div class="form-group">
-                <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signupUsername = c)}/>
-              </div>
-              <div id="passwordContainer" className="password-container">
-                <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CREATE PASSWORD" ref={(c) => (signupPassword = c)}/>
-              </div>
-              <div id="passwordContainer" className="password-container">
-                <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPassword = c)}/>
-              </div>
-              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span>
-              <input id="signinButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignup}/>
-            </form>
-          )
+          ) : ( <SignupPage/> )
         }
       </div>
     </div>
