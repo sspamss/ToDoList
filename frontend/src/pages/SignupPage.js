@@ -1,9 +1,3 @@
-// // Check if the username and password is long enough
-// if (obj.login.length < minUsernameLength || obj.login.length > maxUsernameLength)
-//   {setMessage(`* Username must be between ${minUsernameLength} and ${maxUsernameLength} characters long. *`); return;}
-// if (obj.password.length < minPasswordLength || obj.password.length > maxPasswordLength)
-//   {setMessage(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters long. *`); return;}
-
 import React, {useState} from 'react';
 import SignupPageStyling from './SignupPageStyling';
 
@@ -24,15 +18,15 @@ const SignupPage = () =>
   const doSignup = async event => 
   {
     event.preventDefault();
-    var obj = {user:signupUsername.value, password:signupPassword.value, passwordConfirm:signupPasswordConfirm.value};
+    var obj = {firstName:signupFirstname.value, lastName:signupLastname.value, email:signupEmailaddress.value, user:signupUsername.value, password:signupPassword.value};
 
     // Check for any empty fields
-    if (obj.user == "" && obj.password == "" && obj.passwordConfirm == "") {messageSignup("* Please enter your username and password *"); return;}
+    if (obj.user == "" && obj.password == "" && signupPasswordConfirm == "") {messageSignup("* Please enter your username and password *"); return;}
     if (obj.user == "" && obj.password == "") {messageSignup("* Please enter your username and password *"); return;}
     if (obj.user == "" && obj.passwordConfirm == "") {messageSignup("* Please enter your username and password *"); return;}
     if (obj.user == "") {messageSignup("* Please enter your username *"); return;}
     if (obj.password == "") {messageSignup("* Please enter your password *"); return;}
-    if (obj.passwordConfirm == "") {messageSignup("* Please enter your password *"); return;}
+    if (signupPasswordConfirm == "") {messageSignup("* Please enter your password *"); return;}
 
     // Check for any invalid characters
     if (obj.user.includes(" ")) {messageSignup("* Username cannot contain spaces *"); return;}
@@ -94,7 +88,7 @@ const SignupPage = () =>
           <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CREATE PASSWORD" ref={(c) => (signupPassword = c)}/>
         </div>
         <div id="passwordContainer" className="password-container">
-          <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordConfirmField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPassword = c)}/>
+          <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordConfirmField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPasswordConfirm = c)}/>
         </div>
           <span id="errorMessageSignup" class="w-100 text-center" style={{color: "#FFFFFF"}}> {messageSignup}</span>
           <input id="signupButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN UP" onClick={doSignup}/>
