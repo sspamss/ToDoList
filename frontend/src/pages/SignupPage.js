@@ -21,26 +21,26 @@ const SignupPage = () =>
     var obj = {firstName:signupFirstname.value, lastName:signupLastname.value, email:signupEmailaddress.value, user:signupUsername.value, password:signupPassword.value};
 
     // Check for any empty fields
-    if (obj.user == "" && obj.password == "" && signupPasswordConfirm == "") {messageSignup("* Please enter your username and password *"); return;}
-    if (obj.user == "" && obj.password == "") {messageSignup("* Please enter your username and password *"); return;}
-    if (obj.user == "" && obj.passwordConfirm == "") {messageSignup("* Please enter your username and password *"); return;}
-    if (obj.user == "") {messageSignup("* Please enter your username *"); return;}
-    if (obj.password == "") {messageSignup("* Please enter your password *"); return;}
-    if (signupPasswordConfirm == "") {messageSignup("* Please enter your password *"); return;}
+    if (obj.user == "" && obj.password == "" && obj.passwordConfirm == "") {setMessageSignup("* Please enter your username and password *"); return;}
+    if (obj.user == "" && obj.password == "") {setMessageSignup("* Please enter your username and password *"); return;}
+    if (obj.user == "" && signupPasswordConfirm.value == "") {setMessageSignup("* Please enter your username and password *"); return;}
+    if (obj.user == "") {setMessageSignup("* Please enter your username *"); return;}
+    if (obj.password == "") {setMessageSignup("* Please enter your password *"); return;}
+    if (signupPasswordConfirm == "") {setMessageSignup("* Please enter your password *"); return;}
 
     // Check for any invalid characters
-    if (obj.user.includes(" ")) {messageSignup("* Username cannot contain spaces *"); return;}
-    if (obj.password.includes(" ")) {messageSignup("* Password cannot contain spaces *"); return;}
-    if (obj.passwordConfirm.includes(" ")) {messageSignup("* Password cannot contain spaces *"); return;}
+    if (obj.user.includes(" ")) {setMessageSignup("* Username cannot contain spaces *"); return;}
+    if (obj.password.includes(" ")) {setMessageSignup("* Password cannot contain spaces *"); return;}
+    if (obj.passwordConfirm.includes(" ")) {setMessageSignup("* Password cannot contain spaces *"); return;}
 
     // Check if the username and password is long enough
     if (obj.user.length < minUsernameLength || obj.user.length > maxUsernameLength)
-      {messageSignup("* Username must be between ${minUsernameLength} and ${maxUsernameLength} characters long. *"); return;}
+      {setMessageSignup(`* Username must be between ${minUsernameLength} and ${maxUsernameLength} characters long. *`); return;}
     if (obj.password.length < minPasswordLength || obj.password.length > maxPasswordLength)
-      {messageSignup("* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters long. *"); return;}
+      {setMessageSignup(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters long. *`); return;}
 
     // Check if the password and password confirmation match
-    if (obj.password != obj.passwordConfirm) {messageSignup("* Passwords do not match *"); return;}
+    if (obj.password != obj.passwordConfirm) {setMessageSignup("* Passwords do not match *"); return;}
 
     // Send a request to the backend to create a new account
     var js = JSON.stringify(obj);
@@ -57,8 +57,8 @@ const SignupPage = () =>
       signupPasswordConfirm.value = "";
 
       // Check if the request was successful
-      if (res.error == "") {messageSignup("* Account created successfully *"); return;}
-      else {messageSignup("* " + res.error + " *"); return;}
+      if (res.error == "") {setMessageSignup("* Account created successfully *"); return;}
+      else {setMessageSignup("* " + res.error + " *"); return;}
     }
     catch(e)
     {
