@@ -1,6 +1,6 @@
 # The Fridge List
 *COP4331 - Processes of Object-Oriented Software Development*
-<br> Link to Website: [The Fridge List](https://thefridgelist.herokuapp.com/)
+<br> Link to Website (in progress): [The Fridge List](https://thefridgelist.herokuapp.com/)
 
 ## Description
 The Fridge List is a to-do list website and mobile application that helps you organize your tasks into three separate lists: personal, school, and work.
