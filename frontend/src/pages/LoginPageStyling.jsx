@@ -41,8 +41,8 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 1em;
-            margin-top: 1em;
+            margin-bottom: 0.5em;
+            margin-top: 1.5em;
             height: 30px;
             width: 299px;
           }
@@ -51,7 +51,7 @@ const LoginPageStyling = () => {
             outline: none;
           }
 
-          /* Setting and styling the password field */
+          /* Setting and styling the "CREATE PASSWORD" field */
           #passwordField {
             color: #6C6C6C;
             border: none;
@@ -66,8 +66,28 @@ const LoginPageStyling = () => {
             height: 30px;
             width: 299px;
           }
-          /* Removing the "focus ring" when the password field is clicked */
+          /* Removing the "focus ring" when the "CREATE PASSWORD" field is clicked */
           #passwordField:focus {
+            outline: none;
+          }
+
+          /* Setting and styling the "CONFIRM PASSWORD" field */
+          #passwordConfirmField {
+            color: #6C6C6C;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 0.5em;
+            position: relative;
+
+            height: 30px;
+            width: 299px;
+          }
+          /* Removing the "focus ring" when the "CONFIRM PASSWORD" field is clicked */
+          #passwordConfirmField:focus {
             outline: none;
           }
     
