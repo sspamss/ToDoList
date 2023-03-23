@@ -21,49 +21,48 @@ const SignupPage = () =>
     var obj = {firstName:signupFirstname.value, lastName:signupLastname.value, email:signupEmailaddress.value, user:signupUsername.value, password:signupPassword.value};
 
     // Check for any empty fields
-    if (obj.user == "" && obj.password == "" && obj.passwordConfirm == "") {setMessageSignup("* Please enter your username and password *"); return;}
-    if (obj.user == "" && obj.password == "") {setMessageSignup("* Please enter your username and password *"); return;}
-    if (obj.user == "" && signupPasswordConfirm.value == "") {setMessageSignup("* Please enter your username and password *"); return;}
-    if (obj.user == "") {setMessageSignup("* Please enter your username *"); return;}
-    if (obj.password == "") {setMessageSignup("* Please enter your password *"); return;}
-    if (signupPasswordConfirm == "") {setMessageSignup("* Please enter your password *"); return;}
+    if (obj.firstName === "") {setMessageSignup("* Please fill in all the fields *"); return;}
+    if (obj.lastName === "") {setMessageSignup("* Please fill in all the fields *"); return;}
+    if (obj.email === "") {setMessageSignup("* Please fill in all the fields *"); return;}
+    if (obj.user === "") {setMessageSignup("* Please fill in all the fields *"); return;}
+    if (obj.password === "") {setMessageSignup("* Please fill in all the fields *"); return;}
+    if (signupPasswordConfirm === "") {setMessageSignup("* Please confirm your password*"); return;}
 
     // Check for any invalid characters
     if (obj.user.includes(" ")) {setMessageSignup("* Username cannot contain spaces *"); return;}
     if (obj.password.includes(" ")) {setMessageSignup("* Password cannot contain spaces *"); return;}
-    if (obj.passwordConfirm.includes(" ")) {setMessageSignup("* Password cannot contain spaces *"); return;}
 
     // Check if the username and password is long enough
     if (obj.user.length < minUsernameLength || obj.user.length > maxUsernameLength)
-      {setMessageSignup(`* Username must be between ${minUsernameLength} and ${maxUsernameLength} characters long. *`); return;}
+      {setMessageSignup(`* Username must be between ${minUsernameLength} and ${maxUsernameLength} characters *`); return;}
     if (obj.password.length < minPasswordLength || obj.password.length > maxPasswordLength)
-      {setMessageSignup(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters long. *`); return;}
+      {setMessageSignup(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters *`); return;}
 
     // Check if the password and password confirmation match
-    if (obj.password != obj.passwordConfirm) {setMessageSignup("* Passwords do not match *"); return;}
+    if (obj.password !== signupPasswordConfirm.value) {setMessageSignup("* Passwords do not match *"); return;}
 
-    // Send a request to the backend to create a new account
     var js = JSON.stringify(obj);
 
+    // Send the login information to the backend and check if the sign in is valid
     try
     {
-      // Fetch the request
-      const response = await fetch(bp.buildPath('api/signup'), {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+      const response = await fetch(bp.buildPath('api/addUser'), {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
       var res = JSON.parse(await response.text());
 
-      // Clear the form
-      signupUsername.value = "";
-      signupPassword.value = "";
-      signupPasswordConfirm.value = "";
+        var user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
+        localStorage.setItem('user_data', JSON.stringify(user));
 
-      // Check if the request was successful
-      if (res.error == "") {setMessageSignup("* Account created successfully *"); return;}
-      else {setMessageSignup("* " + res.error + " *"); return;}
+        // Clear the error message
+        setMessageSignup("");
+
+        // Redirect to the home page
+        window.location.href = '/';
+
     }
     catch(e)
     {
-      // Display an error message
-      alert(e.toString());
+      console.log(e.toString());
+      return;
     }
   };
 
@@ -90,7 +89,7 @@ const SignupPage = () =>
         <div id="passwordContainer" className="password-container">
           <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordConfirmField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPasswordConfirm = c)}/>
         </div>
-          <span id="errorMessageSignup" class="w-100 text-center" style={{color: "#FFFFFF"}}> {messageSignup}</span>
+          <span id="errorMessageSignup" class="w-100 text-center" style={{color: "#FF0000"}}> {messageSignup}</span>
           <input id="signupButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN UP" onClick={doSignup}/>
       </form>
     </div>

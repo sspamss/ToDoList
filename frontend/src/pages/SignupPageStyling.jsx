@@ -147,9 +147,9 @@ const LoginPageStyling = () => {
 
           /* Styling the error message (if there is one) */
           #errorMessageSignup {
-            font-size: 10pt;
+            font-size: 9pt;
             position: absolute;
-            margin-top: 0.5em;
+            margin-top: 0.8em;
             top: 370px;
             transform: translateX(-50%);
             white-space: nowrap;

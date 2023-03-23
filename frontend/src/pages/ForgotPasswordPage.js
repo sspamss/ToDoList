@@ -50,7 +50,7 @@ const ForgotPasswordPage = () =>
             <div class="form-group">
               <img id="wingedEmail" src={WingedEmail} alt="Winged Email Image"/>
             </div>
-              <span id="errorMessage" class="w-100 text-center" style={{color: "#FFFFFF"}}> {message}</span>
+              <span id="errorMessage" class="w-100 text-center" style={{color: "#FF0000"}}> {message}</span>
               <input id="resetPasswordButton" type="submit" class="form-controlL btn-danger submit col-md-12" value="RESET PASSWORD" onClick={doForgotPassword}/>
           </form>
         </div>

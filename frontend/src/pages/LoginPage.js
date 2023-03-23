@@ -19,13 +19,13 @@ const LoginPage = () =>
     var obj = {user:signinUsername.value, password:signinPassword.value};
 
     // Check for any empty fields
-    if (obj.user == "" && obj.password == "") {setMessageSignin("* Please enter your username and password *"); return;}
-    if (obj.user == "") {setMessageSignin("* Please enter your username *"); return;}
-    if (obj.password == "") {setMessageSignin("* Please enter your password *"); return;}
+    if (obj.user === "" && obj.password == "") {setMessageSignin("* Please enter your username and password *"); return;}
+    if (obj.user === "") {setMessageSignin("* Please enter your username *"); return;}
+    if (obj.password === "") {setMessageSignin("* Please enter your password *"); return;}
 
     var js = JSON.stringify(obj);
 
-    // Send the login information to the backend and check if the login is valid
+    // Send the login information to the backend and check if the log in is valid
     try
     {
       const response = await fetch(bp.buildPath("api/login"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
