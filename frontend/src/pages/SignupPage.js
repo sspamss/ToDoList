@@ -61,13 +61,13 @@ const SignupPage = () =>
         localStorage.setItem('user_data', JSON.stringify(user));
 
         // // Clear the error message and input fields
-        // setMessageSignup("Account created successfully!");
-        // signupFirstname.value = "";
-        // signupLastname.value = "";
-        // signupEmailaddress.value = "";
-        // signupUsername.value = "";
-        // signupPassword.value = "";
-        // signupPasswordConfirm.value = "";
+        setMessageSignup("");
+        signupFirstname.value = "";
+        signupLastname.value = "";
+        signupEmailaddress.value = "";
+        signupUsername.value = "";
+        signupPassword.value = "";
+        signupPasswordConfirm.value = "";
 
         // Refresh the page to bring the sign in page back
         window.location.reload();
