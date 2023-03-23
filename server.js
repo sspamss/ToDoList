@@ -152,7 +152,7 @@ app.post('/api/addTask', async (req, res, next) =>
   const newTask = {taskContent:cont, time:time, category:cat, tstamp:t};
   var error = '';
   const db = client.db("Fridge");
-  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
+  const results = await db.collection('Tasks').find({taskContent:cont,category:cat}).toArray();
   
   if (results.length != 1)
   {
