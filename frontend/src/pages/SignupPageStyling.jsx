@@ -31,6 +31,61 @@ const LoginPageStyling = () => {
             left: 50%;
             top: 50%;
           }
+
+          /* Setting and styling the username field */
+          #firstnameField {
+            color: #6C6C6C;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 0.5em;
+            margin-top: 1.5em;
+            height: 30px;
+            width: 299px;
+          }
+          /* Removing the "focus ring" when the username field is clicked */
+          #firstnameField:focus {
+            outline: none;
+          }
+
+          /* Setting and styling the username field */
+          #lastnameField {
+            color: #6C6C6C;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 0.5em;
+            height: 30px;
+            width: 299px;
+          }
+          /* Removing the "focus ring" when the username field is clicked */
+          #lastnameField:focus {
+            outline: none;
+          }
+
+          /* Setting and styling the username field */
+          #emailaddressField {
+            color: #6C6C6C;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 0.5em;
+            height: 30px;
+            width: 299px;
+          }
+          /* Removing the "focus ring" when the username field is clicked */
+          #emailaddressField:focus {
+            outline: none;
+          }
     
           /* Setting and styling the username field */
           #usernameField {
@@ -42,7 +97,6 @@ const LoginPageStyling = () => {
             font-family: 'Inter', sans-serif;
             text-align: center;
             margin-bottom: 0.5em;
-            margin-top: 1.5em;
             height: 30px;
             width: 299px;
           }
@@ -70,32 +124,29 @@ const LoginPageStyling = () => {
           #passwordField:focus {
             outline: none;
           }
-    
-          /* Styling the "Forgot your password?" */        
-          #forgotPassword {
-            color: #FFFFFF;
-            display: inline-block;
-            font-family: 'Nunito', sans-serif;
-            font-size: 10pt;
-            float: left;
-            margin-left: 35px;
-            text-align: left;
-            text-decoration: underline;
+
+          /* Setting and styling the "CONFIRM PASSWORD" field */
+          #passwordConfirmField {
+            color: #6C6C6C;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 12pt;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            margin-bottom: 0.5em;
+            position: relative;
+
+            height: 30px;
+            width: 299px;
           }
-          /* Changing the "Forgot your password?" color when hovered over */
-          #forgotPassword:hover {
-            color: #7c4182;
-          }
-    
-          /* Setting the To Do List image */
-          #todolistpurple {
-            margin-bottom: 0.2em;
-            margin-top: 1em;
-            width: 60%;
+          /* Removing the "focus ring" when the "CONFIRM PASSWORD" field is clicked */
+          #passwordConfirmField:focus {
+            outline: none;
           }
 
           /* Styling the error message (if there is one) */
-          #errorMessage {
+          #errorMessageSignup {
             font-size: 10pt;
             position: absolute;
             margin-top: 0.5em;
@@ -105,7 +156,7 @@ const LoginPageStyling = () => {
           }
 
           /* Setting and styling the "SIGN IN" button */
-          #signinButton {
+          #signupButton {
             background-color: #9736C5;
             border: none;
             border-radius: 12px;
@@ -125,7 +176,7 @@ const LoginPageStyling = () => {
             transform: translateX(-50%);
           }
           /* Changing the "SIGN IN" button color when hovered over */
-          #signinButton:hover {
+          #signupButton:hover {
             background-color: #AB6DC9;
           }
 
