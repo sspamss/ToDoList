@@ -46,18 +46,32 @@ const SignupPage = () =>
     // Send the login information to the backend and check if the sign in is valid
     try
     {
-      const response = await fetch(bp.buildPath('api/addUser'), {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
-      var res = JSON.parse(await response.text());
+        const response = await fetch(bp.buildPath('api/addUser'), {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+        var res = JSON.parse(await response.text());
 
+      // If username is already taken, display the error message
+      if (res.error !== null)
+      {
+        setMessageSignup(res.error);
+      }
+      // If sign up is valid, store the user's information in local storage and redirect to the sign in page
+      else
+      {
         var user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
         localStorage.setItem('user_data', JSON.stringify(user));
 
-        // Clear the error message
-        setMessageSignup("");
+        // // Clear the error message and input fields
+        // setMessageSignup("Account created successfully!");
+        // signupFirstname.value = "";
+        // signupLastname.value = "";
+        // signupEmailaddress.value = "";
+        // signupUsername.value = "";
+        // signupPassword.value = "";
+        // signupPasswordConfirm.value = "";
 
-        // Redirect to the home page
-        window.location.href = '/';
-
+        // Refresh the page to bring the sign in page back
+        window.location.reload();
+      }
     }
     catch(e)
     {
