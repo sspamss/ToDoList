@@ -62,8 +62,7 @@ app.post('/api/addUser', async (req, res, next) =>
   var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({user:uid, password:pass}).toArray();
-  console.log(results)
-  console.log(results.length)
+  
   if (results.length != 1)
   {
     try
@@ -137,6 +136,43 @@ app.post('/api/searchcards', async (req, res, next) =>
   var ret = {results:_ret, error:error};
   res.status(200).json(ret);
 });
+
+app.post('/api/addTask', async (req, res, next) =>
+{
+  // Incoming: userId, color
+  // Outgoing: error
+	
+  const cont = req.body["taskContent"];
+  const time = req.body["time"];
+  const cat = req.body["category"];
+  
+  const newTask = {taskContent:cont, time:time, category:cat};
+  var error = '';
+  const db = client.db("Fridge");
+  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
+  
+  if (results.length != 1)
+  {
+    try
+    {
+      const db = client.db("Fridge");
+      const result = db.collection('Tasks').insertOne(newTask);
+    }
+    catch(e)
+    {
+      error = e.toString();
+    }
+  }
+  else
+  {
+    error = "You already added this task"
+  }
+
+  //cardList.push( card );
+  var ret = { error: error };
+  res.status(200).json(ret);
+});
+
 
 
 app.listen(PORT, () => 
