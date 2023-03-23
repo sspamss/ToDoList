@@ -145,8 +145,11 @@ app.post('/api/addTask', async (req, res, next) =>
   const cont = req.body["taskContent"];
   const time = req.body["time"];
   const cat = req.body["category"];
+  const t =req.body["tstamp"];
+  console.log(t)
+
   
-  const newTask = {taskContent:cont, time:time, category:cat};
+  const newTask = {taskContent:cont, time:time, category:cat, tstamp:t};
   var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
