@@ -17,7 +17,7 @@ const HomePageStyling = () => {
             #todolisticon {
               margin-bottom: 0.2em;
               margin-top: 1em;
-              width: 100%;
+              width: 70%;
               position: absolute;
               text-align: center;
             }

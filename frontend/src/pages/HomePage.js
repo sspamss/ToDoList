@@ -80,24 +80,25 @@ const addCard = async event =>
     }
   };
 
-  return(
-    <div id = "cardUIDiv"><br/>
+  return (
+    <div>
+      <HomePageStyling/>
+      <div id = "cardUIDiv"><br/>
         <div class="form-group">
           <img id="todolisticon" src={ToDoIcon} alt="To Do List Logo"/>
         </div>
-      <input type = "text" id = "newTask" placeholder = "ADD NEW TASK" 
-        ref = {(c) => card = c}/>
-      <button type = "button" id = "addTaskButton" class = "buttons" 
-        onClick = {addCard}> New Task </button><br/>
-        <p id = "cardList">{cardList}</p><br/><br/>
-      <span id = "cardAddResult">{message}</span>
-      <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
-        ref = {(c) => search = c}/> 
-      <button type = "button" id = "searchTasksButton" class = "buttons" 
-        onClick = {searchCard}> Search Tasks</button><br/>
-      <span id = "cardSearchResult">{searchResults}</span>
-      
-      
+          <input type = "text" id = "newTask" placeholder = "ADD NEW TASK" 
+          ref = {(c) => card = c}/>
+        <button type = "button" id = "addTaskButton" class = "buttons" 
+          onClick = {addCard}> New Task </button><br/>
+          <p id = "cardList">{cardList}</p><br/><br/>
+        <span id = "cardAddResult">{message}</span>
+        <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
+          ref = {(c) => search = c}/> 
+        <button type = "button" id = "searchTasksButton" class = "buttons" 
+          onClick = {searchCard}> Search Tasks</button><br/>
+        <span id = "cardSearchResult">{searchResults}</span>
+      </div>
     </div>
   );
 }
