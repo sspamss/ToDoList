@@ -78,7 +78,7 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 1em;
+            margin-bottom: 0.6em;
             height: 30px;
             width: 299px;
           }
@@ -89,7 +89,7 @@ const LoginPageStyling = () => {
 
           /* Setting the Spotify Code image */
           #spotifycodeImage {
-            margin-bottom: 0.8em;
+            margin-bottom: 0.4em;
             width: 60%;
           }
     
