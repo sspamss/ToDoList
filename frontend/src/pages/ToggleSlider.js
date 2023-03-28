@@ -1,15 +1,11 @@
 import React, {useState} from 'react';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
-import LoginPageStyling from './LoginPageStyling';
 import SlidingAnimationStyling from './SlidingAnimationStyling';
 
 // Function to handle the login page
 const ToggleSlider = () =>
 {
-  // Import the path to the backend
-  let bp = require("./LoginPagePath.js");
-
   // State variable to determine which page to display
   const [isSignInActive, setIsSignInActive] = useState(true);
 
