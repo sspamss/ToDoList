@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import ToDoListPurple from '../graphics/ToDoListPurple.png';
 import LoginPageStyling from './LoginPageStyling';
+import ToDoListPurple from '../graphics/ToDoListPurple.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
