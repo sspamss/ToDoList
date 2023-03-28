@@ -57,20 +57,15 @@ const SignupPage = () =>
       // If sign up is valid, store the user's information in local storage and redirect to the sign in page
       else
       {
+        setMessageSignup('* Account created successfully. You may now proceed to log in *');
+        
         var user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
         localStorage.setItem('user_data', JSON.stringify(user));
 
-        // // Clear the error message and input fields
-        setMessageSignup("");
-        signupFirstname.value = "";
-        signupLastname.value = "";
-        signupEmailaddress.value = "";
-        signupUsername.value = "";
-        signupPassword.value = "";
-        signupPasswordConfirm.value = "";
 
-        // Refresh the page to bring the sign in page back
-        window.location.reload();
+
+        // Redirect to the home page
+        window.location.href = '/';
       }
     }
     catch(e)
