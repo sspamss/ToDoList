@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
+import LoginPageStyling from './LoginPageStyling';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 // Function to handle the login page
 const LoginPage = () =>
@@ -7,10 +10,9 @@ const LoginPage = () =>
   // Import the path to the backend
   let bp = require("./LoginPagePath.js");
 
-  var signinUsername, signinPassword;
-
   const [messageSignin, setMessageSignin] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  var signinUsername, signinPassword;
 
   // Function to handle the sign in form
   const doSignin = async event => 
@@ -59,13 +61,17 @@ const LoginPage = () =>
   // Returns the content of the login page
   return (
     <div>
+      <LoginPageStyling/>
       <form id="doSignin" onSubmit={doSignin}>
         <div class="form-group">
           <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signinUsername = c)}/>
         </div>
         <div id="passwordContainer" className="password-container">
-          <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signinPassword = c)}/>
-        </div>
+          <div style={{position: 'relative'}}>
+            <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signinPassword = c)} />
+            <FontAwesomeIcon id="eyeIcon" icon={passwordShown ? faEye : faEyeSlash} onClick={() => setPasswordShown(!passwordShown)} className="toggle-password-icon"/>
+          </div>
+       </div>
         <div class="form-group">
           <a href='/forgot-password' id="forgotPassword">Forgot your password?</a>
         </div>
