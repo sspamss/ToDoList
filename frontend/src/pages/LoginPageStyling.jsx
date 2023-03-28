@@ -70,6 +70,16 @@ const LoginPageStyling = () => {
           #passwordField:focus {
             outline: none;
           }
+
+          /* Setting and styling the show and hide eye password icon */
+          #eyeIcon {
+            color: #9736C5;
+            margin-top: 1em;
+            right: 2.5em;
+            position: absolute;
+            transform: translateY(-50%);
+            cursor: pointer;
+          }
     
           /* Styling the "Forgot your password?" */        
           #forgotPassword {
