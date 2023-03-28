@@ -149,7 +149,6 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 0.5em;
             position: relative;
 
             height: 30px;
@@ -173,7 +172,7 @@ const LoginPageStyling = () => {
           #errorMessageSignup {
             font-size: 9pt;
             position: absolute;
-            margin-top: 0.8em;
+            margin-top: 0.9em;
             top: 370px;
             transform: translateX(-50%);
             white-space: nowrap;
