@@ -31,6 +31,7 @@ Download "TheFrigeList" Project
 Run "TheFridgeList" Project
 - *Open Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]
+- sudo npm install
 - sudo npm start
 - *Open another Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]/frontend or cd [YourFileDirectory]\frontend
