@@ -101,13 +101,13 @@ const SignupPage = () =>
         </div>
         <div id="passwordContainer" className="password-container">
           <div style={{position: 'relative'}}>
-            <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signupPassword = c)} />
+            <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CREATE PASSWORD" ref={(c) => (signupPassword = c)} />
             <FontAwesomeIcon id="eyeIcon" icon={passwordShown ? faEye : faEyeSlash} onClick={() => setPasswordShown(!passwordShown)} className="toggle-password-icon"/>
           </div>
        </div>
         <div id="passwordContainer" className="password-container">
           <div style={{position: 'relative'}}>
-            <input type={passwordShownConfirm ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signupPasswordConfirm = c)} />
+            <input type={passwordShownConfirm ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPasswordConfirm = c)} />
             <FontAwesomeIcon id="eyeIcon" icon={passwordShownConfirm ? faEye : faEyeSlash} onClick={() => setPasswordShownConfirm(!passwordShownConfirm)} className="toggle-password-icon"/>
           </div>
        </div>
