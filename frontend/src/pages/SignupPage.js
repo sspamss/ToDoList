@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import SignupPageStyling from './SignupPageStyling';
+import SpotifyCode from '../graphics/SpotifyCode.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 // Function to handle the login page
 const SignupPage = () =>
@@ -13,6 +16,7 @@ const SignupPage = () =>
 
   const [messageSignup, setMessageSignup] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const [passwordShownConfirm, setPasswordShownConfirm] = useState(false);
 
   // Function to handle the sign up form
   const doSignup = async event => 
@@ -90,14 +94,23 @@ const SignupPage = () =>
           <input id="emailaddressField" type="text" class="form-control col-md-12" placeholder="EMAIL ADDRESS" ref={(c) => (signupEmailaddress = c)}/>
         </div>
         <div class="form-group">
+          <img id="spotifycodeImage" src={SpotifyCode} alt="Spotify Code Image"/>
+        </div>
+        <div class="form-group">
           <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signupUsername = c)}/>
         </div>
         <div id="passwordContainer" className="password-container">
-          <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CREATE PASSWORD" ref={(c) => (signupPassword = c)}/>
-        </div>
+          <div style={{position: 'relative'}}>
+            <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signupPassword = c)} />
+            <FontAwesomeIcon id="eyeIcon" icon={passwordShown ? faEye : faEyeSlash} onClick={() => setPasswordShown(!passwordShown)} className="toggle-password-icon"/>
+          </div>
+       </div>
         <div id="passwordContainer" className="password-container">
-          <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordConfirmField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPasswordConfirm = c)}/>
-        </div>
+          <div style={{position: 'relative'}}>
+            <input type={passwordShownConfirm ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="PASSWORD" ref={(c) => (signupPasswordConfirm = c)} />
+            <FontAwesomeIcon id="eyeIcon" icon={passwordShownConfirm ? faEye : faEyeSlash} onClick={() => setPasswordShownConfirm(!passwordShownConfirm)} className="toggle-password-icon"/>
+          </div>
+       </div>
           <span id="errorMessageSignup" class="w-100 text-center" style={{color: "#FF0000"}}> {messageSignup}</span>
           <input id="signupButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN UP" onClick={doSignup}/>
       </form>
