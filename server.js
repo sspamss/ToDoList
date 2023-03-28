@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
 const path = require('path');         
-
 const PORT = process.env.PORT || 5050; 
 const app = express();
+
 app.set('port', (process.env.PORT || 5050));
 
 // Server static assets if in production
@@ -25,7 +25,6 @@ const url = process.env.MONGODB_URI;
 const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(url);
 client.connect();
-
 
 // Connect to the Mongo DB
 client.connect(console.log("mongodb connected"));
@@ -50,18 +49,16 @@ app.use((req, res, next) =>
 // Function to add a contact to the database
 app.post('/api/addUser', async (req, res, next) =>
 {
-  // Incoming: userId, color
-  // Outgoing: error
-	
   const fname = req.body["firstName"];
   const lname = req.body["lastName"];
   const uid = req.body["user"];
   const pass = req.body["password"];
   const email = req.body["email"];
   const newUser = {firstName:fname, lastName:lname, user:uid, password:pass, email:email};
-  var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({user:uid, password:pass}).toArray();
+  
+  var error = '';
   
   if (results.length != 1)
   {
@@ -80,7 +77,6 @@ app.post('/api/addUser', async (req, res, next) =>
     error = "This username is taken."
   }
 
-  //cardList.push( card );
   var ret = { error: error };
   res.status(200).json(ret);
 });
@@ -88,10 +84,6 @@ app.post('/api/addUser', async (req, res, next) =>
 // Function to the log the user into the website
 app.post('/api/login', async (req, res, next) => 
 {
-  // incoming: login, password
-  // outgoing: id, firstName, lastName, error
-  
-  var error = '';
   const user = req.body["user"];
   const password = req.body["password"];
   const db = client.db("Fridge");
@@ -100,6 +92,7 @@ app.post('/api/login', async (req, res, next) =>
   var fn = '';
   var ln = '';
   var em = '';
+  var error = '';
 
   // The user must input at least one character in length for each field
   if (results.length > 0)
@@ -117,15 +110,12 @@ app.post('/api/login', async (req, res, next) =>
 // Function to search for a contact to the database
 app.post('/api/searchcards', async (req, res, next) => 
 {
-  // incoming: userId, search
-  // outgoing: results[], error
-
-  var error = '';
-  const { userId, search } = req.body;
-  var _search = search.trim();
   const db = client.db("COP4331Cards");
   const results = await db.collection('Cards').find({"Card":{$regex:_search+'.*', $options:'r'}}).toArray();
+  const { userId, search } = req.body;
+  var error = '';
   var _ret = [];
+  var _search = search.trim();
 
   // Finds all cards that match the search
   for (var i = 0; i < results.length; i++)
@@ -139,9 +129,6 @@ app.post('/api/searchcards', async (req, res, next) =>
 
 app.post('/api/addTask', async (req, res, next) =>
 {
-  // Incoming: userId, color
-  // Outgoing: error
-	
   const cont = req.body["taskContent"];
   const time = req.body["time"];
   const cat = req.body["category"];
@@ -178,14 +165,15 @@ app.post('/api/addTask', async (req, res, next) =>
 
 app.post('/api/delTask', async (req, res, next) =>
 {
+  const cat = req.body["category"];
   const cont = req.body["taskContent"];
   const time = req.body["time"];
-  const cat = req.body["category"];
-  
   const newTask = {taskContent:cont, time:time, category:cat};
-  var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
+
+  var error = '';
+
   if (results.length == 1)
   {
     try
@@ -205,12 +193,9 @@ app.post('/api/delTask', async (req, res, next) =>
 
   var ret = { error: error };
   res.status(200).json(ret);
-
-
 });
 
-
-
+// Function to call the PORT to use
 app.listen(PORT, () => 
 {
   console.log('Server listening on port ' + PORT);
