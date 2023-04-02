@@ -10,7 +10,7 @@ const SignupPage = () =>
   // Import the path to the backend
   let bp = require("./LoginPagePath.js");
 
-  var signupFirstname, signupLastname, signupEmailaddress; const emailRegex = /^\S+@\S+\.\S+$/;
+  var signupFirstname, signupLastname, signupEmailaddress;
   var signupUsername; const minUsernameLength = 2, maxUsernameLength = 20;
   var signupPassword, signupPasswordConfirm; const minPasswordLength = 6, maxPasswordLength = 20;
 
@@ -32,9 +32,6 @@ const SignupPage = () =>
     if (obj.password === "") {setMessageSignup("* Please fill in all the fields *"); return;}
     if (signupPasswordConfirm === "") {setMessageSignup("* Please confirm your password*"); return;}
 
-    // Check if email is valid
-    if (!emailRegex.test(obj.email)) {setMessageSignup("* Invalid email format *"); return;}
-
     // Check for any invalid characters
     if (obj.user.includes(" ")) {setMessageSignup("* Username cannot contain spaces *"); return;}
     if (obj.password.includes(" ")) {setMessageSignup("* Password cannot contain spaces *"); return;}
@@ -45,11 +42,6 @@ const SignupPage = () =>
     if (obj.password.length < minPasswordLength || obj.password.length > maxPasswordLength)
       {setMessageSignup(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters *`); return;}
 
-    // Check if the password meets the requirements
-    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(obj.password)) {
-      setMessageSignup("* Password does not meet requirements *");
-      return;}
-      
     // Check if the password and password confirmation match
     if (obj.password !== signupPasswordConfirm.value) {setMessageSignup("* Passwords do not match *"); return;}
 
@@ -73,6 +65,8 @@ const SignupPage = () =>
         
         var user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
         localStorage.setItem('user_data', JSON.stringify(user));
+
+
 
         // Redirect to the home page
         window.location.href = '/';
@@ -100,7 +94,7 @@ const SignupPage = () =>
           <input id="emailaddressField" type="text" class="form-control col-md-12" placeholder="EMAIL ADDRESS" ref={(c) => (signupEmailaddress = c)}/>
         </div>
         <div class="form-group">
-          <img id="spotifycodeImage" src={SpotifyCode} alt="Spotify Code"/>
+          <img id="spotifycodeImage" src={SpotifyCode} alt="Spotify Code Image"/>
         </div>
         <div class="form-group">
           <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signupUsername = c)}/>

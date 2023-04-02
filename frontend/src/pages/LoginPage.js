@@ -21,7 +21,7 @@ const LoginPage = () =>
     var obj = {user:signinUsername.value, password:signinPassword.value};
 
     // Check for any empty fields
-    if (obj.user === "" && obj.password === "") {setMessageSignin("* Please enter your username and password *"); return;}
+    if (obj.user === "" && obj.password == "") {setMessageSignin("* Please enter your username and password *"); return;}
     if (obj.user === "") {setMessageSignin("* Please enter your username *"); return;}
     if (obj.password === "") {setMessageSignin("* Please enter your password *"); return;}
 
@@ -76,7 +76,7 @@ const LoginPage = () =>
           <a href='/forgot-password' id="forgotPassword">Forgot your password?</a>
         </div>
         <div class="form-group">
-          <img id="todolistpurple" src={ToDoListPurple} alt="To Do List"/>
+          <img id="todolistpurple" src={ToDoListPurple} alt="To Do List Image"/>
         </div>
         <span id="errorMessage" class="w-100 text-center" style={{color: "#FF0000"}}> {messageSignin}</span>
         <input id="signinButton"  type="submit" class="form-controlL btn-danger submit col-md-12" value="SIGN IN" onClick={doSignin}/>
