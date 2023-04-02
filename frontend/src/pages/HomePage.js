@@ -20,7 +20,7 @@ const addCard = async event =>
 {
   event.preventDefault();
 
-  let obj = {userId:userId,card:card.value};
+  let obj = {userId:userId, card:card.value};
   let js = JSON.stringify(obj);
 
   try
@@ -50,7 +50,7 @@ const addCard = async event =>
   {
     event.preventDefault();
         
-    let obj = {userId:userId,search:search.value};
+    let obj = {userId:userId, search:search.value};
     let js = JSON.stringify(obj);
 
     try
