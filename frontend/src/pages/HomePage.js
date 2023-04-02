@@ -78,6 +78,7 @@ const addCard = async event =>
     }
   };
 
+<<<<<<< HEAD
   return(
     <div id = "cardUIDiv"><br/>
       <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
@@ -91,6 +92,27 @@ const addCard = async event =>
       <button type = "button" id = "addCardButton" class = "buttons" 
         onClick = {addCard}> Add Card </button><br/>
       <span id = "cardAddResult">{message}</span>
+=======
+  return (
+    <div>
+      <HomePageStyling/>
+      <div id = "cardUIDiv"><br/>
+        <div class="form-group">
+          <img id="todolisticon" src={ToDoIcon} alt="To Do List Logo"/>
+        </div>
+          <input type = "text" id = "newTask" placeholder = "ADD NEW TASK" 
+          ref = {(c) => card = c}/>
+        <button type = "button" id = "addTaskButton" class = "buttons" 
+          onClick = {addCard}> New Task </button><br/>
+          <p id = "cardList">{cardList}</p><br/><br/>
+        <span id = "cardAddResult">{message}</span>
+        <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
+          ref = {(c) => search = c}/> 
+        <button type = "button" id = "searchTasksButton" class = "buttons" 
+          onClick = {searchCard}> Search Tasks</button><br/>
+        <span id = "cardSearchResult">{searchResults}</span>
+      </div>
+>>>>>>> parent of 9954653 (Edits to Home Page design)
     </div>
   );
 }
