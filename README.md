@@ -25,10 +25,10 @@ Update Node
 - sudo npm install -g n
 - sudo n stable
 
-Download "The Frige" Project
+Download "TheFrigeList" Project
 - *Recommended to save on desktop*
 
-Run "The Fridge List" Project
+Run "TheFridgeList" Project
 - *Open Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]
 - sudo npm start
