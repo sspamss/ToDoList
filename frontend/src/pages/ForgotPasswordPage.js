@@ -5,13 +5,10 @@ import WingedEmail from '../graphics/WingedEmail.png';
 // Function to handle the login page
 const ForgotPasswordPage = () =>
 {
-  var newSigninUsername; const minUsernameLength = 2, maxUsernameLength = 20;
+  var newSigninUsername;
   var emailAddress, emailAddressConfirmation;
 
   const [message, setMessage] = useState('');
-  const [passwordShown, setPasswordShown] = useState(false);
-  const togglePassword = () => {setPasswordShown(!passwordShown);};
-
   const doForgotPassword = async event => 
   {
     event.preventDefault();
@@ -25,8 +22,6 @@ const ForgotPasswordPage = () =>
     if (obj.username == "") {setMessage("* Please enter your username *"); return;}
     if (obj.email == ""){setMessage("* Please enter your email *"); return;}
     if (obj.emailConfirm == ""){setMessage("* Please confirm your email *"); return;}
-
-    var js = JSON.stringify(obj);
   };
 
   // Returns the content of the login page
@@ -48,10 +43,10 @@ const ForgotPasswordPage = () =>
               <input id="emailFieldConfirmation" type="text" class="form-control col-md-12" placeholder="CONFIRM EMAIL ADDRESS" ref={(c) => (emailAddressConfirmation = c)}/>
             </div>
             <div class="form-group">
-              <a href='/' id="signInSignUp">Back to Sign In/Sign Up</a>
+              <a href='/' id="signInSignUp">Back to sign in / sign up</a>
             </div>
             <div class="form-group">
-              <img id="wingedEmail" src={WingedEmail} alt="Winged Email Image"/>
+              <img id="wingedEmail" src={WingedEmail} alt="Winged Email"/>
             </div>
               <span id="errorMessage" class="w-100 text-center" style={{color: "#FF0000"}}> {message}</span>
               <input id="resetPasswordButton" type="submit" class="form-controlL btn-danger submit col-md-12" value="RESET PASSWORD" onClick={doForgotPassword}/>
