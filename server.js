@@ -13,11 +13,7 @@ if (process.env.NODE_ENV === 'production')
 {
   // Set static folder
   app.use(express.static('frontend/build'));
-
-  app.get('*', (req, res) => 
- {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
+  app.get('*', (req, res) => {res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));});
 }
 
 require('dotenv').config();
@@ -55,28 +51,21 @@ app.post('/api/addUser', async (req, res, next) =>
   const pass = req.body["password"];
   const email = req.body["email"];
   const newUser = {firstName:fname, lastName:lname, user:uid, password:pass, email:email};
+  var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({user:uid, password:pass}).toArray();
   
-  var error = '';
-  
   if (results.length != 1)
   {
-    try
-    {
-      const db = client.db("Fridge");
-      const result = db.collection('Users').insertOne(newUser);
-    }
-    catch(e)
-    {
-      error = e.toString();
-    }
+    try {const db = client.db("Fridge"); const result = db.collection('Users').insertOne(newUser);}
+    catch(e) {error = e.toString();}
   }
   else
   {
     error = "This username is taken."
   }
 
+  //cardList.push( card );
   var ret = { error: error };
   res.status(200).json(ret);
 });
@@ -92,7 +81,6 @@ app.post('/api/login', async (req, res, next) =>
   var fn = '';
   var ln = '';
   var em = '';
-  var error = '';
 
   // The user must input at least one character in length for each field
   if (results.length > 0)
@@ -108,20 +96,15 @@ app.post('/api/login', async (req, res, next) =>
 });
 
 // Function to search for a contact to the database
-app.post('/api/searchcards', async (req, res, next) => 
+app.post('/api/search', async (req, res, next) => 
 {
-  const db = client.db("COP4331Cards");
-  const results = await db.collection('Cards').find({"Card":{$regex:_search+'.*', $options:'r'}}).toArray();
   const { userId, search } = req.body;
-  var error = '';
-  var _ret = [];
-  var _search = search.trim();
+  const db = client.db("Fridge");
+  var error = '', _ret = [], _search = search.trim();
+  const results = await db.collection('Tasks').find({"taskContent":{$regex:_search+'.*', $options:'r'}}).toArray();
 
   // Finds all cards that match the search
-  for (var i = 0; i < results.length; i++)
-  {
-    _ret.push( results[i].Card );
-  }
+  for (var i = 0; i < results.length; i++) {_ret.push( results[i].taskContent);}
   
   var ret = {results:_ret, error:error};
   res.status(200).json(ret);
@@ -133,58 +116,44 @@ app.post('/api/addTask', async (req, res, next) =>
   const time = req.body["time"];
   const cat = req.body["category"];
   const t =req.body["tstamp"];
-  console.log(t)
+  const uid = req.body["user"];
+  const newTask = {taskContent:cont, time:time, category:cat, tstamp:t, user:uid};
 
-  
-  const newTask = {taskContent:cont, time:time, category:cat, tstamp:t};
-  var error = '';
+  console.log(newTask)
+
   const db = client.db("Fridge");
-  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
+  const results = await db.collection('Tasks').find({taskContent:cont,category:cat}).toArray();
+  var error = '';
   
   if (results.length != 1)
   {
-    try
-    {
-      const db = client.db("Fridge");
-      const result = db.collection('Tasks').insertOne(newTask);
-    }
-    catch(e)
-    {
-      error = e.toString();
-    }
+    try {client.db("Fridge"); db.collection('Tasks').insertOne(newTask);}
+    catch(e) {error = e.toString();}
   }
   else
   {
     error = "You already added this task"
   }
 
-  //cardList.push( card );
   var ret = { error: error };
   res.status(200).json(ret);
 });
 
 app.post('/api/delTask', async (req, res, next) =>
 {
-  const cat = req.body["category"];
   const cont = req.body["taskContent"];
   const time = req.body["time"];
-  const newTask = {taskContent:cont, time:time, category:cat};
+  const cat = req.body["category"];
+  const uid = req.body["user"];
+  const newTask = {taskContent:cont, time:time, category:cat, user:uid};
   const db = client.db("Fridge");
-  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
-
+  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat, user:uid}).toArray();
   var error = '';
-
+  
   if (results.length == 1)
   {
-    try
-    {
-      const db = client.db("Fridge");
-      const result = db.collection('Tasks').deleteOne(newTask);
-    }
-    catch(e)
-    {
-      error = e.toString();
-    }
+    try {client.db("Fridge"); db.collection('Tasks').deleteOne(newTask);}
+    catch(e) {error = e.toString();}
   }
   else
   {
@@ -195,9 +164,8 @@ app.post('/api/delTask', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
-// Function to call the PORT to use
+// Use port 5050 to resolve iOS conflicts with port 5000
 app.listen(PORT, () => 
 {
   console.log('Server listening on port ' + PORT);
 });
-
