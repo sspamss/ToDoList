@@ -47,8 +47,7 @@ const SignupPage = () =>
 
     // Check if the password meets the requirements
     if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(obj.password)) {
-      setMessageSignup("* Password does not meet requirements *");
-      return;}
+      setMessageSignup("* Password does not meet requirements *"); return;}
       
     // Check if the password and password confirmation match
     if (obj.password !== signupPasswordConfirm.value) {setMessageSignup("* Passwords do not match *"); return;}
