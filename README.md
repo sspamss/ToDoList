@@ -25,13 +25,12 @@ Update Node
 - sudo npm install -g n
 - sudo n stable
 
-Download "TheFrigeList" Project
+Download "The Frige" Project
 - *Recommended to save on desktop*
 
-Run "TheFridgeList" Project
+Run "The Fridge List" Project
 - *Open Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]
-- sudo npm install
 - sudo npm start
 - *Open another Ubuntu (Linux) / Terminal (MacOS)*
 - cd [YourFileDirectory]/frontend or cd [YourFileDirectory]\frontend

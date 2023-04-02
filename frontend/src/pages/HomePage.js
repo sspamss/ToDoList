@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import LoggedInName from '../components/LoggedInName';
-import ToDoIcon from '../graphics/ToDoIcon.png';
-import HomePageStyling from './HomePageStyling';
 
-const HomePage = () =>
+const CardPage = () =>
 {
   const [message,setMessage] = useState('');
   const [searchResults,setResults] = useState('');
@@ -80,24 +78,21 @@ const addCard = async event =>
     }
   };
 
-  return (
-    <div>
-      <HomePageStyling/>
-      <div id = "cardUIDiv"><br/>
-        <div class="form-group">
-          <img id="todolisticon" src={ToDoIcon} alt="To Do List Logo"/>
-        </div>
-        <button type = "button" id = "addTaskButton" class = "buttons" 
-          onClick = {addCard}> Create New Task </button><br/>
-        <span id = "cardAddResult">{message}</span>
-        <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
-          ref = {(c) => search = c}/> 
-        <button type = "button" id = "searchTasksButton" class = "buttons" 
-          onClick = {searchCard}>Search</button><br/>
-        <span id = "cardSearchResult">{searchResults}</span>
-      </div>
+  return(
+    <div id = "cardUIDiv"><br/>
+      <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
+        ref = {(c) => search = c}/> 
+      <button type = "button" id = "searchCardButton" class = "buttons" 
+        onClick = {searchCard}> Search Card</button><br/>
+      <span id = "cardSearchResult">{searchResults}</span>
+      <p id = "cardList">{cardList}</p><br/><br/>
+      <input type = "text" id = "cardText" placeholder = "ADD NEW TASK" 
+        ref = {(c) => card = c}/>
+      <button type = "button" id = "addCardButton" class = "buttons" 
+        onClick = {addCard}> Add Card </button><br/>
+      <span id = "cardAddResult">{message}</span>
     </div>
   );
 }
 
-export default HomePage;
+export default CardPage;

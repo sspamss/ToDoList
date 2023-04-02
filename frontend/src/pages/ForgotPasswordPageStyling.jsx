@@ -120,7 +120,7 @@ const LoginPageStyling = () => {
             font-family: 'Inter', sans-serif;
             font-size: 12pt;
             text-align: center;
-            margin-bottom: 0.4em;
+            margin-bottom: 0.8em;
 
             height: 30px;
             width: 299px;
@@ -128,22 +128,6 @@ const LoginPageStyling = () => {
           /* Removing the "focus ring" when the username field is clicked */
           #emailFieldConfirmation:focus {
             outline: none;
-          }
-
-          /* Styling the "Back to Sign In/Sign Up" */        
-          #signInSignUp {
-            color: #FFFFFF;
-            display: inline-block;
-            font-family: 'Nunito', sans-serif;
-            font-size: 10pt;
-            float: left;
-            margin-left: 35px;
-            text-align: left;
-            text-decoration: underline;
-          }
-          /* Changing the "Back to Sign In/Sign Up" color when hovered over */
-          #signInSignUp:hover {
-            color: #7c4182;
           }
     
           /* Setting the Winged Email image */
@@ -153,15 +137,15 @@ const LoginPageStyling = () => {
 
           /* Styling the error message (if there is one) */
           #errorMessage {
-            font-size: 9pt;
+            font-size: 10pt;
             position: absolute;
-            margin-top: 0.8em;
+            margin-top: 0.5em;
             top: 370px;
             transform: translateX(-50%);
             white-space: nowrap;
           }
 
-          /* Setting and styling the "Forgot your password?" clickable text */
+          /* Setting and styling the "Forgot yout password?" clickable text */
           #resetPasswordButton {
             background-color: #9736C5;
             border: none;

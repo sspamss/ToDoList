@@ -78,19 +78,13 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 0.6em;
+            margin-bottom: 0.5em;
             height: 30px;
             width: 299px;
           }
           /* Removing the "focus ring" when the username field is clicked */
           #emailaddressField:focus {
             outline: none;
-          }
-
-          /* Setting the Spotify Code image */
-          #spotifycodeImage {
-            margin-bottom: 0.4em;
-            width: 60%;
           }
     
           /* Setting and styling the username field */
@@ -130,15 +124,6 @@ const LoginPageStyling = () => {
           #passwordField:focus {
             outline: none;
           }
-          /* Setting and styling the show and hide eye password icon */
-          #eyeIcon {
-            color: #9736C5;
-            margin-top: 1em;
-            right: 2.5em;
-            position: absolute;
-            transform: translateY(-50%);
-            cursor: pointer;
-          }
 
           /* Setting and styling the "CONFIRM PASSWORD" field */
           #passwordConfirmField {
@@ -149,6 +134,7 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
+            margin-bottom: 0.5em;
             position: relative;
 
             height: 30px;
@@ -158,21 +144,12 @@ const LoginPageStyling = () => {
           #passwordConfirmField:focus {
             outline: none;
           }
-          /* Setting and styling the show and hide eye password confirm icon */
-          #eyeIconConfirm {
-            color: #9736C5;
-            margin-top: 1em;
-            right: 2.5em;
-            position: absolute;
-            transform: translateY(-50%);
-            cursor: pointer;
-          }
 
           /* Styling the error message (if there is one) */
           #errorMessageSignup {
-            font-size: 9pt;
+            font-size: 10pt;
             position: absolute;
-            margin-top: 0.9em;
+            margin-top: 0.5em;
             top: 370px;
             transform: translateX(-50%);
             white-space: nowrap;
