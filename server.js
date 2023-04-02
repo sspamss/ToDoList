@@ -115,7 +115,7 @@ app.post('/api/login', async (req, res, next) =>
 });
 
 // Function to search for a contact to the database
-app.post('/api/searchcards', async (req, res, next) => 
+app.post('/api/search', async (req, res, next) => 
 {
   // incoming: userId, search
   // outgoing: results[], error
@@ -123,14 +123,14 @@ app.post('/api/searchcards', async (req, res, next) =>
   var error = '';
   const { userId, search } = req.body;
   var _search = search.trim();
-  const db = client.db("COP4331Cards");
-  const results = await db.collection('Cards').find({"Card":{$regex:_search+'.*', $options:'r'}}).toArray();
+  const db = client.db("Fridge");
+  const results = await db.collection('Tasks').find({"taskContent":{$regex:_search+'.*', $options:'r'}}).toArray();
   var _ret = [];
 
   // Finds all cards that match the search
   for (var i = 0; i < results.length; i++)
   {
-    _ret.push( results[i].Card );
+    _ret.push( results[i].taskContent );
   }
   
   var ret = {results:_ret, error:error};
@@ -141,15 +141,18 @@ app.post('/api/addTask', async (req, res, next) =>
 {
   // Incoming: userId, color
   // Outgoing: error
+
 	
   const cont = req.body["taskContent"];
   const time = req.body["time"];
   const cat = req.body["category"];
   const t =req.body["tstamp"];
-  console.log(t)
+  const uid = req.body["user"];
+  
 
   
-  const newTask = {taskContent:cont, time:time, category:cat, tstamp:t};
+  const newTask = {taskContent:cont, time:time, category:cat, tstamp:t, user:uid};
+  console.log(newTask)
   var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Tasks').find({taskContent:cont,category:cat}).toArray();
@@ -181,11 +184,12 @@ app.post('/api/delTask', async (req, res, next) =>
   const cont = req.body["taskContent"];
   const time = req.body["time"];
   const cat = req.body["category"];
+  const uid = req.body["user"];
   
-  const newTask = {taskContent:cont, time:time, category:cat};
+  const newTask = {taskContent:cont, time:time, category:cat, user:uid};
   var error = '';
   const db = client.db("Fridge");
-  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat}).toArray();
+  const results = await db.collection('Tasks').find({taskContent:cont, time:time, category:cat, user:uid}).toArray();
   if (results.length == 1)
   {
     try
@@ -208,6 +212,7 @@ app.post('/api/delTask', async (req, res, next) =>
 
 
 });
+
 
 
 
