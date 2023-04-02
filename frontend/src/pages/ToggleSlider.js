@@ -12,9 +12,13 @@ const ToggleSlider = () =>
   // Import the path to the backend
   let bp = require("./LoginPagePath.js");
 
+<<<<<<< HEAD
   var signinUsername;
   var signinPassword;
 
+=======
+  // State variable to determine which page to display
+>>>>>>> parent of c2401d7 (Update ToggleSlider.js)
   const [isSignInActive, setIsSignInActive] = useState(true);
   const [message, setMessage] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
