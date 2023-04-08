@@ -5,6 +5,8 @@ import HomePageStyling from './HomePageStyling';
 
 const HomePage = () =>
 {
+  let bp = require('./LoginPagePath.js');
+
   const [message,setMessage] = useState('');
   const [searchResults,setResults] = useState('');
   const [cardList,setCardList] = useState('');
@@ -16,7 +18,7 @@ const HomePage = () =>
   var card = '';
   var search = '';
 
-const addCard = async event => 
+const addTask = async event => 
 {
   event.preventDefault();
 
@@ -25,8 +27,7 @@ const addCard = async event =>
 
   try
   {
-    const response = await fetch('http://localhost:5050/api/addcard',
-    {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+    const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
 
     let txt = await response.text();
     let res = JSON.parse(txt);
@@ -46,7 +47,7 @@ const addCard = async event =>
   }
 };
 
-  const searchCard = async event => 
+  const searchTask = async event => 
   {
     event.preventDefault();
         
@@ -55,8 +56,7 @@ const addCard = async event =>
 
     try
     {
-      const response = await fetch('http://localhost:5050/api/searchcards',
-      {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+      const response = await fetch(bp.buildPath("api/search"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
 
       let txt = await response.text();
       let res = JSON.parse(txt);
@@ -87,13 +87,18 @@ const addCard = async event =>
         <div class="form-group">
           <img id="todolisticon" src={ToDoIcon} alt="To Do List Logo"/>
         </div>
-        <button type = "button" id = "addTaskButton" class = "buttons" 
-          onClick = {addCard}> Create New Task </button><br/>
-        <span id = "cardAddResult">{message}</span>
-        <input type = "text" id = "searchText" placeholder = "SEARCH TASK" 
-          ref = {(c) => search = c}/> 
-        <button type = "button" id = "searchTasksButton" class = "buttons" 
-          onClick = {searchCard}>Search</button><br/>
+        <div class="form-group">
+          <button type = "button" id = "addTaskButton" class = "buttons" 
+            onClick = {addTask}> Create New Task </button><br/>
+          <span id = "cardAddResult">{message}</span>
+        </div>
+        <div class="form-group">
+          <input type = "text" id = "searchText" placeholder = "SEARCH TASK" ref = {(c) => search = c}/> 
+          <button type = "button" id = "searchTasksButton" class = "buttons" onClick = {searchTask}> Search </button><br/>
+        </div>
+        <div class="form-group">
+          <button type = "button" id = "editTasksButton" class = "buttons"> Edit Tasks </button><br/>
+        </div>
         <span id = "cardSearchResult">{searchResults}</span>
       </div>
     </div>

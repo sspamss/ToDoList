@@ -46,13 +46,12 @@ const HomePageStyling = () => {
             /* Setting and styling the search bar */
             #searchText{
               color: #6C6C6C;
-              // border: none;
               border-radius: 10px;
               box-sizing: border-box;
               font-size: 12pt;
               font-family: 'Inter', sans-serif;
               text-align: center;
-              margin-bottom: 0.5em;
+              margin-bottom: 0em;
               position: relative;
 
               height: 35px;
@@ -75,7 +74,6 @@ const HomePageStyling = () => {
               box-sizing: border-box;
 
               font-size: 15pt;
-              //font-family: 'Inter', sans-serif;
               font-family: 'Comic Sans MS', sans-serif;
               text-align: center;
               font-weight: bold;
@@ -86,8 +84,41 @@ const HomePageStyling = () => {
               width: 100px;
             }
 
-            /* Changing the Add Task button color when hovered over */
+            /* Changing the Search Task button color when hovered over */
             #searchTasksButton:hover {
+              background-color: #AB6DC9;
+            }
+
+            /* Setting and styling the edit button */
+            #editTasksButton {
+              background-color: #9736C5;
+
+              color: #FFFFFF;
+              border: none;
+              border-radius: 10px;
+              box-sizing: border-box;
+
+              font-size: 12pt;
+              font-family: 'Comic Sans MS', sans-serif;
+              text-align: center;
+              font-weight: bold;
+
+              margin-bottom: 0.5em;
+              margin-top: 0em;
+              height: 50px;
+              width: 70px;
+              align: left;
+
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+
+              position: relative;
+              left: -310px;
+            }
+
+            /* Changing the Edit Tasks button color when hovered over */
+            #editTasksButton:hover {
               background-color: #AB6DC9;
             }
   
