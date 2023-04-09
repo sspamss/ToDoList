@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDoList_bg_2 from '../graphics/ToDoList_bg_2.png';
+import ToDoListBackground from '../graphics/ToDoListBackground.png';
 
 const LoginPageStyling = () => {
   return (
@@ -10,7 +10,7 @@ const LoginPageStyling = () => {
 
           /* Setting the website's background image */
           body {
-            background-image: url(${ToDoList_bg_2});
+            background-image: url(${ToDoListBackground});
 
             background-position: center;
             background-repeat: no-repeat;
@@ -60,7 +60,7 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 0.5em;
+            margin-bottom: 0.3em;
             position: relative;
 
             height: 30px;
