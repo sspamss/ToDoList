@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDoList_bg_2 from '../graphics/ToDoList_bg_2.png';
+import ToDoListBackground from '../graphics/ToDoListBackground.png';
 
 const LoginPageStyling = () => {
   return (
@@ -10,7 +10,7 @@ const LoginPageStyling = () => {
 
           /* Setting the website's background image */
           body {
-            background-image: url(${ToDoList_bg_2});
+            background-image: url(${ToDoListBackground});
 
             background-position: center;
             background-repeat: no-repeat;
@@ -40,7 +40,7 @@ const LoginPageStyling = () => {
             font-family: 'Fredoka One', sans-serif;
             font-size: 18pt;
             line-height: 50px;
-            margin-bottom: 0.2em;
+            margin-bottom: 0em;
             margin-top: 1.33em;
             position: relative;
             transform: translateX(-50%);
@@ -52,20 +52,11 @@ const LoginPageStyling = () => {
             top: 0px;
           }
 
-          /* Styling the first line of password reset instructions */
-          #resetInstructionsP1 {
+          /* Styling the password reset instructions */
+          #resetInstructions {
             color: #FFFFFF;
-            margin-bottom: 0em;
-            margin-top: 0em;
-
-            font-family: 'Nunito', sans-serif;
-            font-size: 12pt;
-          }
-          /* Styling the second line of password reset instructions */
-          #resetInstructionsP2 {
-            color: #FFFFFF;
-            margin-bottom: 0em;
-            margin-top: 0em;
+            margin-top: 0.2em;
+            margin-bottom: 0.15em;
 
             font-family: 'Nunito', sans-serif;
             font-size: 12pt;
@@ -78,7 +69,7 @@ const LoginPageStyling = () => {
             border-radius: 10px;
             box-sizing: border-box;
             text-align: center;
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
 
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
@@ -98,7 +89,7 @@ const LoginPageStyling = () => {
             border-radius: 10px;
             box-sizing: border-box;
             text-align: center;
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
 
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
@@ -120,7 +111,7 @@ const LoginPageStyling = () => {
             font-family: 'Inter', sans-serif;
             font-size: 12pt;
             text-align: center;
-            margin-bottom: 0.4em;
+            margin-bottom: 0.3em;
 
             height: 30px;
             width: 299px;
@@ -130,8 +121,8 @@ const LoginPageStyling = () => {
             outline: none;
           }
 
-          /* Styling the "Back to Sign In/Sign Up" */        
-          #signInSignUp {
+          /* Styling the "Back to sign in" */        
+          #backToSignIn {
             color: #FFFFFF;
             display: inline-block;
             font-family: 'Nunito', sans-serif;
@@ -142,13 +133,13 @@ const LoginPageStyling = () => {
             text-decoration: underline;
           }
           /* Changing the "Back to Sign In/Sign Up" color when hovered over */
-          #signInSignUp:hover {
+          #backToSignIn:hover {
             color: #7c4182;
           }
     
-          /* Setting the Winged Email image */
+          /* Setting the "WingedEmail.png" */
           #wingedEmail {
-            width: 55%;
+            width: 70%;
           }
 
           /* Styling the error message (if there is one) */

@@ -15,13 +15,13 @@ const ForgotPasswordPage = () =>
     var obj = {username:newSigninUsername.value, email:emailAddress.value, emailConfirm:emailAddressConfirmation.value};
 
     // Check for any empty fields
-    if (obj.username == "" && obj.email == "" && obj.emailConfirm == "") {setMessage("* Please enter your username and email *"); return;}
-    if (obj.username == "" && obj.email == "") {setMessage("* Please enter your username and email *"); return;}
-    if (obj.username == "" && obj.emailConfirm == "") {setMessage("* Please enter your username and confirm your email *"); return;}
-    if (obj.email == "" && obj.emailConfirm == "") {setMessage("* Please enter your email *"); return;}
-    if (obj.username == "") {setMessage("* Please enter your username *"); return;}
-    if (obj.email == ""){setMessage("* Please enter your email *"); return;}
-    if (obj.emailConfirm == ""){setMessage("* Please confirm your email *"); return;}
+    if (obj.username === "" && obj.email === "" && obj.emailConfirm === "") {setMessage("* Please enter your username and email *"); return;}
+    if (obj.username === "" && obj.email === "") {setMessage("* Please enter your username and email *"); return;}
+    if (obj.username === "" && obj.emailConfirm === "") {setMessage("* Please enter your username and confirm your email *"); return;}
+    if (obj.email === "" && obj.emailConfirm === "") {setMessage("* Please enter your email *"); return;}
+    if (obj.username === "") {setMessage("* Please enter your username *"); return;}
+    if (obj.email === ""){setMessage("* Please enter your email *"); return;}
+    if (obj.emailConfirm === ""){setMessage("* Please confirm your email *"); return;}
   };
 
   // Returns the content of the login page
@@ -31,8 +31,8 @@ const ForgotPasswordPage = () =>
       <div id="forgotpasswordBackground">
         <div class="forgotpasswordContents">
           <form onSubmit={doForgotPassword}>
-            <p id="passwordReset">PASSWORD RESET</p>
-            <p id = "resetInstructionsP2">Reset instructions will be emailed to you.</p><br/>
+            <p id="passwordReset">RESET PASSWORD</p>
+            <p id = "resetInstructions">Reset instructions will be emailed to you.</p>
             <div class="form-group">
               <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (newSigninUsername = c)}/>
             </div>
@@ -43,7 +43,7 @@ const ForgotPasswordPage = () =>
               <input id="emailFieldConfirmation" type="text" class="form-control col-md-12" placeholder="CONFIRM EMAIL ADDRESS" ref={(c) => (emailAddressConfirmation = c)}/>
             </div>
             <div class="form-group">
-              <a href='/' id="signInSignUp">Back to sign in / sign up</a>
+              <a href='/' id="backToSignIn">Back to sign in</a><br/>
             </div>
             <div class="form-group">
               <img id="wingedEmail" src={WingedEmail} alt="Winged Email"/>
