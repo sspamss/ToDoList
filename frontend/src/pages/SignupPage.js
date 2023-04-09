@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import SignupPageStyling from './SignupPageStyling';
 import SpotifyCode from '../graphics/SpotifyCode.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 // Function to handle the login page
 const SignupPage = () =>
@@ -17,6 +17,7 @@ const SignupPage = () =>
   const [messageSignup, setMessageSignup] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordShownConfirm, setPasswordShownConfirm] = useState(false);
+  const [requirementsMet, setRequirementsMet] = useState({length: false, number: false, uppercase: false, lowercase: false, special: false});
 
   // Function to handle the sign up form
   const doSignup = async event => 
@@ -46,7 +47,7 @@ const SignupPage = () =>
       {setMessageSignup(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters *`); return;}
 
     // Check if the password meets the requirements
-    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(obj.password)) {
+    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/.test(obj.password)) {
       setMessageSignup("* Password does not meet requirements *"); return;}
       
     // Check if the password and password confirmation match
@@ -84,6 +85,36 @@ const SignupPage = () =>
     }
   };
 
+  // Function to handle the password requirement met
+  const handlePasswordChange = (event) =>
+  {
+    const password = event.target.value;
+  
+    // Check if password meets requirements
+    let newRequirementsMet = {length: false, number: false, uppercase: false, lowercase: false, special: false};
+    if (password.length >= minUsernameLength && password.length <= maxUsernameLength) {newRequirementsMet.length = true;}
+    if (/\d/.test(password)) {newRequirementsMet.number = true;}
+    if (/[A-Z]/.test(password)) {newRequirementsMet.uppercase = true;}
+    if (/[a-z]/.test(password)) {newRequirementsMet.lowercase = true;}
+    if (/[^A-Za-z0-9]/.test(password)) {newRequirementsMet.special = true;}
+    setRequirementsMet(newRequirementsMet);
+  
+    // Change bullet colors based on whether the password meets the requirements
+    const bullets = document.querySelectorAll(".password-requirement-bullet");
+    for (let i = 0; i < bullets.length; i++)
+    {
+      if (newRequirementsMet[bullets[i].dataset.requirement])
+      {
+        bullets[i].classList.add("password-requirement-bullet-met");
+        bullets[i].classList.remove("password-requirement-bullet-unmet");}
+      else 
+      {
+        bullets[i].classList.add("password-requirement-bullet-unmet");
+        bullets[i].classList.remove("password-requirement-bullet-met");
+      }
+    }
+  };  
+
   // Returns the content of the login page
   return (
     <div>
@@ -104,12 +135,22 @@ const SignupPage = () =>
         <div class="form-group">
           <input id="usernameField" type="text" class="form-control col-md-12" placeholder="USERNAME" ref={(c) => (signupUsername = c)}/>
         </div>
-        <div id="passwordContainer" className="password-container">
-          <div style={{position: 'relative'}}>
-            <input type={passwordShown ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CREATE PASSWORD" ref={(c) => (signupPassword = c)} />
+        <div className="form-group">
+          <div id="passwordRequirementsBox" className="password-input-container">
+            <input id="passwordField" type={passwordShown ? "text" : "password"} className="form-control col-md-12" placeholder="CREATE PASSWORD" ref={(c) => (signupPassword = c)} onChange={handlePasswordChange} />
             <FontAwesomeIcon id="eyeIcon" icon={passwordShown ? faEye : faEyeSlash} onClick={() => setPasswordShown(!passwordShown)} className="toggle-password-icon"/>
+            <div id="passwordRequirementsText" className="tooltip">
+              <p id="passwordRequirementsTitle">PASSWORD REQUIREMENTS:</p>
+              <div id="passwordRequirementsList">
+                <text className={requirementsMet.length ? "requirement-met" : ""}>• Must be between {minUsernameLength} and {maxUsernameLength} characters</text><br/>
+                <text className={requirementsMet.number ? "requirement-met" : ""}>• Must contain at least one number</text><br/>
+                <text className={requirementsMet.uppercase ? "requirement-met" : ""}>• Must contain at least one uppercase letter</text><br/>
+                <text className={requirementsMet.lowercase ? "requirement-met" : ""}>• Must contain at least one lowercase letter</text><br/>
+                <text className={requirementsMet.special ? "requirement-met" : ""}>• Must contain at least one special character</text><br/>
+              </div>
+            </div>
           </div>
-       </div>
+        </div>
         <div id="passwordContainer" className="password-container">
           <div style={{position: 'relative'}}>
             <input type={passwordShownConfirm ? "text" : "password"} className="form-control col-md-12" id="passwordField" placeholder="CONFIRM PASSWORD" ref={(c) => (signupPasswordConfirm = c)} />

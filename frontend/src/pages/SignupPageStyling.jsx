@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDoList_bg_2 from '../graphics/ToDoList_bg_2.png';
+import ToDoListBackground from '../graphics/ToDoListBackground.png';
 
 const LoginPageStyling = () => {
   return (
@@ -10,7 +10,7 @@ const LoginPageStyling = () => {
 
           /* Setting the website's background image */
           body {
-            background-image: url(${ToDoList_bg_2});
+            background-image: url(${ToDoListBackground});
 
             background-position: center;
             background-repeat: no-repeat;
@@ -78,7 +78,7 @@ const LoginPageStyling = () => {
             font-size: 12pt;
             font-family: 'Inter', sans-serif;
             text-align: center;
-            margin-bottom: 0.6em;
+            margin-bottom: 0.5em;
             height: 30px;
             width: 299px;
           }
@@ -158,6 +158,60 @@ const LoginPageStyling = () => {
           #passwordConfirmField:focus {
             outline: none;
           }
+
+          /* Setting and styling the "PASSWORD REQUIREMENTS" box */
+          #passwordRequirementsBox {
+            position: relative;s
+          }
+          #passwordRequirementsBox:hover #passwordRequirementsText {
+            display: block;
+          }
+
+          /* Setting and styling the password requirements bullets */
+          .password-requirement-bullet {
+            color: red;
+          }
+          .password-requirement-bullet-met {
+            color: green;
+          }
+          .password-requirement-bullet-unmet {
+            color: red;
+          }
+          
+          /* Setting and styling the contents inside the password requirements box */
+          #passwordRequirementsText {
+            background-color: #FFFFFF;
+            border: #9736C5 3px solid;
+            border-radius: 6px;
+            display: none;
+            left: 50%;
+            line-height: 1.5;
+            position: absolute;
+            top: calc(100% + 37px);
+            transform: translateX(-50%);
+            z-index: 1;
+            
+            height: 138px;
+            width: 294px;
+          }
+
+          /* Setting and styling the "PASSWORD REQUIREMENTS" title */
+          #passwordRequirementsTitle {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 16px;
+            margin-bottom: 0em;
+            margin-top: 0.5em;
+          }
+
+          /* Setting and styling the password requirements list */
+          #passwordRequirementsList {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            text-align: left;
+            margin-left: 1.9em;
+            margin-top: 0.5em;
+          }
+          
           /* Setting and styling the show and hide eye password confirm icon */
           #eyeIconConfirm {
             color: #9736C5;
