@@ -22,8 +22,8 @@ const HomePage = () =>
 
   const logout = () =>
   {
-    localStorage.removeItem('user_data'); // remove user session data from localStorage
-    history.replace('/'); // redirect to login page
+    localStorage.removeItem('user_data'); // Removes user session data from localStorage
+    history.replace('/'); // Redirects to login page, going back a page will redirect to login page
   };
 
   const addTask = async event => 
