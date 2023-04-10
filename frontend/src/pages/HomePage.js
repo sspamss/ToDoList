@@ -23,37 +23,37 @@ const HomePage = () =>
   const logout = () =>
   {
     localStorage.removeItem('user_data'); // remove user session data from localStorage
-    history.push('/'); // redirect to login page
+    history.replace('/'); // redirect to login page
   };
 
-const addTask = async event => 
-{
-  event.preventDefault();
-
-  let obj = {userId:userId, card:card.value};
-  let js = JSON.stringify(obj);
-
-  try
+  const addTask = async event => 
   {
-    const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+    event.preventDefault();
 
-    let txt = await response.text();
-    let res = JSON.parse(txt);
+    let obj = {userId:userId, card:card.value};
+    let js = JSON.stringify(obj);
 
-    if (res.error.length > 0)
+    try
     {
-      setMessage( "API Error:" + res.error );
+      const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+
+      let txt = await response.text();
+      let res = JSON.parse(txt);
+
+      if (res.error.length > 0)
+      {
+        setMessage( "API Error:" + res.error );
+      }
+      else
+      {
+        setMessage('Card has been added');
+      }
     }
-    else
+    catch(e)
     {
-      setMessage('Card has been added');
+      setMessage(e.toString());
     }
-  }
-  catch(e)
-  {
-    setMessage(e.toString());
-  }
-};
+  };
 
   const searchTask = async event => 
   {
