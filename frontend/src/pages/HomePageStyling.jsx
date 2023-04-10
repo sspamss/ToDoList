@@ -12,12 +12,41 @@ const HomePageStyling = () => {
               background-color: #F6F6EF;
               text-align: center;
             }
+
+            /* Setting the logout button */
+            #logoutButton {
+              background-color: #9736C5;
+              border: none;
+              border-radius: 10px;
+              box-sizing: border-box;
+              height: 35px;
+              width: 80px;
+
+              color: #FFFFFF;
+              font-family: 'Comic Sans MS', sans-serif;
+              font-size: 12pt;
+              font-weight: bold;
+              position: center;
+              text-align: center;
+
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+
+              position: relative;
+              left: -650px;
+            }
+
+            /* Changing the logout button color when hovered over */
+            #logoutButton:hover {
+              background-color: #AB6DC9;
+            }
   
             /* Setting the To Do List image */
             #todolisticon {
               margin-bottom: 3em;
               margin-top: 1em;
-              width: 40%;
+              width: 30%;
               position: center;
             }
 
@@ -105,8 +134,8 @@ const HomePageStyling = () => {
 
               margin-bottom: 0.5em;
               margin-top: 0em;
-              height: 50px;
-              width: 70px;
+              height: 35px;
+              width: 100px;
               align: left;
 
               display: inline-flex;

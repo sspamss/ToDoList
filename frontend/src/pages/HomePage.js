@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import LoggedInName from '../components/LoggedInName';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import HomePageStyling from './HomePageStyling';
+import { useHistory } from 'react-router-dom';
 
 const HomePage = () =>
 {
   let bp = require('./LoginPagePath.js');
+  const history = useHistory();
 
   const [message,setMessage] = useState('');
   const [searchResults,setResults] = useState('');
@@ -17,6 +19,12 @@ const HomePage = () =>
   let lastName = ud.lastName;
   var card = '';
   var search = '';
+
+  const logout = () =>
+  {
+    localStorage.removeItem('user_data'); // remove user session data from localStorage
+    history.push('/'); // redirect to login page
+  };
 
 const addTask = async event => 
 {
@@ -84,6 +92,9 @@ const addTask = async event =>
     <div>
       <HomePageStyling/>
       <div id = "cardUIDiv"><br/>
+      <div class="form-group">
+          <button type="button" id="logoutButton" class="buttons" onClick={logout}>Log Out</button><br/>
+        </div>
         <div class="form-group">
           <img id="todolisticon" src={ToDoIcon} alt="To Do List Logo"/>
         </div>
