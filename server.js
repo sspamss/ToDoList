@@ -110,6 +110,22 @@ app.post('/api/search', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+
+app.post('/api/searchCategory', async (req, res, next) => 
+{
+  const { userId, search } = req.body;
+  const db = client.db("Fridge");
+  var error = '', _ret = [], _search = search.trim();
+  const results = await db.collection('Tasks').find({"category":{$regex:_search+'.*', $options:'r'}}).toArray();
+  console.log(results)
+
+  // Finds all cards that match the search
+  for (var i = 0; i < results.length; i++) {_ret.push( results[i].taskContent);}
+  
+  var ret = {results:_ret, error:error};
+  res.status(200).json(ret);
+});
+
 app.post('/api/addTask', async (req, res, next) =>
 {
   const cont = req.body["taskContent"];
