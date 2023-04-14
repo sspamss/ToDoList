@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+/*import React, {useState} from 'react';
 import ForgotPasswordPageStyling from './ForgotPasswordPageStyling';
 import WingedEmail from '../graphics/WingedEmail.png';
 
@@ -78,3 +78,4 @@ const ForgotPasswordPage = () =>
 };
 
 export default ForgotPasswordPage;
+*/
