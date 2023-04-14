@@ -3,9 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
 const path = require('path');         
-const { stringify } = require('querystring');
-const sendEmail = require("./utils/sendEmail");
-const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5050; 
 const app = express();
 
@@ -97,54 +94,6 @@ app.post('/api/login', async (req, res, next) =>
   var ret = { _id:id, firstName:fn, lastName:ln, email:em, error:''};
   res.status(200).json(ret);
 });
-
-// Function to check validity of password
-app.post('/api/valid', async (req, res, next) => 
-{
-  const user = req.body["user"];
-  const email = req.body["email"];
-  const db = client.db("Fridge");
-  const results = await db.collection('Users').find({user:user, email:email}).toArray();
-  var id = -1;
-  var fn = '';
-  var ln = '';
-  var em = '';
-
-  // The user must input at least one character in length for each field
-  if (results.length > 0)
-  {
-    id = results[0]._id;
-    fn = results[0].firstName;
-    ln = results[0].lastName;
-    em = results[0].email;
-  }
-
-  var ret = { _id:id, firstName:fn, lastName:ln, email:em, error:''};
-  console.log(ret);
-  res.status(200).json(ret);
-});
-
-//sends email
-app.post('/api/sendemail', async (req, res) => {
-  const user = req.body["user"];
-  const email = req.body["email"];
-  
-  try {
-    const send_to = email;
-    const sent_from = 'thefridgelist@gmail.com';
-    const reply_to = email;
-    const subject = "Password Reset";
-    var randomstring = Math.random().toString(36).slice(-8);
-    const message = "This is an email to notify you that your account has attempted to reset your password, the new password is: "+ randomstring;
-    console.log(email);
-    await sendEmail(subject, message, send_to, sent_from, reply_to);
-    
-    res.status(200).json({ success: true, message: "Email Sent" , password: randomstring});
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-});
-
 // Function to search for a contact to the database
 
 app.post('/api/search', async (req, res, next) => 
