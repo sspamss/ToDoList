@@ -96,16 +96,26 @@ app.post('/api/login', async (req, res, next) =>
 });
 
 // Function to search for a contact to the database
+
 app.post('/api/search', async (req, res, next) => 
 {
+  // incoming: userId, search
+  // outgoing: results[], error
+
+  var error = '';
   const { userId, search } = req.body;
+  var _search = search.trim();
   const db = client.db("Fridge");
-  var error = '', _ret = [], _search = search.trim();
-  const results = await db.collection('Tasks').find({"taskContent":{$regex:_search+'.*', $options:'r'}}).toArray();
+
+  const results = await db.collection('Tasks').find({"taskContent":{$regex:_search+'.*', $options:'i'}}).toArray();
+  var _ret = [];
 
   // Finds all cards that match the search
-  for (var i = 0; i < results.length; i++) {_ret.push( results[i].taskContent);}
-  
+  for (var i = 0; i < results.length; i++)
+  {
+    _ret.push( results[i].taskContent );
+  }
+
   var ret = {results:_ret, error:error};
   res.status(200).json(ret);
 });
@@ -116,8 +126,7 @@ app.post('/api/searchCategory', async (req, res, next) =>
   const { userId, search } = req.body;
   const db = client.db("Fridge");
   var error = '', _ret = [], _search = search.trim();
-  const results = await db.collection('Tasks').find({"category":{$regex:_search+'.*', $options:'r'}}).toArray();
-  console.log(results)
+  const results = await db.collection('Tasks').find({"category":{$regex:_search+'.*', $options:'i'}}).toArray();
 
   // Finds all cards that match the search
   for (var i = 0; i < results.length; i++) {_ret.push( results[i].taskContent);}
