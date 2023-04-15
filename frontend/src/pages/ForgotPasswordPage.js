@@ -5,46 +5,23 @@ import WingedEmail from '../graphics/WingedEmail.png';
 // Function to handle the login page
 const ForgotPasswordPage = () =>
 {
-  // Import the path to the backend
-  let bp = require("./LoginPagePath.js");
   var newSigninUsername;
-  var emailAddress;
+  var emailAddress, emailAddressConfirmation;
 
   const [message, setMessage] = useState('');
-  const doForgotPassword = async event => {
+  const doForgotPassword = async event => 
+  {
     event.preventDefault();
-    var obj = {user:newSigninUsername.value, email:emailAddress.value};
-    // Check for any empty fields
-    if (obj.user === "" && obj.email === "") {setMessage("* Please enter your username and email *"); return;}
-    if (obj.user === "") {setMessage("* Please enter your username *"); return;}
-    if (obj.email === ""){setMessage("* Please enter your email *"); return;}
-    console.log(obj.user);
-    console.log(obj.email); 
-    var js = JSON.stringify(obj);
-    console.log(js)
+    var obj = {username:newSigninUsername.value, email:emailAddress.value, emailConfirm:emailAddressConfirmation.value};
 
-    const response = await fetch(bp.buildPath('api/valid'),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-    var res = JSON.parse(await response.text());
-    
-    console.log(res._id);
-    console.log(res.email);
-      
-    // If sign in is invalid, display an error message
-    if (res._id <= 0){
-      setMessage("* Username or email is incorrect *");
-      return;
-    }
-      
-    // If sign in is valid, store the user's information in local storage and redirect to the home page
-    else{
-      //changes the message to sending the email
-      setMessage("* Email has been sent *");
-    
-      //sends email
-      const response = await fetch(bp.buildPath('api/sendemail'), {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
-      var res = JSON.parse(await response.text());
-      console.log(res.email);
-    }
+    // Check for any empty fields
+    if (obj.username === "" && obj.email === "" && obj.emailConfirm === "") {setMessage("* Please enter your username and email *"); return;}
+    if (obj.username === "" && obj.email === "") {setMessage("* Please enter your username and email *"); return;}
+    if (obj.username === "" && obj.emailConfirm === "") {setMessage("* Please enter your username and confirm your email *"); return;}
+    if (obj.email === "" && obj.emailConfirm === "") {setMessage("* Please enter your email *"); return;}
+    if (obj.username === "") {setMessage("* Please enter your username *"); return;}
+    if (obj.email === ""){setMessage("* Please enter your email *"); return;}
+    if (obj.emailConfirm === ""){setMessage("* Please confirm your email *"); return;}
   };
 
   // Returns the content of the login page
@@ -61,6 +38,9 @@ const ForgotPasswordPage = () =>
             </div>
             <div class="form-group">
               <input id="emailField" type="text" class="form-control col-md-12" placeholder="EMAIL ADDRESS" ref={(c) => (emailAddress = c)}/>
+            </div>
+            <div class="form-group">
+              <input id="emailFieldConfirmation" type="text" class="form-control col-md-12" placeholder="CONFIRM EMAIL ADDRESS" ref={(c) => (emailAddressConfirmation = c)}/>
             </div>
             <div class="form-group">
               <a href='/' id="backToSignIn">Back to sign in</a><br/>
