@@ -189,8 +189,72 @@ app.post('/api/delTask', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+app.post('/api/editTask', async (req, res, next) =>
+{
+  const cont = req.body["taskContent"];
+  const time = req.body["time"];
+  const cat = req.body["category"];
+  const uid = req.body["user"];
+  const newTask = {taskContent:cont, time:time, category:cat,user:uid};
+
+  const newCont = req.body["newTaskContent"];
+  const newTime = req.body["newTime"];
+  const newCat = req.body["newCategory"];
+  const replaceTask = {taskContent:newCont, time:newTime, category:newCat,user:uid};
+
+  const db = client.db("Fridge");
+  const results = await db.collection('Tasks').find({taskContent:cont,category:cat}).toArray();
+  var error = '';
+  console.log(results)
+  if (results.length == 1)
+  {
+    try {client.db("Fridge"); db.collection('Tasks').updateOne(results[0],{$set:replaceTask});}
+    catch(e) {error = e.toString();}
+  }
+  else
+  {
+    error = "You already added this task"
+  }
+
+  var ret = { error: error };
+  res.status(200).json(ret);
+});
+
+
+app.post('/api/resetPassword', async (req, res, next) =>
+{
+  const uid = req.body["user"];
+  const pass = req.body["password"];
+  const newUser = {user:uid, password:pass};
+
+  const newPass = req.body["newPassword"];
+  const replaceUser = {user:uid, password:newPass};
+
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find(newUser).toArray();
+  var error = '';
+  console.log(results)
+  if (results.length == 1)
+  {
+    try {client.db("Fridge"); db.collection('Users').updateOne(results[0],{$set:replaceUser});}
+    catch(e) {error = e.toString();}
+  }
+  else
+  {
+    error = "You already added this task"
+  }
+
+  var ret = { error: error };
+  res.status(200).json(ret);
+});
+
+
+
+
 // Use port 5050 to resolve iOS conflicts with port 5000
 app.listen(PORT, () => 
 {
   console.log('Server listening on port ' + PORT);
 });
+
+
