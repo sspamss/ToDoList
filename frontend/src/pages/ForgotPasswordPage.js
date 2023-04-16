@@ -18,16 +18,10 @@ const ForgotPasswordPage = () =>
     if (obj.user === "" && obj.email === "") {setMessage("* Please enter your username and email *"); return;}
     if (obj.user === "") {setMessage("* Please enter your username *"); return;}
     if (obj.email === ""){setMessage("* Please enter your email *"); return;}
-    console.log(obj.user);
-    console.log(obj.email); 
     var js = JSON.stringify(obj);
-    console.log(js)
 
     const response = await fetch(bp.buildPath('api/valid'),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
     var res = JSON.parse(await response.text());
-    
-    console.log(res._id);
-    console.log(res.email);
       
     // If sign in is invalid, display an error message
     if (res._id <= 0){
@@ -42,8 +36,12 @@ const ForgotPasswordPage = () =>
     
       //sends email
       const response = await fetch(bp.buildPath('api/sendemail'), {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
-      var res = JSON.parse(await response.text());
-      console.log(res.email);
+      var res2 = JSON.parse(await response.text());
+      
+      var js2 = JSON.stringify(res2);
+
+      await fetch(bp.buildPath('api/resetPassword'), {method:'POST', body:js2, headers:{'Content-Type': 'application/json'}});
+
     }
   };
 
