@@ -128,6 +128,14 @@ app.post('/api/valid', async (req, res, next) =>
 app.post('/api/sendemail', async (req, res) => {
   const user = req.body["user"];
   const email = req.body["email"];
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find({user:user, email:email}).toArray();
+
+  if (results.length > 0)
+  {
+    pw = results[0].password;
+  }
+
   
   try {
     const send_to = email;
@@ -139,7 +147,7 @@ app.post('/api/sendemail', async (req, res) => {
     console.log(email);
     await sendEmail(subject, message, send_to, sent_from, reply_to);
     
-    res.status(200).json({ success: true, message: "Email Sent" , password: randomstring});
+    res.status(200).json({ user: user, password: pw , newPassword: randomstring});
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -306,5 +314,3 @@ app.listen(PORT, () =>
 {
   console.log('Server listening on port ' + PORT);
 });
-
-
