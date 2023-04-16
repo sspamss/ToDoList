@@ -1,4 +1,5 @@
 import React from 'react';
+import HomePageBackground from '../graphics/HomePageBackground.png';
 
 const HomePageStyling = () => {
     return (
@@ -9,6 +10,12 @@ const HomePageStyling = () => {
   
             /* Setting the website background */
             body {
+              background-image: url(${HomePageBackground});
+
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+
               background-color: #F6F6EF;
               text-align: center;
             }
