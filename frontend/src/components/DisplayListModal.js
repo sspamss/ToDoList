@@ -29,6 +29,7 @@ const DisplayListModal = ({isOpen, onRequestClose, onCreateList}) => {
   // Function that keeps track of which lists the user wants
   const handleCreateList = () => {
     const lists = [];
+
     if (personalChecked) lists.push("personal");
     if (schoolChecked) lists.push("school");
     if (workChecked) lists.push("work");
