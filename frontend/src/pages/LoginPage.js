@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import LoginPageStyling from './LoginPageStyling';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 // Function to handle the login page
 const LoginPage = () =>
