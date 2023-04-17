@@ -187,7 +187,11 @@ app.post('/api/searchCategory', async (req, res, next) =>
   const results = await db.collection('Tasks').find({"category":{$regex:_search+'.*', $options:'i'}}).toArray();
 
   // Finds all cards that match the search
-  for (var i = 0; i < results.length; i++) {_ret.push( results[i].taskContent);}
+  for (var i = 0; i < results.length; i++) {
+    _ret.push( [results[i].taskContent,results[i].time]);
+    
+  
+  }
   
   var ret = {results:_ret, error:error};
   res.status(200).json(ret);
