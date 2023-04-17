@@ -3,8 +3,8 @@ import React from 'react';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import HomePage from './pages/HomePage';
 import ToggleSlider from './pages/ToggleSlider';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 
 function App() {
   return (
