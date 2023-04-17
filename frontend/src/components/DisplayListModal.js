@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import CreateListModalStyling from "./CreateListModalStyling";
+import React, {useState} from "react";
+import DisplayListModalStyling from "./DisplayListModalStyling";
 import Modal from "react-modal";
 
-const CreateListModal = ({ isOpen, onRequestClose, onCreateList }) => {
+const DisplayListModal = ({isOpen, onRequestClose, onCreateList}) => {
   const [message, setMessage] = useState('');
   const [personalChecked, setPersonalChecked] = useState(false);
   const [schoolChecked, setSchoolChecked] = useState(false);
@@ -40,30 +40,30 @@ const CreateListModal = ({ isOpen, onRequestClose, onCreateList }) => {
 
   return (
     <div>
-      <CreateListModalStyling />
+      <DisplayListModalStyling/>
       <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
-        <text id="createAList">CREATE A LIST</text>
+        <text id="createAList">DISPLAY A LIST</text>
         <text id="createAListInstructions">Available lists to choose:</text>
         <button id="closePopUp" className="modal-close" onClick={onRequestClose}>X</button>
         <div id="listOptions">
           <div>
             <input id="personalOption" type="checkbox" checked={personalChecked} onChange={() => setPersonalChecked(!personalChecked)}/>
-            <label for="personalOption" id="personalLabel">PERSONAL</label>
+            <label for="personalOption" id="personalLabel">Personal</label>
           </div>
           <div>
             <input id="schoolOption" type="checkbox" checked={schoolChecked} onChange={() => setSchoolChecked(!schoolChecked)}/>
-            <label for="schoolOption" id="schoolLabel">SCHOOL</label>
+            <label for="schoolOption" id="schoolLabel">School</label>
           </div>
           <div>
             <input id="workOption" type="checkbox" checked={workChecked} onChange={() => setWorkChecked(!workChecked)}/>
-            <label for="workOption" id="workLabel">WORK</label>
+            <label for="workOption" id="workLabel">Work</label>
           </div>
         </div>
         <span id="errorMessagePopUp" class="w-100 text-center"> {message}</span>
-        <button id="createListPopUpButton" onClick={handleCreateList}>CREATE LIST</button>
+        <button id="createListPopUpButton" onClick={handleCreateList}>DISPLAY LIST</button>
       </Modal>
     </div>
   );
 };
 
-export default CreateListModal;
+export default DisplayListModal;
