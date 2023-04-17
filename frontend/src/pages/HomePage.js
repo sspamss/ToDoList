@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import CreateListModal from '../components/CreateListModal';
+import CreateListModal from '../components/DisplayListModal';
 import HomePageStyling from './HomePageStyling';
 import LoggedInName from '../components/LoggedInName';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import {useHistory} from 'react-router-dom';
+import DisplayListModal from '../components/DisplayListModal';
 
 const HomePage = () =>
 {
@@ -87,9 +88,10 @@ const HomePage = () =>
   return (
     <div>
       <HomePageStyling/>
+      <LoggedInName/>
       <div id="homePage">
         <div class="form-group">
-            <button id="signoutButton" class="buttons" type="button" onClick={signout}>SIGN OUT</button>
+          <button id="signoutButton" class="buttons" type="button" onClick={signout}>SIGN OUT</button>
         </div>
         <div class="form-group">
           <img id="todolisticon" src={ToDoIcon} alt="To Do List Logo"/>
@@ -104,7 +106,7 @@ const HomePage = () =>
           <button id="editTaskButton" class="buttons" type="button">EDIT TASK</button>
         </div>
         {isCreateListOpen && (
-          <CreateListModal 
+          <DisplayListModal 
             isOpen={isCreateListOpen} 
             onRequestClose={() => setIsCreateListOpen(false)} 
             onCreateList={handleCreateList}
