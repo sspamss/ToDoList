@@ -69,6 +69,7 @@ const CreateTaskModalStyling = () => {
           color: #6C6C6C;
           border: 2px solid #9736C5;
           border-radius: 4px;
+          cursor: pointer;
           font-family: 'Nunito', sans-serif;
           font-size: 10pt;
           margin-top: 0.5em;
