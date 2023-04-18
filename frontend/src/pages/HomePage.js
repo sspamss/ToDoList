@@ -18,7 +18,8 @@ const HomePage = () =>
   const [selectedList, setSelectedList] = useState("");
 
   let _ud = localStorage.getItem('user_data'), ud = JSON.parse(_ud), userId = ud.id;
-  var card = '', search = '';
+  var newtaskContent = "", newtaskTime = "", newtaskCategory = ""; 
+  var search = '';
 
   // Get user data from local storage
   const user = JSON.parse(localStorage.getItem('user_data'));
@@ -40,19 +41,24 @@ const HomePage = () =>
   const createTask = async event => 
   {
     event.preventDefault();
-    let obj = {userId:userId, card:card.value}, js = JSON.stringify(obj);
+    // Make sure when choosing the task that you have the user provide newtaskContent, newtaskTime (must be in datetime format but as a string), newtaskCategory but make sure its a dropdown of three options.
+    let obj = {taskContent: newtaskContent, time: newtaskTime, category: newtaskCategory, user:user.user}, js = JSON.stringify(obj);
+    if(newtaskContent != '' && newtaskTime != "" && newtaskCategory != ""){
+      try
+      {
+        const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+        let txt = await response.text(), res = JSON.parse(txt);
 
-    try
-    {
-      const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-      let txt = await response.text(), res = JSON.parse(txt);
-
-      if (res.error.length > 0) {setMessage("API Error: " + res.error);}
-      else {setMessage("Card has been added");}
+        if (res.error.length > 0) {setMessage("API Error: " + res.error);}
+        else {setMessage("Task has been added");}
+      }
+      catch(e)
+      {
+        setMessage(e.toString());
+      }
     }
-    catch(e)
-    {
-      setMessage(e.toString());
+    else{
+      setMessage("Unable to add task (not all fields filled in)")
     }
   };
 
@@ -60,7 +66,7 @@ const HomePage = () =>
   const searchTask = async event => 
   {
     event.preventDefault();
-    let obj = {userId:userId, search:search.value}, js = JSON.stringify(obj);
+    let obj = {user:user.user, search:search.value}, js = JSON.stringify(obj);
 
     try
     {
