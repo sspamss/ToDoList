@@ -2,11 +2,17 @@ import React, {useState} from "react";
 import CreateTaskModalStyling from "./CreateTaskModalStyling";
 import Modal from "react-modal";
 
-const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
+const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
+{
+  // Import the path to the backend
+  let bp = require("../pages/LoginPagePath.js");
+
   var createTaskName;
 
+  // Get user data from local storage
+  const user = JSON.parse(localStorage.getItem('user_data'));
   const [message, setMessage] = useState('');
-  const [newtaskCategory, setNewTaskCategory] = useState('');
+  const [taskCategory, setTaskCategory] = useState('');
   const [taskDueDate, setTaskDueDate] = useState(null);
 
   // Function that sets and styles the pop up box
@@ -35,32 +41,32 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
     // Check for any empty fields
     if (!createTaskName.value) {setMessage("* Please enter a task name *"); return;}
     if (!taskDueDate) {setMessage("* Please select a task due date *"); return;}
-    if (!newtaskCategory) {setMessage("* Please select a task category *"); return;}
+    if (!taskCategory) {setMessage("* Please select a task category *"); return;}
 
-    // // Make sure when choosing the task that you have the user provide newtaskContent, newtaskTime (must be in datetime format but as a string), newtaskCategory but make sure its a dropdown of three options.
-    // let obj = {taskContent: newtaskContent, time: newtaskTime, category: newtaskCategory, user:user.user}, js = JSON.stringify(obj);
-    // if(newtaskContent != '' && newtaskTime != "" && newtaskCategory != ""){
-    //   try
-    //   {
-    //     const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-    //     let txt = await response.text(), res = JSON.parse(txt);
+    // Make sure when choosing the task that you have the user provide newtaskContent, newtaskTime (must be in datetime format but as a string), newtaskCategory but make sure its a dropdown of three options.
+    let obj = {taskContent: createTaskName.value, time: taskDueDate, category: taskCategory, user:user.user}, js = JSON.stringify(obj);
+    if(createTaskName.value != '' && taskDueDate != "" && taskCategory != ""){
+      try
+      {
+        const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+        let txt = await response.text(), res = JSON.parse(txt);
 
-    //     if (res.error.length > 0) {setMessage("API Error: " + res.error);}
-    //     else {setMessage("Task has been added");}
-    //   }
-    //   catch(e)
-    //   {
-    //     setMessage(e.toString());
-    //   }
-    // }
-    // else{
-    //   setMessage("Unable to add task (not all fields filled in)")
-    // }
+        if (res.error.length > 0) {setMessage("API Error: " + res.error);}
+        else {setMessage("* Task has been added *");}
+      }
+      catch(e)
+      {
+        setMessage(e.toString());
+      }
+    }
+    else {
+      setMessage("Unable to add task (not all fields filled in)")
+    }
   };
 
   // Function to handle task category selection
   const handleTaskCategoryChange = (event) => {
-    setNewTaskCategory(event.target.value);
+    setTaskCategory(event.target.value);
   };
 
   return (
@@ -76,7 +82,7 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
           <input id="taskDueDate" type="datetime-local" required onChange={(e) => setTaskDueDate(e.target.value)}></input>
         </div>
         <div>
-          <select id="taskCategory" value={newtaskCategory} onChange={handleTaskCategoryChange} required>
+          <select id="taskCategory" value={taskCategory} onChange={handleTaskCategoryChange} required>
             <option value="">TASK CATEGORY</option>
             <option value="Personal">Personal</option>
             <option value="School">School</option>
