@@ -33,15 +33,18 @@ const LoginPage = () =>
       const response = await fetch(bp.buildPath("api/login"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
       var res = JSON.parse(await response.text());
       
+      
       // If sign in is invalid, display an error message
       if (res._id <= 0)
       {
         setMessageSignin("* Username or password is incorrect *");
       }
+      /*
       if(res.verified==false){
         setMessageSignin("* this account has yet to be verified resending email now *");
         await fetch(bp.buildPath("api/emailVerification"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
       }
+      */
       // If sign in is valid, store the user's information in local storage and redirect to the home page
       else
       {
