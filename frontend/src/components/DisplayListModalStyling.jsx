@@ -44,9 +44,10 @@ const CreateListModalStyling = () => {
 
         /* Styling the checkbox */
         [type="checkbox"] {
-          transform: scale(1.2);
+          cursor: pointer;
           margin-right: 0.5em;
           margin-left: 1.5em;
+          transform: scale(1.2);
         }
         
         /* Setting and styling the "PERSONAL", "SCHOOL", "WORK" list option */
@@ -70,10 +71,11 @@ const CreateListModalStyling = () => {
           background-color: #9736C5;
           bottom: 33px;
           color: #FFFFFF;
+          cursor: pointer;
           border: none;
           border-radius: 6px;
-          font-size: 12pt;
           font-family: 'Fredoka One', sans-serif;
+          font-size: 12pt;
           position: absolute;
           transform: translateX(-50%);
 
