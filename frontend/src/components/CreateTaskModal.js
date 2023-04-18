@@ -45,22 +45,18 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
 
     // Make sure when choosing the task that you have the user provide newtaskContent, newtaskTime (must be in datetime format but as a string), newtaskCategory but make sure its a dropdown of three options.
     let obj = {taskContent: createTaskName.value, time: taskDueDate, category: taskCategory, user:user.user}, js = JSON.stringify(obj);
-    if(createTaskName.value != '' && taskDueDate != "" && taskCategory != ""){
-      try
-      {
-        const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-        let txt = await response.text(), res = JSON.parse(txt);
 
-        if (res.error.length > 0) {setMessage("API Error: " + res.error);}
-        else {setMessage("* Task has been added *");}
-      }
-      catch(e)
-      {
-        setMessage(e.toString());
-      }
+    try
+    {
+      const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+      let txt = await response.text(), res = JSON.parse(txt);
+
+      if (res.error.length > 0) {setMessage("API Error: " + res.error);}
+      else {setMessage("* Task has been added *");}
     }
-    else {
-      setMessage("Unable to add task (not all fields filled in)")
+    catch(e)
+    {
+      setMessage(e.toString());
     }
   };
 
