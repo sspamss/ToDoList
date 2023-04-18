@@ -138,7 +138,8 @@ const HomePageStyling = () => {
               background-color: #AB6DC9;
             }
             /* Styling the error message (if there is one) */
-            #errorMessageCreateTask {
+            #errorMessage {
+              color: #FF0000;
               font-size: 9pt;
               margin-top: 0.9em;
               position: absolute;
