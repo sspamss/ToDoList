@@ -6,9 +6,8 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
   var createTaskName;
 
   const [message, setMessage] = useState('');
-  const [personalChecked, setPersonalChecked] = useState(false);
-  const [schoolChecked, setSchoolChecked] = useState(false);
-  const [workChecked, setWorkChecked] = useState(false);
+  const [newtaskCategory, setNewTaskCategory] = useState('');
+  const [taskDueDate, setTaskDueDate] = useState(null);
 
   // Function that sets and styles the pop up box
   const customStyles = {
@@ -20,7 +19,7 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
 
       left: "50%",
       top: "50%",
-      height: "250px",
+      height: "200px",
       width: "215px",
     },
     overlay: {
@@ -31,18 +30,13 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
   // Function that handles creating a task
   const handleCreateTask = async event => 
   {
-    // const tasks = [];
+    event.preventDefault();
 
-    // if (personalChecked) tasks.push("MEMEME");
-    // if (schoolChecked) tasks.push("TEST");
-    // if (workChecked) tasks.push("OK");
-  
-    // if (tasks.length === 0) {setMessage("Please select at least one task.");}
-    // else {onCreateTask(tasks);}
+    // Check for any empty fields
+    if (!createTaskName.value) {setMessage("* Please enter a task name *"); return;}
+    if (!taskDueDate) {setMessage("* Please select a task due date *"); return;}
+    if (!newtaskCategory) {setMessage("* Please select a task category *"); return;}
 
-
-
-    // event.preventDefault();
     // // Make sure when choosing the task that you have the user provide newtaskContent, newtaskTime (must be in datetime format but as a string), newtaskCategory but make sure its a dropdown of three options.
     // let obj = {taskContent: newtaskContent, time: newtaskTime, category: newtaskCategory, user:user.user}, js = JSON.stringify(obj);
     // if(newtaskContent != '' && newtaskTime != "" && newtaskCategory != ""){
@@ -64,32 +58,30 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) => {
     // }
   };
 
+  // Function to handle task category selection
+  const handleTaskCategoryChange = (event) => {
+    setNewTaskCategory(event.target.value);
+  };
+
   return (
     <div>
       <CreateTaskModalStyling/>
       <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
         <text id="createAList">CREATE A TASK</text>
-        <text id="createAListInstructions">Please fill in all fields:</text>
         <button id="closePopUp" className="modal-close" onClick={onRequestClose}>X</button>
         <div>
           <input id="tasknameField" type="text" class="form-control col-md-12" placeholder="TASK NAME" ref={(c) => (createTaskName = c)}/>
         </div>
         <div>
-          <input id="taskDueDate" type="datetime-local" name="startTime" required></input>
+          <input id="taskDueDate" type="datetime-local" required onChange={(e) => setTaskDueDate(e.target.value)}></input>
         </div>
-        <div id="listOptions">
-          <div>
-            {/* <input id="personalOption" type="checkbox" checked={personalChecked} onChange={() => setPersonalChecked(!personalChecked)}/>
-            <label for="personalOption" id="personalLabel">Personal</label> */}
-          </div>
-          <div>
-            {/* <input id="schoolOption" type="checkbox" checked={schoolChecked} onChange={() => setSchoolChecked(!schoolChecked)}/>
-            <label for="schoolOption" id="schoolLabel">School</label> */}
-          </div>
-          <div>
-            {/* <input id="workOption" type="checkbox" checked={workChecked} onChange={() => setWorkChecked(!workChecked)}/>
-            <label for="workOption" id="workLabel">Work</label> */}
-          </div>
+        <div>
+          <select id="taskCategory" value={newtaskCategory} onChange={handleTaskCategoryChange} required>
+            <option value="">TASK CATEGORY</option>
+            <option value="Personal">Personal</option>
+            <option value="School">School</option>
+            <option value="Work">Work</option>
+          </select>
         </div>
         <span id="errorMessagePopUp" class="w-100 text-center"> {message}</span>
         <button id="createListPopUpButton" onClick={handleCreateTask}>CREATE TASK</button>
