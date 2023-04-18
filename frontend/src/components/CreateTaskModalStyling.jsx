@@ -64,12 +64,24 @@ const CreateTaskModalStyling = () => {
           outline: none;
         }
 
-        /* Setting and styling the create a list's instructions */
-        #createAListInstructions {
-          color: #000000;
+        /* Setting and styling the tast category field */
+        #taskCategory {
+          color: #6C6C6C;
+          border: 2px solid #9736C5;
+          border-radius: 4px;
           font-family: 'Nunito', sans-serif;
-          font-size: 12pt;
+          font-size: 10pt;
+          margin-top: 0.5em;
+          padding-left: 0.5em;
           text-align: center;
+
+          height: 27px;
+          width: 188px;
+          position: relative;
+          transform: translateX(-50%, -50%);
+        }
+        #taskCategory:focus {
+          outline: none;
         }
 
         /* Moving the three lists further down, too close to instructions */
