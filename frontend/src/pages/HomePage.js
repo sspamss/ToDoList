@@ -66,8 +66,19 @@ const HomePage = () =>
   const searchTask = async event => 
   {
     event.preventDefault();
-    let obj = {user:user.user, search:search.value}, js = JSON.stringify(obj);
+    let obj = {user:user.user, search:search.value};
 
+    // Check for any empty fields
+    if (obj.search === "")
+    {
+      setSearchTaskMessage("* Please type at least one character *");
+      setCardList("");
+      return;
+    }
+    
+    var js = JSON.stringify(obj);
+
+    // Send the query to the backend and check if the query is valid
     try
     {
       const response = await fetch(bp.buildPath("api/search"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
@@ -80,7 +91,7 @@ const HomePage = () =>
         resultText += _results[i];
         if (i < _results.length - 1) {resultText += ', ';}
       }
-      setSearchTaskMessage('Task(s) have been found.');
+      setSearchTaskMessage("* Task(s) have been found *");
       setCardList(resultText);
     }
     catch(e)
