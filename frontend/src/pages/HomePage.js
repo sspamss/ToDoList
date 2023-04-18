@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import CreateListModal from '../components/DisplayListModal';
+import DisplayListModal from '../components/DisplayListModal';
 import HomePageStyling from './HomePageStyling';
-import LoggedInName from '../components/LoggedInName';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import {useHistory} from 'react-router-dom';
-import DisplayListModal from '../components/DisplayListModal';
 
+// Function to handle the home page
 const HomePage = () =>
 {
   let bp = require('./LoginPagePath.js');
@@ -17,9 +16,12 @@ const HomePage = () =>
   const [message,setMessage] = useState('');
   const [searchTaskMessage, setSearchTaskMessage] = useState('');
   const [selectedList, setSelectedList] = useState("");
-  let _ud = localStorage.getItem('user_data'), ud = JSON.parse(_ud);
-  let userId = ud.id, firstName = ud.firstName, lastName = ud.lastName;
+
+  let _ud = localStorage.getItem('user_data'), ud = JSON.parse(_ud), userId = ud.id;
   var card = '', search = '';
+
+  // Get user data from local storage
+  const user = JSON.parse(localStorage.getItem('user_data'));
 
   // Function that removes user session data from local storage then redirects to sign in page
   const signout = () =>
@@ -34,9 +36,7 @@ const HomePage = () =>
     setSelectedList(listName);
     setIsCreateListOpen(false);
   };  
-  
-  {isCreateListOpen && (<CreateListModal isOpen={isCreateListOpen} onRequestClose={() => setIsCreateListOpen(false)} onCreateList={handleCreateList}/>)}
-  
+    
   const createTask = async event => 
   {
     event.preventDefault();
@@ -45,10 +45,9 @@ const HomePage = () =>
     try
     {
       const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-
       let txt = await response.text(), res = JSON.parse(txt);
 
-      if (res.error.length > 0) {setMessage("API Error: " + res.error );}
+      if (res.error.length > 0) {setMessage("API Error: " + res.error);}
       else {setMessage("Card has been added");}
     }
     catch(e)
@@ -57,7 +56,7 @@ const HomePage = () =>
     }
   };
 
-
+  // Function that handles the user queries
   const searchTask = async event => 
   {
     event.preventDefault();
@@ -66,10 +65,10 @@ const HomePage = () =>
     try
     {
       const response = await fetch(bp.buildPath("api/search"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-
       let txt = await response.text(), res = JSON.parse(txt);
       let _results = res.results, resultText = '';
 
+      // Find the task(s) that match the search query
       for (var i = 0; i < _results.length; i++ )
       {
         resultText += _results[i];
@@ -88,8 +87,8 @@ const HomePage = () =>
   return (
     <div>
       <HomePageStyling/>
-      <LoggedInName/>
       <div id="homePage">
+        <text id="usernameStyling">Hi, {user.user}!</text>
         <div class="form-group">
           <button id="signoutButton" class="buttons" type="button" onClick={signout}>SIGN OUT</button>
         </div>
