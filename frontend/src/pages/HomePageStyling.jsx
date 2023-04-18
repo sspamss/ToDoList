@@ -10,13 +10,11 @@ const HomePageStyling = () => {
   
             /* Setting the website background */
             body {
+              background-color: #F6F6EF;
               background-image: url(${HomePageBackground});
-
               background-position: center;
               background-repeat: no-repeat;
               background-size: cover;
-
-              background-color: #F6F6EF;
               text-align: center;
             }
 
@@ -27,7 +25,6 @@ const HomePageStyling = () => {
               font-size: 20pt;
               position: absolute;
               text-align: center;
-
               top: 25.5px;
               transform: translate(-50%, -50%);
             }
@@ -38,6 +35,7 @@ const HomePageStyling = () => {
               border: none;
               border-radius: 6px;
               color: #FFFFFF;
+              cursor: pointer;
               font-family: 'Fredoka One', sans-serif;
               font-size: 12pt;
               position: absolute;
@@ -56,8 +54,8 @@ const HomePageStyling = () => {
             /* Setting the To Do List image */
             #todolisticon {
               margin-top: 3em;
-              width: 400px;
               position: center;
+              width: 400px;
             }
 
             /* Setting and styling the search bar */
@@ -66,12 +64,12 @@ const HomePageStyling = () => {
               border: 3px solid #9736C5;
               border-radius: 6px;
               box-sizing: border-box;
-              font-size: 12pt;
               font-family: 'Inter', sans-serif;
-              text-align: center;
+              font-size: 12pt;
               margin-bottom: 0.5em;
               margin-right: 0.2em;
               position: relative;
+              text-align: center;
    
               height: 30px;
               width: 370px;
@@ -83,18 +81,16 @@ const HomePageStyling = () => {
 
             /* Setting and styling the search button */
             #searchTaskButton {
-              background-color: #9736C5;
-
               color: #FFFFFF;
+              background-color: #9736C5;
               border: none;
               border-radius: 6px;
-
-              font-size: 12pt;
+              cursor: pointer;
               font-family: 'Fredoka One', sans-serif;
-              text-align: center;
-
+              font-size: 12pt;
               margin-bottom: 0.5em;
               margin-top: 0.5em;
+              text-align: center;
 
               height: 30px;
               width: 85px;
@@ -111,8 +107,8 @@ const HomePageStyling = () => {
               cursor: pointer;
               border: none;
               border-radius: 6px;
-              font-size: 12pt;
               font-family: 'Fredoka One', sans-serif;
+              font-size: 12pt;
               margin-right: 0.5em;
 
               height: 30px;
@@ -127,10 +123,11 @@ const HomePageStyling = () => {
             #createTaskButton {
               background-color: #9736C5;
               color: #FFFFFF;
+              cursor: pointer;
               border: none;
               border-radius: 6px;
-              font-size: 12pt;
               font-family: 'Fredoka One', sans-serif;
+              font-size: 12pt;
               margin-right: 0.5em;
 
               height: 30px;
@@ -143,8 +140,8 @@ const HomePageStyling = () => {
             /* Styling the error message (if there is one) */
             #errorMessageCreateTask {
               font-size: 9pt;
-              position: absolute;
               margin-top: 0.9em;
+              position: absolute;
               top: 370px;
               transform: translateX(-50%);
               white-space: nowrap;
@@ -153,9 +150,10 @@ const HomePageStyling = () => {
             /* Setting and styling the edit button */
             #editTaskButton {
               background-color: #9736C5;
-              color: #FFFFFF;
               border: none;
               border-radius: 6px;
+              color: #FFFFFF;
+              cursor: pointer;
               font-size: 12pt;
               font-family: 'Fredoka One', sans-serif;
 
