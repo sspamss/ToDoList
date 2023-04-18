@@ -118,6 +118,11 @@ const CreateTaskModalStyling = () => {
           white-space: nowrap;
         }
 
+        /* Styling "Task added successfully" message */
+        #successMessagePopUp {
+          color: #008000;
+        }
+
         /* Setting and styling "CREATE LIST" button in the pop up*/
         #createListPopUpButton {
           background-color: #9736C5;

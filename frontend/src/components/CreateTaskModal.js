@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import CreateTaskModalStyling from "./CreateTaskModalStyling";
+import { Message } from './CreateTaskModalStyling';
 import Modal from "react-modal";
 
 const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
@@ -52,7 +53,7 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
       let txt = await response.text(), res = JSON.parse(txt);
 
       if (res.error.length > 0) {setMessage("API Error: " + res.error);}
-      else {setMessage("* Task has been added *");}
+      else {setMessage(<span id="successMessagePopUp">* Task has been added *</span>);}
     }
     catch(e)
     {
