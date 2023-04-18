@@ -169,8 +169,13 @@ app.post('/api/emailVerification', async (req, res) => {
   const password = req.body["password"];
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({user:user, password:password}).toArray();
+  var message =``
   var vf = results[0].verified
   var cc = results[0].confirmationCode
+  id = results[0]._id;
+  fn = results[0].firstName;
+  ln = results[0].lastName;
+  em = results[0].email;
   if (results.length > 0)
   {
     em = results[0].email;
@@ -187,24 +192,29 @@ app.post('/api/emailVerification', async (req, res) => {
       cc = results[0].confirmationCode
     }
   } 
+  if (process.env.NODE_ENV === 'production') {
+      message = `Hi! There, You have recently visited  
+      our website and entered your email. 
+      Please follow the given link to verify your email
+     'https://thefridgelist.herokuapp.com/verify/${cc}
+     Thanks` 
+  }
+    // If the app is in development, use the localhost link
+    else {
+      message = `Hi! There, You have recently visited  
+      our website and entered your email. 
+      Please follow the given link to verify your email 
+      http://localhost:5050/verify/${cc}  
+      Thanks` 
+  }
   try {
     const send_to = em;
     const sent_from = 'thefridgelist@gmail.com';
     const reply_to = em;
     const subject = "emailverification";
-    const message = `Hi! There, You have recently visited  
-
-    our website and entered your email. 
-
-    Please follow the given link to verify your email 
-
-    http://localhost:5050/verify/${cc}  
-
-    Thanks` 
     console.log(em);
     await sendEmail(subject, message, send_to, sent_from, reply_to);
     console.log("hello");
-
     res.status(200).json({ user: user, verified: vf});
   } catch (error) {
     res.status(500).json(error.message);
@@ -371,8 +381,6 @@ app.post('/api/resetPassword', async (req, res, next) =>
 });
 
 
-
-
 // Use port 5050 to resolve iOS conflicts with port 5000
 app.listen(PORT, () => 
 {
@@ -381,10 +389,9 @@ app.listen(PORT, () =>
 
 app.get('/verify/:token', async (req, res)=>{ 
   const {token} = req.params;
-  const user = {confirmationCode:token, verified:false};
+  const user = {verified:false, confirmationCode: token};
   const db = client.db("Fridge");
-  const results = await db.collection('Users').find(user).toArray();
-  console.log(results[0].verified);
+  const results = await db.collection('Users').find({confirmationCode:token}).toArray();
   const replaceUser = {confirmationCode:token, verified:true};
   // Verifying the JWT token  
   jwt.verify(token, 'ourSecretKey', function(err, decoded) { 
