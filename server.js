@@ -161,11 +161,12 @@ app.post('/api/search', async (req, res, next) =>
   // outgoing: results[], error
 
   var error = '';
+  const uid = req.body["user"];
   const { userId, search } = req.body;
   var _search = search.trim();
   const db = client.db("Fridge");
 
-  const results = await db.collection('Tasks').find({"taskContent":{$regex:_search+'.*', $options:'i'}}).toArray();
+  const results = await db.collection('Tasks').find({"user":uid,"taskContent":{$regex:_search+'.*', $options:'i'}}).toArray();
   var _ret = [];
 
   // Finds all cards that match the search
@@ -183,8 +184,9 @@ app.post('/api/searchCategory', async (req, res, next) =>
 {
   const { userId, search } = req.body;
   const db = client.db("Fridge");
+  const uid = req.body["user"];
   var error = '', _ret = [], _search = search.trim();
-  const results = await db.collection('Tasks').find({"category":{$regex:_search+'.*', $options:'i'}}).toArray();
+  const results = await db.collection('Tasks').find({"user":uid,"category":{$regex:_search+'.*', $options:'i'}}).toArray();
 
   // Finds all cards that match the search
   for (var i = 0; i < results.length; i++) {
