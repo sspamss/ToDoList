@@ -10,7 +10,8 @@ const SignupPage = () =>
   // Import the path to the backend
   let bp = require("./LoginPagePath.js");
 
-  var signupFirstname, signupLastname, signupEmailaddress; const emailRegex = /^\S+@\S+\.\S+$/;
+  var signupFirstname, signupLastname, signupEmailaddress;
+  const passwordRegex =  /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/, emailRegex = /^\S+@\S+\.\S+$/;
   var signupUsername; const minUsernameLength = 2, maxUsernameLength = 20;
   var signupPassword, signupPasswordConfirm; const minPasswordLength = 6, maxPasswordLength = 20;
 
@@ -47,7 +48,7 @@ const SignupPage = () =>
       {setMessageSignup(`* Password must be between ${minPasswordLength} and ${maxPasswordLength} characters *`); return;}
 
     // Check if the password meets the requirements
-    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])/.test(obj.password)) {
+    if (!passwordRegex.test(obj.password)) {
       setMessageSignup("* Password does not meet requirements *"); return;}
       
     // Check if the password and password confirmation match
@@ -71,8 +72,8 @@ const SignupPage = () =>
       {
         setMessageSignup('* Account created successfully. You may now proceed to log in *');
         
-        var user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
-        localStorage.setItem('user_data', JSON.stringify(user));
+        const user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
+        localStorage.setItem('user_data', JSON.stringify(user));        
 
         // Redirect to the home page
         window.location.href = '/';
