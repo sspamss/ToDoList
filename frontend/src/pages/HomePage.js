@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import CreateTaskModal from '../components/CreateTaskModal';
 import DisplayListModal from '../components/DisplayListModal';
 import HomePageStyling from './HomePageStyling';
@@ -8,6 +8,8 @@ import {useHistory} from 'react-router-dom';
 // Function to handle the home page
 const HomePage = () =>
 {
+
+  
   let bp = require('./LoginPagePath.js');
 
   const history = useHistory();
@@ -17,13 +19,16 @@ const HomePage = () =>
   const [lists, setLists] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [message,setMessage] = useState('');
-  const [selectedList, setSelectedList] = useState("");
+  const [selectedList, setSelectedList] = useState("Personal");
   const [selectedTask, setSelectedTask] = useState("");
-
+  useEffect(()=>{
+    searchTaskCategory({preventDefault:() => {}});
+  }, [selectedList]);
+  
   let _ud = localStorage.getItem('user_data'), ud = JSON.parse(_ud), userId = ud.id;
   var newtaskContent = "", newtaskTime = "", newtaskCategory = ""; 
   var search = '';
-
+  var originalList = selectedList;
   // Get user data from local storage
   const user = JSON.parse(localStorage.getItem('user_data'));
 
@@ -52,7 +57,7 @@ const HomePage = () =>
   const searchTaskCategory = async event => 
   {
     event.preventDefault();
-    let obj = {user:user.user, search:"Personal"};
+    let obj = {user:user.user, search:selectedList};
     
     var js = JSON.stringify(obj);
 
@@ -70,7 +75,7 @@ const HomePage = () =>
         // This is the 2d array that holds the results. you can do taskArray[0] to see the first entry, taskArray[1] for the next, etc
         // Can also do taskArray[0][0]
         let taskArray = res.results;
-        //setMessage(taskArray[0][0]);
+        setMessage(taskArray);
        }
     }
     catch(e)
@@ -150,6 +155,7 @@ const HomePage = () =>
             lists={lists}
           />
         )}
+        <div><p>{selectedList}</p></div>
         {isCreateTaskOpen && (
           <CreateTaskModal 
             isOpen={isCreateTaskOpen} 
@@ -161,7 +167,7 @@ const HomePage = () =>
         <div className="list-container">
           {lists.map((list) => (
             <div key={list.name} className="list">
-              <div className="list-header">{list.name}</div>
+              <div className="list-header">{}</div>
               <div className="list-body">{/* insert list items here */}</div>
             </div>
           ))}
