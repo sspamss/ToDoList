@@ -48,7 +48,7 @@ const LoginPage = () =>
       // If sign in is valid, store the user's information in local storage and redirect to the home page
       else
       {
-        var user = {firstName:res.firstName, lastName:res.lastName, id:res._id}
+        var user = {firstName:res.firstName, lastName:res.lastName, user:signinUsername.value}
         localStorage.setItem('user_data', JSON.stringify(user));
 
         // Clear the error message
