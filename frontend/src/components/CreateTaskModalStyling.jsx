@@ -24,6 +24,46 @@ const CreateTaskModalStyling = () => {
           position: relative;
         }
 
+        /* Setting and styling the task name field */
+        #tasknameField {
+          color: #6C6C6C;
+          border: 2px solid #9736C5;
+          border-radius: 4px;
+          font-family: 'Nunito', sans-serif;
+          font-size: 10pt;
+          margin-top: 0.5em;
+          padding-left: 0.5em;
+          text-align: center;
+
+          height: 20px;
+          width: 175px;
+          position: relative;
+          transform: translateX(-50%, -50%);
+        }
+        #tasknameField:focus {
+          outline: none;
+        }
+
+        /* Setting and styling the task due date field */
+        #taskDueDate {
+          color: #6C6C6C;
+          border: 2px solid #9736C5;
+          border-radius: 4px;
+          font-family: 'Nunito', sans-serif;
+          font-size: 10pt;
+          margin-top: 0.5em;
+          padding-left: 0.5em;
+          text-align: center;
+
+          height: 23px;
+          width: 177px;
+          position: relative;
+          transform: translateX(-50%, -50%);
+        }
+        #taskDueDate:focus {
+          outline: none;
+        }
+
         /* Setting and styling the create a list's instructions */
         #createAListInstructions {
           color: #000000;
