@@ -133,11 +133,11 @@ const LoginPageStyling = () => {
           /* Setting and styling the show and hide eye password icon */
           #eyeIcon {
             color: #9736C5;
+            cursor: pointer;
             margin-top: 1em;
             right: 2.5em;
             position: absolute;
             transform: translateY(-50%);
-            cursor: pointer;
           }
 
           /* Setting and styling the "CONFIRM PASSWORD" field */
@@ -215,11 +215,11 @@ const LoginPageStyling = () => {
           /* Setting and styling the show and hide eye password confirm icon */
           #eyeIconConfirm {
             color: #9736C5;
+            cursor: pointer;
             margin-top: 1em;
             right: 2.5em;
             position: absolute;
             transform: translateY(-50%);
-            cursor: pointer;
           }
 
           /* Styling the error message (if there is one) */
