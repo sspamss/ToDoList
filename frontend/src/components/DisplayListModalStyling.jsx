@@ -38,7 +38,6 @@ const CreateListModalStyling = () => {
         }
         /* Aligning the three lists to be right under each other */
         #listOptions div {
-          align-items: center;
           display: flex;
         }
 
