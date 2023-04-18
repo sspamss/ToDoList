@@ -8,6 +8,7 @@ const sendEmail = require("./utils/sendEmail");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5050; 
 const app = express();
+const jwt = require('jsonwebtoken'); 
 
 app.set('port', (process.env.PORT || 5050));
 
@@ -53,7 +54,9 @@ app.post('/api/addUser', async (req, res, next) =>
   const uid = req.body["user"];
   const pass = req.body["password"];
   const email = req.body["email"];
-  const newUser = {firstName:fname, lastName:lname, user:uid, password:pass, email:email};
+  var verified = false;
+  const token = jwt.sign({ data: 'Token Data' }, 'ourSecretKey');
+  const newUser = {firstName:fname, lastName:lname, user:uid, password:pass, email:email, verified:verified, confirmationCode: token};
   var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({user:uid, password:pass}).toArray();
@@ -84,6 +87,7 @@ app.post('/api/login', async (req, res, next) =>
   var fn = '';
   var ln = '';
   var em = '';
+  var vf;
 
   // The user must input at least one character in length for each field
   if (results.length > 0)
@@ -92,11 +96,18 @@ app.post('/api/login', async (req, res, next) =>
     fn = results[0].firstName;
     ln = results[0].lastName;
     em = results[0].email;
+    if(typeof results[0].verified == 'undefined'){
+      vf = false;
+    } 
+    else{
+      vf = results[0].verified;
+    } 
   }
 
-  var ret = { _id:id, firstName:fn, lastName:ln, email:em, error:''};
+  var ret = { _id:id, firstName:fn, lastName:ln, email:em, error:'', verified:vf};
   res.status(200).json(ret);
 });
+
 
 // Function to check calidity forfrogot password the user into the website
 app.post('/api/valid', async (req, res, next) => 
@@ -148,6 +159,53 @@ app.post('/api/sendemail', async (req, res) => {
     await sendEmail(subject, message, send_to, sent_from, reply_to);
     
     res.status(200).json({ user: user, password: pw , newPassword: randomstring});
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+});
+
+app.post('/api/emailVerification', async (req, res) => {
+  const user = req.body["user"];
+  const password = req.body["password"];
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find({user:user, password:password}).toArray();
+  var vf = results[0].verified
+  var cc = results[0].confirmationCode
+  if (results.length > 0)
+  {
+    em = results[0].email;
+    if(typeof results[0].verified == 'undefined'){
+      vf = false;
+    } 
+    else{
+      vf = results[0].verified;
+    }
+    if(typeof results[0].confirmationCode == 'undefined'){
+      cc = jwt.sign({ data: 'Token Data' }, 'ourSecretKey');
+    }
+    else{
+      cc = results[0].confirmationCode
+    }
+  } 
+  try {
+    const send_to = em;
+    const sent_from = 'thefridgelist@gmail.com';
+    const reply_to = em;
+    const subject = "emailverification";
+    const message = `Hi! There, You have recently visited  
+
+    our website and entered your email. 
+
+    Please follow the given link to verify your email 
+
+    http://localhost:5050/verify/${cc}  
+
+    Thanks` 
+    console.log(em);
+    await sendEmail(subject, message, send_to, sent_from, reply_to);
+    console.log("hello");
+
+    res.status(200).json({ user: user, verified: vf});
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -320,3 +378,25 @@ app.listen(PORT, () =>
 {
   console.log('Server listening on port ' + PORT);
 });
+
+app.get('/verify/:token', async (req, res)=>{ 
+  const {token} = req.params;
+  const user = {confirmationCode:token, verified:false};
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find(user).toArray();
+  console.log(results[0].verified);
+  const replaceUser = {confirmationCode:token, verified:true};
+  // Verifying the JWT token  
+  jwt.verify(token, 'ourSecretKey', function(err, decoded) { 
+      if (err) { 
+        console.log(err); 
+        res.send("Email verification failed, possibly the link is invalid or expired");
+      } 
+      else {
+        res.send("Email verified successfully"); 
+        console.log("account verified");
+        try {client.db("Fridge"); db.collection('Users').updateOne(results[0],{$set:replaceUser});}
+        catch(e) {error = e.toString();}
+    } 
+  }); 
+}); 
