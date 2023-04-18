@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import LoginPageStyling from './LoginPageStyling';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 // Function to handle the login page
 const LoginPage = () =>
@@ -21,7 +21,7 @@ const LoginPage = () =>
     var obj = {user:signinUsername.value, password:signinPassword.value};
 
     // Check for any empty fields
-    if (obj.user === "" && obj.password === "") {setMessageSignin("* Please enter your username and password *"); return;}
+    if (obj.user === "" && obj.password == "") {setMessageSignin("* Please enter your username and password *"); return;}
     if (obj.user === "") {setMessageSignin("* Please enter your username *"); return;}
     if (obj.password === "") {setMessageSignin("* Please enter your password *"); return;}
 
@@ -37,6 +37,10 @@ const LoginPage = () =>
       if (res._id <= 0)
       {
         setMessageSignin("* Username or password is incorrect *");
+      }
+      if(res.verified==false){
+        setMessageSignin("* this account has yet to be verified resending email now *");
+        await fetch(bp.buildPath("api/emailVerification"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
       }
       // If sign in is valid, store the user's information in local storage and redirect to the home page
       else
