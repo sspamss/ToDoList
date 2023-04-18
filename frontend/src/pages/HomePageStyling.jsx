@@ -20,6 +20,18 @@ const HomePageStyling = () => {
               text-align: center;
             }
 
+            /* Setting and styling the username at the top of the webpage */
+            #usernameStyling {
+              color: #000000;
+              font-family: 'Fredoka One', sans-serif;
+              font-size: 20pt;
+              position: absolute;
+              text-align: center;
+
+              top: 25.5px;
+              transform: translate(-50%, -50%);
+            }
+
             /* Setting the logout button */
             #signoutButton {
               background-color: #9736C5;
