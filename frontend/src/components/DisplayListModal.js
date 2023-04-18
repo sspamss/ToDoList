@@ -28,12 +28,15 @@ const DisplayListModal = ({isOpen, onRequestClose, onCreateList}) => {
 
   // Function that keeps track of which lists the user wants
   const handleCreateList = () => {
-    const lists = [];
+    var lists = "Personal"
+    
+    if (personalChecked) lists = "Personal";
 
-    if (personalChecked) lists.push("personal");
-    if (schoolChecked) lists.push("school");
-    if (workChecked) lists.push("work");
-  
+    if (schoolChecked) lists = "School";
+
+    if (workChecked) lists = "Work";
+    
+
     if (lists.length === 0) {setMessage("Please select at least one list.");}
     else {onCreateList(lists);}
   };
@@ -43,25 +46,25 @@ const DisplayListModal = ({isOpen, onRequestClose, onCreateList}) => {
     <div>
       <DisplayListModalStyling/>
       <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
-        <text id="createAList">DISPLAY A LIST</text>
-        <text id="createAListInstructions">Available lists to choose:</text>
-        <button id="closePopUp" className="modal-close" onClick={onRequestClose}>X</button>
-        <div id="listOptions">
-          <div>
-            <input id="personalOption" type="checkbox" checked={personalChecked} onChange={() => setPersonalChecked(!personalChecked)}/>
-            <label for="personalOption" id="personalLabel">Personal</label>
-          </div>
-          <div>
-            <input id="schoolOption" type="checkbox" checked={schoolChecked} onChange={() => setSchoolChecked(!schoolChecked)}/>
-            <label for="schoolOption" id="schoolLabel">School</label>
-          </div>
-          <div>
-            <input id="workOption" type="checkbox" checked={workChecked} onChange={() => setWorkChecked(!workChecked)}/>
-            <label for="workOption" id="workLabel">Work</label>
-          </div>
+      <text id="createAList">DISPLAY A LIST</text>
+      <text id="createAListInstructions">Available lists to choose:</text>
+      <button id="closePopUp" className="modal-close" onClick={onRequestClose}>X</button>
+      <div id="listOptions">
+        <div>
+          <input id="personalOption" type="radio" name="listOption" checked={personalChecked} onChange={() => {setPersonalChecked(true);setSchoolChecked(false);setWorkChecked(false);}}/>
+          <label for="personalOption" id="personalLabel">Personal</label>
         </div>
-        <span id="errorMessagePopUp" class="w-100 text-center"> {message}</span>
-        <button id="createListPopUpButton" onClick={handleCreateList}>DISPLAY LIST</button>
+        <div>
+          <input id="schoolOption" type="radio" name="listOption" checked={schoolChecked} onChange={() => {setPersonalChecked(false);setSchoolChecked(true);setWorkChecked(false);}}/>
+          <label for="schoolOption" id="schoolLabel">School</label>
+        </div>
+        <div>
+          <input id="workOption" type="radio" name="listOption" checked={workChecked} onChange={() => {setPersonalChecked(false);setSchoolChecked(false);setWorkChecked(true);}}/>
+          <label for="workOption" id="workLabel">Work</label>
+        </div>
+      </div>
+      <span id="errorMessagePopUp" class="w-100 text-center"> {message}</span>
+      <button id="createListPopUpButton" onClick={handleCreateList}>DISPLAY LIST</button>
       </Modal>
     </div>
   );
