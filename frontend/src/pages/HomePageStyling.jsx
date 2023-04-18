@@ -108,6 +108,7 @@ const HomePageStyling = () => {
             #createListButton {
               background-color: #9736C5;
               color: #FFFFFF;
+              cursor: pointer;
               border: none;
               border-radius: 6px;
               font-size: 12pt;
