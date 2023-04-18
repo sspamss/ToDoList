@@ -49,6 +49,38 @@ const HomePage = () =>
   }; 
 
   // Function that handles the user queries
+  const searchTaskCategory = async event => 
+  {
+    event.preventDefault();
+    let obj = {user:user.user, search:"Personal"};
+    
+    var js = JSON.stringify(obj);
+
+    // Send the query to the backend and check if the query is valid
+    try
+    {
+      const response = await fetch(bp.buildPath("api/searchCategory"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+      let txt = await response.text(), res = JSON.parse(txt);
+      
+      //setMessage(""); 
+      //setMessage("* Task(s) have been found *");
+      //setCardList(resultText);
+      if (res.error.length > 0) {setMessage("API Error: " + res.error);}
+      else {
+        // This is the 2d array that holds the results. you can do taskArray[0] to see the first entry, taskArray[1] for the next, etc
+        // Can also do taskArray[0][0]
+        let taskArray = res.results;
+        //setMessage(taskArray[0][0]);
+       }
+    }
+    catch(e)
+    {
+      setMessage(""); 
+      alert(e.toString());
+      setMessage(e.toString());
+    }
+  };
+  
   const searchTask = async event => 
   {
     event.preventDefault();
