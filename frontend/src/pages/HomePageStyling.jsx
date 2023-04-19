@@ -170,12 +170,17 @@ const HomePageStyling = () => {
               font-family: Arial, Helvetica, sans-serif;
               border-collapse: collapse;
               width: 50%;
+              border-radius: 30px;
+              overflow: hidden;
+              margin-bottom: 100px;
             }
             
             th, td {
-              width: 50%;
               border: 1px solid #ddd;
-             padding: 8px;
+              padding: 8px;
+              max-width: 200px;
+              word-wrap: break-word;
+              background-color: #F2F1E8;
             }
             
             th {
@@ -185,6 +190,14 @@ const HomePageStyling = () => {
               background-color: #AB6DC9;
               color: white;
             }
+            tr:last-child td:first-child {
+              border-bottom-left-radius: 30px;
+            }
+            
+            tr:last-child td:last-child {
+              border-bottom-right-radius: 30px;
+            }
+            
           </style>
           <!-- End Login Form -->
         `
