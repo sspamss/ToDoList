@@ -197,8 +197,8 @@ app.post('/api/emailVerification', async (req, res) => {
       message = `Hi! There, You have recently visited  
       our website and entered your email. 
       Please follow the given link to verify your email
-     'https://thefridgelist.herokuapp.com/verify?token=${cc}  
-     Thanks` 
+      https://thefridgelist.herokuapp.com/verify?token=${cc}   
+      Thanks` 
   }
     // If the app is in development, use the localhost link
     else {
