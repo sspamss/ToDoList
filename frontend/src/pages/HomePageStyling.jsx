@@ -15,6 +15,7 @@ const HomePageStyling = () => {
               background-position: center;
               background-repeat: no-repeat;
               background-size: cover;
+              margin-bottom: 100px;
               text-align: center;
             }
 
@@ -55,7 +56,7 @@ const HomePageStyling = () => {
             #todolisticon {
               margin-top: 3em;
               position: center;
-              width: 400px;
+              width: 350px;
             }
 
             /* Setting and styling the search bar */
@@ -182,6 +183,15 @@ const HomePageStyling = () => {
             #createTaskButton:hover {
               background-color: #AB6DC9;
             }
+
+            /* Setting and styling the selected list from "DISPLAY LIST" */
+            #selectedList {
+              color: #000000;
+              font-family: 'Fredoka One', sans-serif;
+              font-size: 25pt;
+              text-transform: uppercase;
+            }
+
             /* Styling the error message (if there is one) */
             #errorMessage {
               color: #FF0000;
@@ -193,40 +203,101 @@ const HomePageStyling = () => {
               white-space: nowrap;
             }
 
-            
-            table {
-              margin: 0 auto;
-              font-family: Arial, Helvetica, sans-serif;
-              border-collapse: collapse;
-              width: 50%;
-              border-radius: 30px;
-              overflow: hidden;
-              margin-bottom: 100px;
+            /* Setting and styling the edit button */
+            #editTaskButton {
+              background-color: #9736C5;
+              border: none;
+              border-radius: 6px;
+              color: #FFFFFF;
+              cursor: pointer;
+              font-family: 'Fredoka One', sans-serif;
+              font-size: 12pt;
+
+              height: 30px;
+              width: 105px;
             }
-            
-            th, td {
-              border: 1px solid #ddd;
-              padding: 8px;
-              max-width: 200px;
-              word-wrap: break-word;
-              background-color: #F2F1E8;
-            }
-            
-            th {
-              padding-top: 12px;
-              padding-bottom: 12px;
-              text-align: center;
+            /* Changing the Edit Tasks button color when hovered over */
+            #editTaskButton:hover {
               background-color: #AB6DC9;
-              color: white;
             }
-            tr:last-child td:first-child {
-              border-bottom-left-radius: 30px;
+
+            /* Setting and styling the left table title */
+            #tableTask {
+              background-color: #9736C5;
+              border: 1px solid #DDDDDD;
+              border-radius: 15px 0px 0px 0px;
+              color: #FFFFFF;
+              font-family: 'Fredoka One', sans-serif;
+              padding-top: 1em;
+              padding-bottom: 1em;
+              text-align: center;
             }
+            /* Setting and styling the middle table title */
+            #tableTime {
+              background-color: #9736C5;
+              border: 1px solid #DDDDDD;
+              color: #FFFFFF;
+              font-family: 'Fredoka One', sans-serif;
+              padding-top: 1em;
+              padding-bottom: 1em;
+              text-align: center;
+
+              width: 100px;
+
+            }
+            /* Setting and styling the right table title */
+            #tableActions {
+              background-color: #9736C5;
+              border: 1px solid #DDDDDD;
+              border-radius: 0px 15px 0px 0px;
+              color: #FFFFFF;
+              font-family: 'Fredoka One', sans-serif;
+              padding-top: 1em;
+              padding-bottom: 1em;
+              text-align: center;
+
+              width: 100px;
+            }
+
+            /* Setting and styling the table with the tasks */
+            #table {
+              border-collapse: separate;
+              border-radius: 15px;
+              border-spacing: 0em;
+              font-family: 'Inter', sans-serif;
+              margin-bottom: 20px;
+              margin-left: auto;
+              margin-right: auto;
+              overflow-y: auto;
+
+              width: 100%;
+              max-width: 1000px;
+            }
+            /* Applying different styles when the screen width is less than 1000px */
+            @media (max-width: 1000px) {
+              #table {
+                width: 92%;
+              }
+            }            
             
-            tr:last-child td:last-child {
-              border-bottom-right-radius: 30px;
+            /* Setting and styling the table outlines */
+            #tableOutlines {
+              border: 1px solid #DDDDDD;
             }
-            
+
+            /* #Table is being stubborn so we make a fake div to make a space at the bottom of the webpage */
+            #makeFakeSpace {
+              height: 1px;
+            }
+
+            /* Setting and styling the "BACK TO TOP" button */
+            #scrollToTopButton {
+              position: fixed;
+              bottom: 20px;
+              right: 0;
+              z-index: 9999;
+            }
+
           </style>
           <!-- End Login Form -->
         `
