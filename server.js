@@ -388,28 +388,25 @@ app.listen(PORT, () =>
   console.log('Server listening on port ' + PORT);
 });
 
-app.get('/verify', async (req, res)=>{ 
-  const {token} = req.query;
-  const user = {verified:false, confirmationCode: token};
-  const db = client.db("Fridge");
-  const results = await db.collection('Users').find({confirmationCode:token}).toArray();
-  const replaceUser = {confirmationCode:token, verified:true};
+app.get('/verify', async (request, response) => {
+  const {token } = request.query;
 
+  try {
+    const db = client.db("Fridge");
 
-  // Verifying the JWT token  
-  jwt.verify(token, 'ourSecretKey', function(err, decoded) { 
-      if (err) { 
-        console.log(err); 
-        res.send("Email verification failed, possibly the link is invalid or expired");
-      } 
-      else {
-        res.send("Email verified successfully"); 
-        console.log("account verified");
-        try {
-          client.db("Fridge"); db.collection('Users').updateOne(results[0],{$set:replaceUser});
-          return response.redirect('https://thefridgelist.herokuapp.com/home');
-        }
-        catch(e) {error = e.toString();}
-    } 
-  }); 
-}); 
+    const user = await db.collection('Users').findOneAndUpdate(
+      { confirmationCode: token },
+      { $set: { verified: true }},
+    );
+
+    if (!user.value) {
+      return response.status(400).json({ error: 'Invalid verification token' });
+    }
+
+    return response.redirect('https://thefridgelist.herokuapp.com');
+
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ error: 'Server error' });
+  }
+});
