@@ -3,10 +3,12 @@ import ForgotPasswordPageStyling from './ForgotPasswordPageStyling';
 import WingedEmail from '../graphics/WingedEmail.png';
 
 // Function to handle the login page
-const emailVerificationPage = () =>
+const EmailVerificationPage = () =>
 {
   let bp = require("./LoginPagePath.js");
   var confirmationCode;
+
+  const [message,setMessage] = useState("");
 
   const doForgotPassword = async event => {
     event.preventDefault();
@@ -15,16 +17,20 @@ const emailVerificationPage = () =>
 
     var js = JSON.stringify(obj);
 
+    if (obj.confirmationCode === "") {setMessage("* Please enter your confirmationCode *"); return;}
+
     const response = await fetch(bp.buildPath('api/validCode'),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
     var res = JSON.parse(await response.text());
 
     if (res._id <= 0){
+      setMessage("* Please enter a valid confirmationCode *");
       return;
     }
 
     else{
       await fetch(bp.buildPath('api/updateCode'), {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
-
+      setMessage(<span id="successMessagePopUp">* Email has been verified for *</span>);
+      return;
     }
   };
 
@@ -46,6 +52,7 @@ const emailVerificationPage = () =>
             <div class="form-group">
               <img id="wingedEmail" src={WingedEmail} alt="Winged Email"/>
             </div>
+              <span id="errorMessage" class="w-100 text-center" style={{color: "#FF0000"}}> {message}</span>
               <input id="resetPasswordButton" type="submit" class="form-controlL btn-danger submit col-md-12" value="Verify Email" onClick={doForgotPassword}/>
           </form>
         </div>
@@ -54,4 +61,4 @@ const emailVerificationPage = () =>
   );
 };
 
-export default emailVerificationPage;
+export default EmailVerificationPage;
