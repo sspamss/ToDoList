@@ -15,6 +15,7 @@ function App() {
         <Route exact path="/" component={ToggleSlider}/>
         <Route exact path="/forgot-password" component={ForgotPasswordPage}/>
         <Route exact path="/home" component={HomePage}/>
+        <Route exact path="/verify" component={ToggleSlider}/>
       </Switch>
     </Router>
   );
