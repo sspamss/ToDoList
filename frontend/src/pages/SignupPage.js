@@ -66,13 +66,13 @@ const SignupPage = () =>
       if (res.error.length > 0) {setMessageSignup(res.error); return;}
       else
       {
-        setMessageSignup("* Account created successfully...redirecting to sign in *");
+        setMessageSignup(<span id="successMessagePopUp">* Account created successfully, email verification sent *</span>);
 
         const user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
         localStorage.setItem('user_data', JSON.stringify(user));
         
         // Pause for 3 seconds before redirecting to the home page
-        setTimeout(() => {window.location.href = '/';}, 3000);
+        setTimeout(() => {window.location.href = '/';}, 5000);
       }
     }
     catch(e)

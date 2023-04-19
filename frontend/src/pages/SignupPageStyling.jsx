@@ -232,6 +232,12 @@ const LoginPageStyling = () => {
             white-space: nowrap;
           }
 
+          /* Styling “Account created successfully" message */
+          #successMessagePopUp {
+            color: #008000;
+          }
+
+
           /* Setting and styling the "SIGN IN" button */
           #signupButton {
             background-color: #9736C5;
