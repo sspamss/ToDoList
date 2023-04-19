@@ -12,6 +12,7 @@ const BackToTopButtonStyling = () => {
         border-radius: 6px;
         bottom: 20px;
         color: #FFFFFF;
+        cursor: pointer;
         font-family: 'Fredoka One', sans-serif;
         font-size: 20pt;
         position: fixed;
