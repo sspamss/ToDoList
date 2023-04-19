@@ -4,39 +4,50 @@ import DisplayListModal from '../components/DisplayListModal';
 import HomePageStyling from './HomePageStyling';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import {useHistory} from 'react-router-dom';
+import EditTaskModal from '../components/EditTaskModal';
 
 // Function to handle the home page
-function renderTable(filteredArray, deleteTask, message)
-{
-  return(
-    <div id="taskTable">
-            <span id="errorMessage">{message}</span>
-          <table>
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Time</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredArray.slice(0,filteredArray.length).map((item,index) => {
-                return(
-                  <tr>
-                    <td>{item[0]}</td>
-                    <td>{item[1]}</td>
-                    <td><button id="deleteTaskButton" class="buttons" type="button" onClick={(event)=>deleteTask(event,item)}>DELETE</button></td>
-                  </tr>
-                )
-              })}
-            </tbody> 
-          </table>
-          </div> );
-}
 
 const HomePage = () =>
 {
 
+  function renderTable(filteredArray, deleteTask,  message)
+  {
+    return(
+      <div id="taskTable">
+              <span id="errorMessage">{message}</span>
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredArray.slice(0,filteredArray.length).map((item,index) => {
+                  return(
+                    <tr>
+                      <td>{item[0]}</td>
+                      <td>{item[1]}</td>
+                      <td><button id="editTaskButton" class="buttons" type="button" onClick={(event)=>setEditTaskOpen(event,item)}>EDIT</button>
+                      <br />
+                        <button id="deleteTaskButton" class="buttons" type="button" onClick={(event)=>deleteTask(event,item)}>DELETE</button></td>
+                        {isEditTaskOpen && (
+                          <EditTaskModal 
+                            isOpen={isEditTaskOpen} 
+                            onRequestClose={() => setEditTaskOpen(false)} 
+                            onEditTask={handleEditTask}
+                            tasks={tasks}
+                          />
+                        )}
+                    </tr>
+                  )
+                })}
+              </tbody> 
+            </table>
+            </div> );
+  }
   
   let bp = require('./LoginPagePath.js');
 
@@ -51,6 +62,8 @@ const HomePage = () =>
   const [selectedTask, setSelectedTask] = useState("");
   const [array,setArray] = useState([]);
   const [filteredArray,setFilteredArray] = useState([]);
+  const [isEditTaskOpen,setEditTaskOpen] = useState("");
+
 
   useEffect(()=>{
     searchTaskCategory({preventDefault:() => {}});
@@ -81,6 +94,12 @@ const HomePage = () =>
 
   // Function that creates a new object with the selected task name and push it into the tasks array
   const handleCreateTask = (taskName) => {
+    setTasks(prevTasks => [...prevTasks, {name: taskName}]);
+    setSelectedTask(taskName);
+    setIsCreateTaskOpen(false);
+  }; 
+
+  const handleEditTask = (taskName) => {
     setTasks(prevTasks => [...prevTasks, {name: taskName}]);
     setSelectedTask(taskName);
     setIsCreateTaskOpen(false);
@@ -216,6 +235,41 @@ const HomePage = () =>
         setMessage(e.toString());
       }
     }
+
+    // const editTask = async (event, item) => 
+    // {
+    //   event.preventDefault();
+    //   let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
+  
+     
+    //   var js = JSON.stringify(obj);
+  
+    //   // Send the query to the backend and check if the query is valid
+    //   try
+    //   {
+    //     const response = await fetch(bp.buildPath("api/editTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+    //     let txt = await response.text(), res = JSON.parse(txt);
+       
+  
+    //     if(res.error != "")
+    //     {
+    //       setMessage(res.error)
+    //     }
+    //     else{
+    //       const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
+    //       const newAllTasks = array.filter((t) => t[0] !== item[0]);
+    //       setFilteredArray(newFilteredTasks)
+    //       setArray(newAllTasks);
+    //       renderTable(filteredArray,deleteTask,message);
+    //     }
+    //   }
+    //   catch(e)
+    //   {
+    //     setMessage(""); 
+    //     alert(e.toString());
+    //     setMessage(e.toString());
+    //   }
+    // }
       
     };
   return (
@@ -236,7 +290,7 @@ const HomePage = () =>
         <div class="form-group">
           <button id="createListButton" onClick={() => setIsCreateListOpen(true)}>DISPLAY LIST</button>
           <button id="createTaskButton" onClick={() => setIsCreateTaskOpen(true)}>CREATE TASK</button>
-          <button id="editTaskButton" class="buttons" type="button">EDIT TASK</button>
+          
         </div>
         
         {isCreateListOpen && (

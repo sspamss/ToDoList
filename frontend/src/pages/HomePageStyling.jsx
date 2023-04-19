@@ -95,6 +95,8 @@ const HomePageStyling = () => {
               height: 30px;
               width: 85px;
             }
+
+            
             #deleteTaskButton {
               color: #FFFFFF;
               background-color: #9736C5;
@@ -110,6 +112,34 @@ const HomePageStyling = () => {
               height: 30px;
               width: 85px;
             }
+
+            /* Changing the Delete Task button color when hovered over */
+            #deleteTaskButton:hover {
+              background-color: #AB6DC9;
+            }
+
+            /* Styling Edit Task button */
+            #editTaskButton {
+              color: #FFFFFF;
+              background-color: #9736C5;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              font-family: 'Fredoka One', sans-serif;
+              font-size: 12pt;
+              margin-bottom: 0.5em;
+              margin-top: 0.5em;
+              text-align: center;
+
+              height: 30px;
+              width: 85px;
+            }
+
+            /* Changing the Edit Task button color when hovered over */
+            #editTaskButton:hover {
+              background-color: #AB6DC9;
+            }
+
             /* Changing the Search Task button color when hovered over */
             #searchTaskButton:hover {
               background-color: #AB6DC9;
@@ -163,23 +193,7 @@ const HomePageStyling = () => {
               white-space: nowrap;
             }
 
-            /* Setting and styling the edit button */
-            #editTaskButton {
-              background-color: #9736C5;
-              border: none;
-              border-radius: 6px;
-              color: #FFFFFF;
-              cursor: pointer;
-              font-size: 12pt;
-              font-family: 'Fredoka One', sans-serif;
-
-              height: 30px;
-              width: 105px;
-            }
-            /* Changing the Edit Tasks button color when hovered over */
-            #editTaskButton:hover {
-              background-color: #AB6DC9;
-            }
+            
             table {
               margin: 0 auto;
               font-family: Arial, Helvetica, sans-serif;
