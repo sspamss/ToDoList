@@ -6,7 +6,7 @@ import EditTaskModal from '../components/EditTaskModal';
 import HomePageStyling from './HomePageStyling';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, faPencil} from '@fortawesome/free-solid-svg-icons';
 import {useHistory} from 'react-router-dom';
 
 const HomePage = () =>
@@ -32,8 +32,7 @@ const HomePage = () =>
                 <td id="tableOutlines">{item[0]}</td>
                 <td id="tableOutlines">{item[1]}</td>
                 <td id="tableOutlines">
-                  {/* Change the code below to edit task */}
-                  {/* <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/> */}
+                  <FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>editTask(event,item)}/>
                   <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/>
                 </td>
               </tr>
@@ -72,6 +71,7 @@ const HomePage = () =>
   // Get user data from local storage
   const user = JSON.parse(localStorage.getItem('user_data'));
 
+  // Function that handles the user query to delete a task
   const deleteTask = async (event, item) => 
   {
       const confirmed = window.confirm("Are you sure you want to delete this task?");
@@ -104,6 +104,12 @@ const HomePage = () =>
         setMessage(e.toString());
       }
     }
+  };
+
+  // Function that handles the user query to edit a task
+  const editTask = async (event, item) => 
+  {
+
   };
 
   // const editTask = async (event, item) => 
