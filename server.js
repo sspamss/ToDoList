@@ -405,7 +405,10 @@ app.get('/verify', async (req, res)=>{
       else {
         res.send("Email verified successfully"); 
         console.log("account verified");
-        try {client.db("Fridge"); db.collection('Users').updateOne(results[0],{$set:replaceUser});}
+        try {
+          client.db("Fridge"); db.collection('Users').updateOne(results[0],{$set:replaceUser});
+          return response.redirect('https://thefridgelist.herokuapp.com/home');
+        }
         catch(e) {error = e.toString();}
     } 
   }); 
