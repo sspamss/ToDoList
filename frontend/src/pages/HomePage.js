@@ -6,6 +6,33 @@ import ToDoIcon from '../graphics/ToDoIcon.png';
 import {useHistory} from 'react-router-dom';
 
 // Function to handle the home page
+function renderTable(filteredArray, deleteTask, message)
+{
+  return(
+    <div id="taskTable">
+            <span id="errorMessage">{message}</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Time</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredArray.slice(0,filteredArray.length).map((item,index) => {
+                return(
+                  <tr>
+                    <td>{item[0]}</td>
+                    <td>{item[1]}</td>
+                    <td><button id="deleteTaskButton" class="buttons" type="button" onClick={(event)=>deleteTask(event,item)}>DELETE</button></td>
+                  </tr>
+                )
+              })}
+            </tbody> 
+          </table>
+          </div> );
+}
 
 const HomePage = () =>
 {
@@ -34,6 +61,7 @@ const HomePage = () =>
   var search = '';
   var originalList = selectedList;
   var taskArray;
+  var delContent, delTime;
   // Get user data from local storage
   const user = JSON.parse(localStorage.getItem('user_data'));
 
@@ -152,6 +180,42 @@ const HomePage = () =>
      
     };
 
+    const deleteTask = async (event, item) => 
+    {
+      const confirmed = window.confirm("Are you sure you want to delete this task?");
+      if (confirmed){
+      event.preventDefault();
+      let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
+  
+     
+      var js = JSON.stringify(obj);
+  
+      // Send the query to the backend and check if the query is valid
+      try
+      {
+        const response = await fetch(bp.buildPath("api/delTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+        let txt = await response.text(), res = JSON.parse(txt);
+       
+  
+        if(res.error != "")
+        {
+          setMessage(res.error)
+        }
+        else{
+          const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
+          setFilteredArray(newFilteredTasks)
+          renderTable(filteredArray,deleteTask,message);
+        }
+      }
+      catch(e)
+      {
+        setMessage(""); 
+        alert(e.toString());
+        setMessage(e.toString());
+      }
+    }
+      
+    };
   return (
     <div>
       <HomePageStyling/>
@@ -190,37 +254,11 @@ const HomePage = () =>
             tasks={tasks}
           />
         )}
-        
-        <div id="taskTable">
-        <span id="errorMessage">{message}</span>
-       <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Time</th>
-            <th>Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-            {filteredArray.slice(0,filteredArray.length).map((item,index) => {
-              return(
-                <tr>
-                  <td>{item[0]}</td>
-                  <td>{item[1]}</td>
-                  <td><button id="searchTaskButton" class="buttons" type="button" onClick={"test"}>DELETE</button></td>
-                </tr>
-              )
-            })}
-          </tbody>
-        
-       </table>
+        <div>
+        {renderTable(filteredArray, deleteTask, message)}
         </div>
-        
-        
-
-       
-      </div>
     </div>
+  </div>
   );
 }
 
