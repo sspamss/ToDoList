@@ -67,6 +67,7 @@ const SignupPage = () =>
       else
       {
         setMessageSignup(<span id="successMessagePopUp">* Account created successfully, email verification sent *</span>);
+        await fetch(bp.buildPath("api/emailVerification"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
 
         const user = {firstName:res.firstName, lastName:res.lastName, email:res.email, user:res.user, password:res.password, id:res._id};
         localStorage.setItem('user_data', JSON.stringify(user));
