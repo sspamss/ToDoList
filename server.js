@@ -242,8 +242,9 @@ app.post('/api/emailVerification', async (req, res) => {
   if (process.env.NODE_ENV === 'production') {
       message = `Hi! There, You have recently visited  
       our website and entered your email. 
-      Please follow the given link to verify your email
-      <p>Thank you for signing up! Please <a href="https://thefridgelist.herokuapp.com/verify?token=${cc}">click here</a> to verify your email.</p>
+      Please copy the following code follow the given link to verify your email
+      code: ${cc}
+      Link: https://thefridgelist.herokuapp.com/verify?token=${cc}
       Thanks` 
   }
     // If the app is in development, use the localhost link
