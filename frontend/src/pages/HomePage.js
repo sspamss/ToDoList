@@ -6,6 +6,7 @@ import ToDoIcon from '../graphics/ToDoIcon.png';
 import {useHistory} from 'react-router-dom';
 
 // Function to handle the home page
+
 const HomePage = () =>
 {
 
@@ -21,6 +22,7 @@ const HomePage = () =>
   const [message,setMessage] = useState('');
   const [selectedList, setSelectedList] = useState("Personal");
   const [selectedTask, setSelectedTask] = useState("");
+  const [array,setArray] = useState([]);
   useEffect(()=>{
     searchTaskCategory({preventDefault:() => {}});
   }, [selectedList]);
@@ -29,6 +31,7 @@ const HomePage = () =>
   var newtaskContent = "", newtaskTime = "", newtaskCategory = ""; 
   var search = '';
   var originalList = selectedList;
+  var taskArray;
   // Get user data from local storage
   const user = JSON.parse(localStorage.getItem('user_data'));
 
@@ -70,12 +73,13 @@ const HomePage = () =>
       //setMessage(""); 
       //setMessage("* Task(s) have been found *");
       //setCardList(resultText);
-      if (res.error.length > 0) {setMessage("API Error: " + res.error);}
+      if (res.error.length > 0) {setMessage(res.error);}
       else {
         // This is the 2d array that holds the results. you can do taskArray[0] to see the first entry, taskArray[1] for the next, etc
         // Can also do taskArray[0][0]
-        let taskArray = res.results;
-        setMessage(taskArray);
+        taskArray = res.results;
+        setArray(res.results);
+        
        }
     }
     catch(e)
@@ -125,6 +129,8 @@ const HomePage = () =>
       alert(e.toString());
       setMessage(e.toString());
     }
+    
+    
   };
 
   return (
@@ -147,6 +153,7 @@ const HomePage = () =>
           <button id="createTaskButton" onClick={() => setIsCreateTaskOpen(true)}>CREATE TASK</button>
           <button id="editTaskButton" class="buttons" type="button">EDIT TASK</button>
         </div>
+        
         {isCreateListOpen && (
           <DisplayListModal 
             isOpen={isCreateListOpen} 
@@ -164,23 +171,33 @@ const HomePage = () =>
             tasks={tasks}
           />
         )}
-        <div className="list-container">
-          {lists.map((list) => (
-            <div key={list.name} className="list">
-              <div className="list-header">{}</div>
-              <div className="list-body">{/* insert list items here */}</div>
-            </div>
-          ))}
-        </div>
-        <div className="list-container">
-          {tasks.map((task) => (
-            <div key={task.name} className="task">
-              <div className="task-header">{task.name}</div>
-              <div className="task-body">{/* insert list items here */}</div>
-            </div>
-          ))}
-        </div>
+        
+        <div id="taskTable">
         <span id="errorMessage">{message}</span>
+       <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Time</th>
+          </tr>
+          </thead>
+          <tbody>
+            {array.slice(0,array.length).map((item,index) => {
+              return(
+                <tr>
+                  <td>{item[0]}</td>
+                  <td>{item[1]}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        
+       </table>
+        </div>
+        
+        
+
+       
       </div>
     </div>
   );

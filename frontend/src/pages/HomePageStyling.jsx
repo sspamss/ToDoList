@@ -142,7 +142,7 @@ const HomePageStyling = () => {
               color: #FF0000;
               font-size: 9pt;
               margin-top: 0.9em;
-              position: absolute;
+             
               top: 370px;
               transform: translateX(-50%);
               white-space: nowrap;
@@ -165,7 +165,26 @@ const HomePageStyling = () => {
             #editTaskButton:hover {
               background-color: #AB6DC9;
             }
-  
+            table {
+              margin: 0 auto;
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 50%;
+            }
+            
+            th, td {
+              width: 50%;
+              border: 1px solid #ddd;
+             padding: 8px;
+            }
+            
+            th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: center;
+              background-color: #AB6DC9;
+              color: white;
+            }
           </style>
           <!-- End Login Form -->
         `
