@@ -136,6 +136,52 @@ app.post('/api/valid', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+app.post('/api/validCode', async (req, res, next) => 
+{
+  const cc = req.body["confirmationCode"];
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find({confirmationCode:cc}).toArray();
+  var id = -1;
+  var fn = '';
+  var ln = '';
+  var em = '';
+
+  // The user must input at least one character in length for each field
+  if (results.length > 0)
+  {
+    id = results[0]._id;
+    fn = results[0].firstName;
+    ln = results[0].lastName;
+    em = results[0].email;
+  }
+
+  var ret = { _id:id, firstName:fn, lastName:ln, email:em, error:''};
+  console.log(ret);
+  res.status(200).json(ret);
+});
+
+app.post('/api/updateCode', async (req, res, next) =>
+{
+  const cc = req.body["confirmationCode"];
+  const db = client.db("Fridge");
+  const results = await db.collection('Users').find({confirmationCode:cc}).toArray();
+  const replaceUser = {confirmationCode:cc, verified:true};
+  var error = '';
+  console.log(results)
+  if (results.length == 1)
+  {
+    try {client.db("Fridge"); db.collection('Users').updateOne(results[0],{$set:replaceUser});}
+    catch(e) {error = e.toString();}
+  }
+  else
+  {
+    error = "You already added this task"
+  }
+
+  var ret = { error: error };
+  res.status(200).json(ret);
+});
+
 //api for sending emails
 app.post('/api/sendemail', async (req, res) => {
   const user = req.body["user"];
