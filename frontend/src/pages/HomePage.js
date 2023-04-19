@@ -6,49 +6,38 @@ import ToDoIcon from '../graphics/ToDoIcon.png';
 import {useHistory} from 'react-router-dom';
 import EditTaskModal from '../components/EditTaskModal';
 
-// Function to handle the home page
-
 const HomePage = () =>
 {
-
-  function renderTable(filteredArray, deleteTask,  message)
+  // Function to handle the task table
+  function renderTable(filteredArray, deleteTask, message)
   {
-    return(
+    return (
       <div id="taskTable">
-              <span id="errorMessage">{message}</span>
-            <table>
-              <thead>
-                <tr>
-                  <th>Task</th>
-                  <th>Time</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredArray.slice(0,filteredArray.length).map((item,index) => {
-                  return(
-                    <tr>
-                      <td>{item[0]}</td>
-                      <td>{item[1]}</td>
-                      <td><button id="editTaskButton" class="buttons" type="button" onClick={(event)=>setEditTaskOpen(event,item)}>EDIT</button>
-                      <br />
-                        <button id="deleteTaskButton" class="buttons" type="button" onClick={(event)=>deleteTask(event,item)}>DELETE</button></td>
-                        {isEditTaskOpen && (
-                          <EditTaskModal 
-                            isOpen={isEditTaskOpen} 
-                            onRequestClose={() => setEditTaskOpen(false)} 
-                            onEditTask={handleEditTask}
-                            tasks={tasks}
-                          />
-                        )}
-                    </tr>
-                  )
-                })}
-              </tbody> 
-            </table>
-            </div> );
+        <span id="errorMessage">{message}</span>
+        <table id="table">
+          <thead>
+            <tr>
+              <th id="tableTask" style={{fontWeight: 'normal'}}>TASK</th>
+              <th id="tableTime" style={{fontWeight: 'normal'}}>TIME</th>
+              <th id="tableActions" style={{fontWeight: 'normal'}}>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredArray.slice(0,filteredArray.length).map((item,index) => {
+            return (
+              <tr>
+                <td id="tableOutlines">{item[0]}</td>
+                <td id="tableOutlines">{item[1]}</td>
+                <td id="tableOutlines"><button id="deleteTaskButton" class="buttons" type="button" onClick={(event)=>deleteTask(event,item)}>DELETE</button></td>
+              </tr>
+              )
+            })}
+          </tbody> 
+        </table>
+      </div>
+    );
   }
-  
+
   let bp = require('./LoginPagePath.js');
 
   const history = useHistory();
@@ -60,14 +49,24 @@ const HomePage = () =>
   const [message,setMessage] = useState('');
   const [selectedList, setSelectedList] = useState("Personal");
   const [selectedTask, setSelectedTask] = useState("");
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
   const [array,setArray] = useState([]);
   const [filteredArray,setFilteredArray] = useState([]);
   const [isEditTaskOpen,setEditTaskOpen] = useState("");
 
-
-  useEffect(()=>{
-    searchTaskCategory({preventDefault:() => {}});
+  // If the user scrolls down far enough, this button will appear, it scrolls the user back to the top of the page
+  useEffect(() => {const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const selectedListElement = document.getElementById(selectedList);
+      const showButton = scrollTop >= selectedListElement.offsetTop;
+      setShowScrollToTopButton(showButton);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {window.removeEventListener('scroll', handleScroll);};
   }, [selectedList]);
+  
+  // Function that handles the user queries
+  useEffect(()=>{searchTaskCategory({preventDefault:() => {}});}, [selectedList]);
   
   let _ud = localStorage.getItem('user_data'), ud = JSON.parse(_ud), userId = ud.id;
   var newtaskContent = "", newtaskTime = "", newtaskCategory = ""; 
@@ -99,18 +98,17 @@ const HomePage = () =>
     setIsCreateTaskOpen(false);
   }; 
 
-  const handleEditTask = (taskName) => {
-    setTasks(prevTasks => [...prevTasks, {name: taskName}]);
-    setSelectedTask(taskName);
-    setIsCreateTaskOpen(false);
-  }; 
+  // const handleEditTask = (taskName) => {
+  //   setTasks(prevTasks => [...prevTasks, {name: taskName}]);
+  //   setSelectedTask(taskName);
+  //   setIsCreateTaskOpen(false);
+  // }; 
 
   // Function that handles the user queries
   const searchTaskCategory = async event => 
   {
     event.preventDefault();
     let obj = {user:user.user, search:selectedList};
-    
     var js = JSON.stringify(obj);
 
     // Send the query to the backend and check if the query is valid
@@ -119,13 +117,9 @@ const HomePage = () =>
       const response = await fetch(bp.buildPath("api/searchCategory"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
       let txt = await response.text(), res = JSON.parse(txt);
       
-      //setMessage(""); 
-      //setMessage("* Task(s) have been found *");
-      //setCardList(resultText);
       if (res.error.length > 0) {setMessage(res.error);}
-      else {
-        // This is the 2d array that holds the results. you can do taskArray[0] to see the first entry, taskArray[1] for the next, etc
-        // Can also do taskArray[0][0]
+      else
+      {
         taskArray = res.results;
         setArray(res.results);
         setFilteredArray(res.results);
@@ -178,35 +172,21 @@ const HomePage = () =>
       alert(e.toString());
       setMessage(e.toString());
     }
-    
-    
   };
-  const onSiteSearch = async event => 
-    {
-      event.preventDefault();
-      let obj = {user:user.user, search:search.value};
-      /*if (obj.search === "")
-      {
-        setMessage("* Please type at least one character *");
-        return;
-      }*/
-      
-       const filteringarray = array.filter((row)=>
-        row[0].toLowerCase().includes(obj.search.toLowerCase())
-      );
-      setFilteredArray(filteringarray);
-      // setMessage(filteredArray);
-     
-    };
 
-    const deleteTask = async (event, item) => 
-    {
+  const onSiteSearch = async event => 
+  {
+    event.preventDefault();
+    let obj = {user:user.user, search:search.value};
+    const filteringarray = array.filter((row)=> row[0].toLowerCase().includes(obj.search.toLowerCase()));
+    setFilteredArray(filteringarray);     
+  };
+
+  const deleteTask = async (event, item) => 
+  {
       const confirmed = window.confirm("Are you sure you want to delete this task?");
-      if (confirmed){
-      event.preventDefault();
+      if (confirmed) {event.preventDefault();
       let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
-  
-     
       var js = JSON.stringify(obj);
   
       // Send the query to the backend and check if the query is valid
@@ -214,7 +194,6 @@ const HomePage = () =>
       {
         const response = await fetch(bp.buildPath("api/delTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
         let txt = await response.text(), res = JSON.parse(txt);
-       
   
         if(res.error != "")
         {
@@ -271,7 +250,9 @@ const HomePage = () =>
     //   }
     // }
       
-    };
+  };
+
+  // Returns the content of the home page
   return (
     <div>
       <HomePageStyling/>
@@ -290,9 +271,10 @@ const HomePage = () =>
         <div class="form-group">
           <button id="createListButton" onClick={() => setIsCreateListOpen(true)}>DISPLAY LIST</button>
           <button id="createTaskButton" onClick={() => setIsCreateTaskOpen(true)}>CREATE TASK</button>
-          
         </div>
+        <text id="selectedList">{selectedList}</text>
         
+        {/* Show the "DISPLAY LIST" pop up */}
         {isCreateListOpen && (
           <DisplayListModal 
             isOpen={isCreateListOpen} 
@@ -301,7 +283,7 @@ const HomePage = () =>
             lists={lists}
           />
         )}
-        <div><p>{selectedList}</p></div>
+        {/* Show the "CREATE TASK" pop up */}
         {isCreateTaskOpen && (
           <CreateTaskModal 
             isOpen={isCreateTaskOpen} 
@@ -310,11 +292,16 @@ const HomePage = () =>
             tasks={tasks}
           />
         )}
-        <div>
-        {renderTable(filteredArray, deleteTask, message)}
-        </div>
+
+        {/* Show the "BACK TO TOP" */}
+        {showScrollToTopButton && (
+          <button id="scrollToTopButton" onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</button>
+        )}
+
+        <div>{renderTable(filteredArray, deleteTask, message)}</div>
+        <div id="makeFakeSpace"></div>
+      </div>
     </div>
-  </div>
   );
 }
 
