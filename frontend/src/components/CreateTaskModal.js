@@ -71,7 +71,7 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
       <CreateTaskModalStyling/>
       <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
         <text id="createAList">CREATE A TASK</text>
-        <button id="closePopUp" className="modal-close" onClick={onRequestClose}>X</button>
+        <button id="closePopUp" className="modal-close" onClick={() => {onRequestClose(); window.location.reload();}}>X</button>
         <div>
           <input id="tasknameField" type="text" class="form-control col-md-12" placeholder="TASK NAME" ref={(c) => (createTaskName = c)}/>
         </div>
