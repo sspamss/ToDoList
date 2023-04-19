@@ -203,7 +203,9 @@ const HomePage = () =>
         }
         else{
           const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
+          const newAllTasks = array.filter((t) => t[0] !== item[0]);
           setFilteredArray(newFilteredTasks)
+          setArray(newAllTasks);
           renderTable(filteredArray,deleteTask,message);
         }
       }
