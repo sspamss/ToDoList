@@ -1,10 +1,12 @@
 import React, {useState,useEffect} from 'react';
 import CreateTaskModal from '../components/CreateTaskModal';
 import DisplayListModal from '../components/DisplayListModal';
+import EditTaskModal from '../components/EditTaskModal';
 import HomePageStyling from './HomePageStyling';
 import ToDoIcon from '../graphics/ToDoIcon.png';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {useHistory} from 'react-router-dom';
-import EditTaskModal from '../components/EditTaskModal';
 
 const HomePage = () =>
 {
@@ -28,7 +30,11 @@ const HomePage = () =>
               <tr>
                 <td id="tableOutlines">{item[0]}</td>
                 <td id="tableOutlines">{item[1]}</td>
-                <td id="tableOutlines"><button id="deleteTaskButton" class="buttons" type="button" onClick={(event)=>deleteTask(event,item)}>DELETE</button></td>
+                <td id="tableOutlines">
+                  {/* Change the code below to edit task */}
+                  {/* <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/> */}
+                  <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/>
+                </td>
               </tr>
               )
             })}
