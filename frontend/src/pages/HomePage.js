@@ -198,6 +198,7 @@ const HomePage = () =>
           <tr>
             <th>Task</th>
             <th>Time</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -206,6 +207,7 @@ const HomePage = () =>
                 <tr>
                   <td>{item[0]}</td>
                   <td>{item[1]}</td>
+                  <td><button id="searchTaskButton" class="buttons" type="button" onClick={"test"}>DELETE</button></td>
                 </tr>
               )
             })}

@@ -52,7 +52,7 @@ const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
       const response = await fetch(bp.buildPath("api/addTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
       let txt = await response.text(), res = JSON.parse(txt);
 
-      if (res.error.length > 0) {setMessage("API Error: " + res.error);}
+      if (res.error.length > 0) {setMessage(res.error);}
       else {setMessage(<span id="successMessagePopUp">* Task has been added *</span>);}
     }
     catch(e)

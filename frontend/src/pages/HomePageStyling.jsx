@@ -95,6 +95,21 @@ const HomePageStyling = () => {
               height: 30px;
               width: 85px;
             }
+            #deleteTaskButton {
+              color: #FFFFFF;
+              background-color: #9736C5;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              font-family: 'Fredoka One', sans-serif;
+              font-size: 12pt;
+              margin-bottom: 0.5em;
+              margin-top: 0.5em;
+              text-align: center;
+
+              height: 30px;
+              width: 85px;
+            }
             /* Changing the Search Task button color when hovered over */
             #searchTaskButton:hover {
               background-color: #AB6DC9;
