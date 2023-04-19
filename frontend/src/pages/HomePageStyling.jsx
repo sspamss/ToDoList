@@ -97,7 +97,6 @@ const HomePageStyling = () => {
               width: 85px;
             }
 
-            
             #deleteTaskButton {
               color: #FFFFFF;
               background-color: #9736C5;
@@ -105,19 +104,22 @@ const HomePageStyling = () => {
               border-radius: 6px;
               cursor: pointer;
               font-family: 'Fredoka One', sans-serif;
-              font-size: 12pt;
-              margin-bottom: 0.5em;
-              margin-top: 0.5em;
+              font-size: 1pt;
+              margin-left: 3em;
+              margin-right: 3em;
+              margin-top: 2.5em;
+              padding-bottom: 5em;
+              padding-top: 5em;
               text-align: center;
-
-              height: 30px;
-              width: 85px;
+              
+              height: 20px;
+              width: 40px;
             }
-
-            /* Changing the Delete Task button color when hovered over */
+            /* Changing the garbage can button color when hovered over */
             #deleteTaskButton:hover {
               background-color: #AB6DC9;
             }
+            
 
             /* Styling Edit Task button */
             #editTaskButton {
@@ -230,7 +232,6 @@ const HomePageStyling = () => {
               font-family: 'Fredoka One', sans-serif;
               padding-top: 1em;
               padding-bottom: 1em;
-              text-align: center;
             }
             /* Setting and styling the middle table title */
             #tableTime {
@@ -240,7 +241,6 @@ const HomePageStyling = () => {
               font-family: 'Fredoka One', sans-serif;
               padding-top: 1em;
               padding-bottom: 1em;
-              text-align: center;
 
               width: 100px;
 
@@ -254,7 +254,6 @@ const HomePageStyling = () => {
               font-family: 'Fredoka One', sans-serif;
               padding-top: 1em;
               padding-bottom: 1em;
-              text-align: center;
 
               width: 100px;
             }
