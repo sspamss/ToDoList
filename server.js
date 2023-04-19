@@ -60,8 +60,9 @@ app.post('/api/addUser', async (req, res, next) =>
   var error = '';
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({user:uid, password:pass}).toArray();
+  const results2 = await db.collection('Users').find({user:uid}).toArray();
   
-  if (results.length != 1)
+  if (results2.length != 1)
   {
     try {const db = client.db("Fridge"); const result = db.collection('Users').insertOne(newUser);}
     catch(e) {error = e.toString();}
