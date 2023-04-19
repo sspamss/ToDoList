@@ -197,7 +197,7 @@ app.post('/api/emailVerification', async (req, res) => {
       message = `Hi! There, You have recently visited  
       our website and entered your email. 
       Please follow the given link to verify your email
-     'https://thefridgelist.herokuapp.com/verify/${cc}
+     'https://thefridgelist.herokuapp.com/verify?token=${cc}  
      Thanks` 
   }
     // If the app is in development, use the localhost link
@@ -205,7 +205,7 @@ app.post('/api/emailVerification', async (req, res) => {
       message = `Hi! There, You have recently visited  
       our website and entered your email. 
       Please follow the given link to verify your email 
-      http://localhost:5050/verify/${cc}  
+      http://localhost:5050/verify?token=${cc}  
       Thanks` 
   }
   try {
@@ -388,12 +388,14 @@ app.listen(PORT, () =>
   console.log('Server listening on port ' + PORT);
 });
 
-app.get('/verify/:token', async (req, res)=>{ 
-  const {token} = req.params;
+app.get('/verify', async (req, res)=>{ 
+  const {token} = req.query;
   const user = {verified:false, confirmationCode: token};
   const db = client.db("Fridge");
   const results = await db.collection('Users').find({confirmationCode:token}).toArray();
   const replaceUser = {confirmationCode:token, verified:true};
+
+
   // Verifying the JWT token  
   jwt.verify(token, 'ourSecretKey', function(err, decoded) { 
       if (err) { 
@@ -407,4 +409,4 @@ app.get('/verify/:token', async (req, res)=>{
         catch(e) {error = e.toString();}
     } 
   }); 
-});
+}); 
