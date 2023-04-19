@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import CreateTaskModalStyling from "./CreateTaskModalStyling";
-import { Message } from './CreateTaskModalStyling';
 import Modal from "react-modal";
 
 const CreateTaskModal = ({isOpen, onRequestClose, onCreateTask}) =>
