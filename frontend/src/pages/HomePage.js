@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import BackToTopButton from '../components/BackToTopButton';
 import CreateTaskModal from '../components/CreateTaskModal';
 import DisplayListModal from '../components/DisplayListModal';
 import EditTaskModal from '../components/EditTaskModal';
@@ -55,21 +56,9 @@ const HomePage = () =>
   const [message,setMessage] = useState('');
   const [selectedList, setSelectedList] = useState("Personal");
   const [selectedTask, setSelectedTask] = useState("");
-  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
   const [array,setArray] = useState([]);
   const [filteredArray,setFilteredArray] = useState([]);
   const [isEditTaskOpen,setEditTaskOpen] = useState("");
-
-  // If the user scrolls down far enough, this button will appear, it scrolls the user back to the top of the page
-  useEffect(() => {const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const selectedListElement = document.getElementById(selectedList);
-      const showButton = scrollTop >= selectedListElement.offsetTop;
-      setShowScrollToTopButton(showButton);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {window.removeEventListener('scroll', handleScroll);};
-  }, [selectedList]);
   
   // Function that handles the user queries
   useEffect(()=>{searchTaskCategory({preventDefault:() => {}});}, [selectedList]);
@@ -83,12 +72,74 @@ const HomePage = () =>
   // Get user data from local storage
   const user = JSON.parse(localStorage.getItem('user_data'));
 
-  // Function that removes user session data from local storage then redirects to sign in page
-  const signout = () =>
+  const deleteTask = async (event, item) => 
   {
-    localStorage.removeItem('user_data');
-    history.replace('/');
+      const confirmed = window.confirm("Are you sure you want to delete this task?");
+      if (confirmed) {event.preventDefault();
+      let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
+      var js = JSON.stringify(obj);
+  
+      // Send the query to the backend and check if the query is valid
+      try
+      {
+        const response = await fetch(bp.buildPath("api/delTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+        let txt = await response.text(), res = JSON.parse(txt);
+  
+        if(res.error != "")
+        {
+          setMessage(res.error)
+        }
+        else{
+          const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
+          const newAllTasks = array.filter((t) => t[0] !== item[0]);
+          setFilteredArray(newFilteredTasks)
+          setArray(newAllTasks);
+          renderTable(filteredArray,deleteTask,message);
+        }
+      }
+      catch(e)
+      {
+        setMessage(""); 
+        alert(e.toString());
+        setMessage(e.toString());
+      }
+    }
   };
+
+  // const editTask = async (event, item) => 
+  // {
+  //   event.preventDefault();
+  //   let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
+
+    
+  //   var js = JSON.stringify(obj);
+
+  //   // Send the query to the backend and check if the query is valid
+  //   try
+  //   {
+  //     const response = await fetch(bp.buildPath("api/editTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
+  //     let txt = await response.text(), res = JSON.parse(txt);
+      
+
+  //     if(res.error != "")
+  //     {
+  //       setMessage(res.error)
+  //     }
+  //     else{
+  //       const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
+  //       const newAllTasks = array.filter((t) => t[0] !== item[0]);
+  //       setFilteredArray(newFilteredTasks)
+  //       setArray(newAllTasks);
+  //       renderTable(filteredArray,deleteTask,message);
+  //     }
+  //   }
+  //   catch(e)
+  //   {
+  //     setMessage(""); 
+  //     alert(e.toString());
+  //     setMessage(e.toString());
+  //   }
+  // }  
 
   // Function that creates a new object with the selected list name and push it into the lists array
   const handleCreateList = (listName) => {
@@ -110,6 +161,14 @@ const HomePage = () =>
   //   setIsCreateTaskOpen(false);
   // }; 
 
+  const onSiteSearch = async event => 
+  {
+    event.preventDefault();
+    let obj = {user:user.user, search:search.value};
+    const filteringarray = array.filter((row)=> row[0].toLowerCase().includes(obj.search.toLowerCase()));
+    setFilteredArray(filteringarray);     
+  };
+  
   // Function that handles the user queries
   const searchTaskCategory = async event => 
   {
@@ -180,88 +239,18 @@ const HomePage = () =>
     }
   };
 
-  const onSiteSearch = async event => 
+  // Function that removes user session data from local storage then redirects to sign in page
+  const signout = () =>
   {
-    event.preventDefault();
-    let obj = {user:user.user, search:search.value};
-    const filteringarray = array.filter((row)=> row[0].toLowerCase().includes(obj.search.toLowerCase()));
-    setFilteredArray(filteringarray);     
-  };
-
-  const deleteTask = async (event, item) => 
-  {
-      const confirmed = window.confirm("Are you sure you want to delete this task?");
-      if (confirmed) {event.preventDefault();
-      let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
-      var js = JSON.stringify(obj);
-  
-      // Send the query to the backend and check if the query is valid
-      try
-      {
-        const response = await fetch(bp.buildPath("api/delTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-        let txt = await response.text(), res = JSON.parse(txt);
-  
-        if(res.error != "")
-        {
-          setMessage(res.error)
-        }
-        else{
-          const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
-          const newAllTasks = array.filter((t) => t[0] !== item[0]);
-          setFilteredArray(newFilteredTasks)
-          setArray(newAllTasks);
-          renderTable(filteredArray,deleteTask,message);
-        }
-      }
-      catch(e)
-      {
-        setMessage(""); 
-        alert(e.toString());
-        setMessage(e.toString());
-      }
-    }
-
-    // const editTask = async (event, item) => 
-    // {
-    //   event.preventDefault();
-    //   let obj = {taskContent:item[0], time:item[1], category:selectedList,user:user.user};
-  
-     
-    //   var js = JSON.stringify(obj);
-  
-    //   // Send the query to the backend and check if the query is valid
-    //   try
-    //   {
-    //     const response = await fetch(bp.buildPath("api/editTask"), {method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-    //     let txt = await response.text(), res = JSON.parse(txt);
-       
-  
-    //     if(res.error != "")
-    //     {
-    //       setMessage(res.error)
-    //     }
-    //     else{
-    //       const newFilteredTasks = filteredArray.filter((t) => t[0] !== item[0]);
-    //       const newAllTasks = array.filter((t) => t[0] !== item[0]);
-    //       setFilteredArray(newFilteredTasks)
-    //       setArray(newAllTasks);
-    //       renderTable(filteredArray,deleteTask,message);
-    //     }
-    //   }
-    //   catch(e)
-    //   {
-    //     setMessage(""); 
-    //     alert(e.toString());
-    //     setMessage(e.toString());
-    //   }
-    // }
-      
+    localStorage.removeItem('user_data');
+    history.replace('/');
   };
 
   // Returns the content of the home page
   return (
     <div>
       <HomePageStyling/>
+      <BackToTopButton/>
       <div id="homePage">
         <text id="usernameStyling">Hi, {user.user}!</text>
         <div class="form-group">
@@ -279,7 +268,6 @@ const HomePage = () =>
           <button id="createTaskButton" onClick={() => setIsCreateTaskOpen(true)}>CREATE TASK</button>
         </div>
         <text id="selectedList">{selectedList}</text>
-        
         {/* Show the "DISPLAY LIST" pop up */}
         {isCreateListOpen && (
           <DisplayListModal 
@@ -298,12 +286,6 @@ const HomePage = () =>
             tasks={tasks}
           />
         )}
-
-        {/* Show the "BACK TO TOP" */}
-        {showScrollToTopButton && (
-          <button id="scrollToTopButton" onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</button>
-        )}
-
         <div>{renderTable(filteredArray, deleteTask, message)}</div>
         <div id="makeFakeSpace"></div>
       </div>
