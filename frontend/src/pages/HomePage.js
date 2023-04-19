@@ -23,6 +23,8 @@ const HomePage = () =>
   const [selectedList, setSelectedList] = useState("Personal");
   const [selectedTask, setSelectedTask] = useState("");
   const [array,setArray] = useState([]);
+  const [filteredArray,setFilteredArray] = useState([]);
+
   useEffect(()=>{
     searchTaskCategory({preventDefault:() => {}});
   }, [selectedList]);
@@ -79,7 +81,7 @@ const HomePage = () =>
         // Can also do taskArray[0][0]
         taskArray = res.results;
         setArray(res.results);
-        
+        setFilteredArray(res.results);
        }
     }
     catch(e)
@@ -132,6 +134,23 @@ const HomePage = () =>
     
     
   };
+  const onSiteSearch = async event => 
+    {
+      event.preventDefault();
+      let obj = {user:user.user, search:search.value};
+      /*if (obj.search === "")
+      {
+        setMessage("* Please type at least one character *");
+        return;
+      }*/
+      
+       const filteringarray = array.filter((row)=>
+        row[0].toLowerCase().includes(obj.search.toLowerCase())
+      );
+      setFilteredArray(filteringarray);
+      // setMessage(filteredArray);
+     
+    };
 
   return (
     <div>
@@ -146,7 +165,7 @@ const HomePage = () =>
         </div>
         <div class="form-group">
           <input id="searchText" placeholder="SEARCH" type="text" ref={(c) => search = c}/> 
-          <button id="searchTaskButton" class="buttons" type="button" onClick={searchTask}>SEARCH</button>
+          <button id="searchTaskButton" class="buttons" type="button" onClick={onSiteSearch}>SEARCH</button>
         </div>
         <div class="form-group">
           <button id="createListButton" onClick={() => setIsCreateListOpen(true)}>DISPLAY LIST</button>
@@ -182,7 +201,7 @@ const HomePage = () =>
           </tr>
           </thead>
           <tbody>
-            {array.slice(0,array.length).map((item,index) => {
+            {filteredArray.slice(0,filteredArray.length).map((item,index) => {
               return(
                 <tr>
                   <td>{item[0]}</td>
