@@ -6,7 +6,12 @@ import EditTaskModal from '../components/EditTaskModal';
 import HomePageStyling from './HomePageStyling';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+<<<<<<< Updated upstream
 import {faTrash, faPencil} from '@fortawesome/free-solid-svg-icons';
+=======
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import { faPencil } from '@fortawesome/free-solid-svg-icons'
+>>>>>>> Stashed changes
 import {useHistory} from 'react-router-dom';
 
 const HomePage = () =>
@@ -32,9 +37,22 @@ const HomePage = () =>
                 <td id="tableOutlines">{item[0]}</td>
                 <td id="tableOutlines">{item[1]}</td>
                 <td id="tableOutlines">
+<<<<<<< Updated upstream
                   <FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>editTask(event,item)}/>
+=======
+                  {/* Change the code below to edit task */}
+                  <FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>setEditTaskOpen(event,item)}/>
+>>>>>>> Stashed changes
                   <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/>
                 </td>
+                {isEditTaskOpen && (
+                          <EditTaskModal 
+                            isOpen={isEditTaskOpen} 
+                            onRequestClose={() => setEditTaskOpen(false)} 
+                            taskToEdit={handleEditTask}
+                            editedTaskID={editedTaskID}
+                          />
+                        )}
               </tr>
               )
             })}
@@ -58,6 +76,7 @@ const HomePage = () =>
   const [array,setArray] = useState([]);
   const [filteredArray,setFilteredArray] = useState([]);
   const [isEditTaskOpen,setEditTaskOpen] = useState("");
+  const [editedTaskID, setEditedTaskID] = useState(null);
   
   // Function that handles the user queries
   useEffect(()=>{searchTaskCategory({preventDefault:() => {}});}, [selectedList]);
@@ -161,11 +180,41 @@ const HomePage = () =>
     setIsCreateTaskOpen(false);
   }; 
 
+  const handleEditTask = (taskName, editedTaskID) => {
+    setTasks(prevTasks => [...prevTasks, {name: taskName}]);
+    setSelectedTask(taskName);
+    setEditTaskOpen(false);
+    setEditedTaskID(editedTaskID);
+  };
+
   // const handleEditTask = (taskName) => {
-  //   setTasks(prevTasks => [...prevTasks, {name: taskName}]);
+  //   setTasks(prevTasks => {
+  //     const updatedTasks = prevTasks.map(task => {
+  //       if (task._id === editedTaskID) {
+  //         return {
+  //           ...task,
+  //           name: taskName
+  //         };
+  //       } else {
+  //         return task;
+  //       }
+  //     });
+  //     return updatedTasks;
+  //   });
   //   setSelectedTask(taskName);
-  //   setIsCreateTaskOpen(false);
-  // }; 
+  //   setEditTaskOpen(false);
+  // };
+
+  // const handleEditTask = (taskName, taskId) => {
+  //   const taskIndex = tasks.findIndex(task => task._id === taskId);
+  //   if (taskIndex >= 0) {
+  //     const updatedTasks = [...tasks];
+  //     updatedTasks.splice(taskIndex, 1, { name: taskName, _id: taskId });
+  //     setTasks(updatedTasks);
+  //     setSelectedTask(taskName);
+  //     setEditTaskOpen(false);
+  //   }
+  // };
 
   const onSiteSearch = async event => 
   {
