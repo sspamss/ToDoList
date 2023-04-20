@@ -28,7 +28,7 @@ const EditTaskModal = ({isOpen, onRequestClose, taskToEdit}) =>
       width: "215px",
     },
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      backgroundColor: "rgba(0, 0, 0, 0.065)",
     },
   };
 
