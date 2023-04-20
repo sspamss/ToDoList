@@ -6,12 +6,7 @@ import EditTaskModal from '../components/EditTaskModal';
 import HomePageStyling from './HomePageStyling';
 import ToDoIcon from '../graphics/ToDoIcon.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-<<<<<<< Updated upstream
 import {faTrash, faPencil} from '@fortawesome/free-solid-svg-icons';
-=======
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
->>>>>>> Stashed changes
 import {useHistory} from 'react-router-dom';
 
 const HomePage = () =>
@@ -37,12 +32,8 @@ const HomePage = () =>
                 <td id="tableOutlines">{item[0]}</td>
                 <td id="tableOutlines">{item[1]}</td>
                 <td id="tableOutlines">
-<<<<<<< Updated upstream
-                  <FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>editTask(event,item)}/>
-=======
                   {/* Change the code below to edit task */}
                   <FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>setEditTaskOpen(event,item)}/>
->>>>>>> Stashed changes
                   <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/>
                 </td>
                 {isEditTaskOpen && (
