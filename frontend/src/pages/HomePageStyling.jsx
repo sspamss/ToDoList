@@ -12,7 +12,7 @@ const HomePageStyling = () => {
             body {
               background-color: #F6F6EF;
               background-image: url(${HomePageBackground});
-              background-position: center;
+              background-position: top;
               background-repeat: no-repeat;
               background-size: cover;
               margin-bottom: 100px;
