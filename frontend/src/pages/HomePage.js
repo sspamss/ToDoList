@@ -33,7 +33,7 @@ const HomePage = () =>
                 <td id="tableOutlines">{item[1]}</td>
                 <td id="tableOutlines">
                   {/* Change the code below to edit task */}
-                  <FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>setEditTaskOpen(event,item)}/>
+                  {/*<FontAwesomeIcon icon={faPencil} id="deleteTaskButton" className="buttons" onClick={(event)=>setEditTaskOpen(event,item)}/>*/}
                   <FontAwesomeIcon icon={faTrash} id="deleteTaskButton" className="buttons" onClick={(event)=>deleteTask(event,item)}/>
                 </td>
                 {isEditTaskOpen && (

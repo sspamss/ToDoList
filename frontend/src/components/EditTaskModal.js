@@ -43,12 +43,28 @@ const EditTaskModal = ({isOpen, onRequestClose, taskToEdit}) =>
     if (!taskCategory) {setMessage("* Please select a task category *"); return;}
 
     // Make sure when choosing the task that you have the user provide newtaskContent, newtaskTime (must be in datetime format but as a string), newtaskCategory but make sure its a dropdown of three options.
-    let obj = {id: taskToEdit.editedTaskID, taskContent: taskContent, time: taskDueDate, category: taskCategory, user:user.user}, js = JSON.stringify(obj);
+    // let obj = {id: taskToEdit.editedTaskID, taskContent: taskContent, time: taskDueDate, category: taskCategory, user:user.user}, js = JSON.stringify(obj);
+    let obj = {taskContent:"",time:"",category:"", user:"", newTaskContent: taskContent, newTime: taskDueDate, newCategory: taskCategory}, js = JSON.stringify(obj);
 
     try
     {
       const response = await fetch(bp.buildPath("api/editTask"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
       let txt = await response.text(), res = JSON.parse(txt);
+      // const res = await fetch('/api/editTask', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     id: taskToEdit.editedTaskID,
+      //     taskContent: taskContent,
+      //     time: taskDueDate,
+      //     user: user.user, // replace with the user ID of the current user
+      //     newTaskContent: newTaskContent,
+      //     newTime: newTime,
+      //     newCategory: newCategory,
+      //   }),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
 
       if (res.error.length > 0) {setMessage(res.error);}
       else {setMessage(<span id="successMessagePopUp">* Task edited successfully! *</span>);}
