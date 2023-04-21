@@ -25,7 +25,7 @@ Update Node
 - sudo npm install -g n
 - sudo n stable
 
-Download "TheFrigeList" Project
+Download "TheFridgeList" Project
 - *Recommended to save on desktop*
 
 Run "TheFridgeList" Project
