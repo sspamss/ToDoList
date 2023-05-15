@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import LoginPageStyling from './LoginPageStyling';
 import ToDoListPurple from '../graphics/ToDoListPurple.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,7 +21,7 @@ const LoginPage = () =>
     var obj = {user:signinUsername.value, password:signinPassword.value};
 
     // Check for any empty fields
-    if (obj.user === "" && obj.password == "") {setMessageSignin("* Please enter your username and password *"); return;}
+    if (obj.user === "" && obj.password === "") {setMessageSignin("* Please enter your username and password *"); return;}
     if (obj.user === "") {setMessageSignin("* Please enter your username *"); return;}
     if (obj.password === "") {setMessageSignin("* Please enter your password *"); return;}
 
@@ -45,19 +45,22 @@ const LoginPage = () =>
       // If sign in is valid, store the user's information in local storage and redirect to the home page
       else
       {
-        if(res.verified==false){
+        if (!res.verified)
+        {
           setMessageSignin("* this account has yet to be verified resending email now *");
           await fetch(bp.buildPath("api/emailVerification"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
         }
-        else{
-        var user = {firstName:res.firstName, lastName:res.lastName, user:signinUsername.value}
-        localStorage.setItem('user_data', JSON.stringify(user));
+        else
+        {
+          var user = {firstName:res.firstName, lastName:res.lastName, user:signinUsername.value}
+          localStorage.setItem('user_data', JSON.stringify(user));
 
-        // Clear the error message
-        setMessageSignin("");
+          // Clear the error message
+          setMessageSignin("");
 
-        // Redirect to the home page
-        window.location.href = '/home';}
+          // Redirect to the home page
+          window.location.href = '/home';
+        }
       }
     }
     catch(e)
