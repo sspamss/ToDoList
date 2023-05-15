@@ -39,9 +39,6 @@ const LoginPage = () =>
       {
         setMessageSignin("* Username or password is incorrect *");
       }
-      
-     
-      
       // If sign in is valid, store the user's information in local storage and redirect to the home page
       else
       {
@@ -67,40 +64,7 @@ const LoginPage = () =>
     {
       console.log(e.toString());
       return;
-    }    
-
-
-
-
-        // // Send the login information to the backend and check if the log in is valid
-        // try
-        // {
-        //   const response = await fetch(bp.buildPath("api/login"),{method:'POST', body:js, headers:{'Content-Type':'application/json'}});
-        //   var res = JSON.parse(await response.text());
-          
-        //   // If sign in is invalid, display an error message
-        //   if (res._id <= 0)
-        //   {
-        //     setMessageSignin("* Username or password is incorrect *");
-        //   }
-        //   // If sign in is valid, store the user's information in local storage and redirect to the home page
-        //   else
-        //   {
-        //     var user = {firstName:res.firstName, lastName:res.lastName, id:res._id}
-        //     localStorage.setItem('user_data', JSON.stringify(user));
-    
-        //     // Clear the error message
-        //     setMessageSignin("");
-    
-        //     // Redirect to the home page
-        //     window.location.href = '/home';
-        //   }
-        // }
-        // catch(e)
-        // {
-        //   console.log(e.toString());
-        //   return;
-        // }
+    }
   };
 
   // Returns the content of the login page
