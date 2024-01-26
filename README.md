@@ -42,6 +42,6 @@ Run "TheFridgeList" Project
 Project Manager - [Kyle Franklin](https://github.com/KyleFranklin)
 <br> Front-End Web Developer - [Pam Kitsuwan](https://github.com/sspamss)
 <br> Front-End Mobile Developer - [Ethan Adkins](https://github.com/EthanAdkins)
-<br> Front-End Designer - [Emmanuelle "Alex" Rebosura](https://github.com/justarandomidiot1)
+<br> Front-End Designer - [Emmanuelle "Alex" Rebosura](https://github.com/emmrebosura)
 <br> Product Manager - [Pranav Nair](https://github.com/pranavjnair123)
 <br> Database Manager - [James Ko](https://github.com/JamesKo51)
