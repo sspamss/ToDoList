@@ -20,6 +20,11 @@ Install Nodemon
 - sudo npm install -g create-react-app
 - sudo npm install -g nodemon
 
+Install MongoDB (if running website with database offline)
+- brew tap mongodb/brew
+- brew install mongodb-community
+- brew services start mongodb/brew/mongodb-community
+
 Update Node
 - sudo npm cache clean -f
 - sudo npm install -g n
